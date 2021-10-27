@@ -8,11 +8,11 @@
 		<version>2.5.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.projeto-dsc</groupId>
-	<artifactId>projeto_dsc</artifactId>
+	<groupId>com.projeto-dsc.edoe</groupId>
+	<artifactId>eDoe</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>projeto_dsc</name>
-	<description>API projeto DSC</description>
+	<name>eDoe</name>
+	<description>eDoe project</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

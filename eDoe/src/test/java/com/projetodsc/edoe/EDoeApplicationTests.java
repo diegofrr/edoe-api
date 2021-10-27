@@ -1,10 +1,10 @@
-package com.projetodsc;
+package com.projetodsc.edoe;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProjetoDscApplicationTests {
+class EDoeApplicationTests {
 
 	@Test
 	void contextLoads() {
