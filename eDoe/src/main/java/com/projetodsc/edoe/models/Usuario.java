@@ -35,7 +35,7 @@ public class Usuario implements Serializable{
 	private int docIdentificacao;
 	
 	@Column(nullable = false)
-	private TipoUsuario tipo = TipoUsuario.DOADOR;
+	private TipoUsuario tipo;
 	
 	public Usuario() {
 		super();
@@ -48,6 +48,7 @@ public class Usuario implements Serializable{
 		this.celular = celular;
 		this.classe = classe;
 		this.docIdentificacao = doc;
+		this.tipo = TipoUsuario.DOADOR;
 	}
 
 

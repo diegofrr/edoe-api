@@ -15,7 +15,7 @@ public class UsuarioDTO {
 	private int celular;
 	private ClasseUsuario classe;
 	private int docIdentificacao;
-	private TipoUsuario tipo = TipoUsuario.DOADOR;
+	private TipoUsuario tipo;
 
 	public UsuarioDTO() {
 		super();

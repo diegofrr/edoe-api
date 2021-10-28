@@ -1,3 +1,15 @@
 2021-10-28 16:48:01 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "TIPO[*]"; expected "TRUNCATE"; SQL statement:
 TIPO [42001-200]
+2021-10-28 19:15:58 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DELETE *[*] FROM USUARIO"; expected "identifier"; SQL statement:
+DELETE * FROM USUARIO [42001-200]
+2021-10-28 19:16:17 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DELETE *[*] FROM USUARIO"; expected "identifier"; SQL statement:
+DELETE * FROM USUARIO [42001-200]
+2021-10-28 19:19:29 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT FROM[*] USUARIO VALUES (""Diego"",""diego@gmail"", 5464,""PESSOA_FISICA"", 12312312)"; expected "INTO"; SQL statement:
+INSERT FROM USUARIO VALUES ("Diego","diego@gmail", 5464,"PESSOA_FISICA", 12312312) [42001-200]
+2021-10-28 19:19:34 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT IN[*] USUARIO VALUES (""Diego"",""diego@gmail"", 5464,""PESSOA_FISICA"", 12312312)"; expected "INTO"; SQL statement:
+INSERT IN USUARIO VALUES ("Diego","diego@gmail", 5464,"PESSOA_FISICA", 12312312) [42001-200]
