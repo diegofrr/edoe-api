@@ -1,5 +1,7 @@
 package com.projetodsc.edoe.models.dtos;
 
+import com.projetodsc.edoe.models.ClasseUsuario;
+import com.projetodsc.edoe.models.TipoUsuario;
 import com.projetodsc.edoe.models.Usuario;
 
 import lombok.Data;
@@ -11,23 +13,25 @@ public class UsuarioDTO {
 	private String nome;
 	private String email;
 	private int celular;
-	private String classe;
+	private ClasseUsuario classe;
 	private int docIdentificacao;
-	
+	private TipoUsuario tipo;
+
 	public UsuarioDTO() {
 		super();
 	}
-	
-	public UsuarioDTO(String nome, String email, int celular, String classe, int doc) {
+
+	public UsuarioDTO(String nome, String email, int celular, ClasseUsuario classe, int doc, TipoUsuario tipo) {
 		this.nome = nome;
 		this.email = email;
 		this.celular = celular;
 		this.classe = classe;
 		this.docIdentificacao = doc;
+		this.tipo = tipo;
 	}
 
 	public Usuario getUsuario() {
-		return new Usuario(this.id, this.nome, this.email, this.celular, this.classe, this.docIdentificacao);
+		return new Usuario(this.id, this.nome, this.email, this.celular, this.classe, this.docIdentificacao, this.tipo);
 	}
 
 }

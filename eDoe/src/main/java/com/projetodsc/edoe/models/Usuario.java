@@ -1,5 +1,7 @@
 package com.projetodsc.edoe.models;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,9 @@ import lombok.Data;
 
 @Data
 @Entity(name = "usuario")
-public class Usuario {
+public class Usuario implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,22 +29,26 @@ public class Usuario {
 	private int celular;
 	
 	@Column(nullable = false, length = 10)
-	private String classe;
+	private ClasseUsuario classe;
 	
 	@Column(nullable = false, length = 11)
 	private int docIdentificacao;
+	
+	@Column(nullable = false)
+	private TipoUsuario tipo;
 	
 	public Usuario() {
 		super();
 	}
 	
-	public Usuario(Long id, String nome, String email, int celular, String classe, int doc) {
+	public Usuario(Long id, String nome, String email, int celular, ClasseUsuario classe, int doc, TipoUsuario tipo) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.celular = celular;
 		this.classe = classe;
 		this.docIdentificacao = doc;
+		this.tipo = tipo;
 	}
 
 
