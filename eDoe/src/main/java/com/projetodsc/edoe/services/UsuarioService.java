@@ -12,13 +12,14 @@ import org.springframework.stereotype.Service;
 import com.projetodsc.edoe.models.TipoUsuario;
 import com.projetodsc.edoe.models.Usuario;
 import com.projetodsc.edoe.models.dtos.UsuarioDTO;
+import com.projetodsc.edoe.repository.UsuarioDAO;
 import com.projetodsc.edoe.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
 
 	@Autowired
-	private UsuarioRepository repositorio;
+	private UsuarioDAO repositorio;
 
 	public Usuario criarDoador(UsuarioDTO usuarioDTO) {
 		Usuario user = repositorio.findByEmail(usuarioDTO.getEmail());
