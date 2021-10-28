@@ -35,20 +35,19 @@ public class Usuario implements Serializable{
 	private int docIdentificacao;
 	
 	@Column(nullable = false)
-	private TipoUsuario tipo;
+	private TipoUsuario tipo = TipoUsuario.DOADOR;
 	
 	public Usuario() {
 		super();
 	}
 	
-	public Usuario(Long id, String nome, String email, int celular, ClasseUsuario classe, int doc, TipoUsuario tipo) {
+	public Usuario(Long id, String nome, String email, int celular, ClasseUsuario classe, int doc) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.celular = celular;
 		this.classe = classe;
 		this.docIdentificacao = doc;
-		this.tipo = tipo;
 	}
 
 
