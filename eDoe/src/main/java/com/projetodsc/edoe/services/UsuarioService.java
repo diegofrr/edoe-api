@@ -21,27 +21,44 @@ public class UsuarioService {
 	private UsuarioRepository repositorio;
 
 	public Usuario criarDoador(UsuarioDTO usuarioDTO) {
-		Usuario user = usuarioDTO.getUsuario();
-		user.setTipo(TipoUsuario.DOADOR);
-		return repositorio.save(user);
+		Usuario user = repositorio.findByEmail(usuarioDTO.getEmail());
+		if (user == null) {
+			usuarioDTO.setTipo(TipoUsuario.DOADOR);
+			return repositorio.save(usuarioDTO.getUsuario());
+		} else {
+			return user;
+		}
 	}
 	
 	public Usuario criarReceptor(UsuarioDTO usuarioDTO) {
-		Usuario user = usuarioDTO.getUsuario();
-		user.setTipo(TipoUsuario.RECEPTOR);
-		return repositorio.save(user);
+		Usuario user = repositorio.findByEmail(usuarioDTO.getEmail());
+		if (user == null) {
+			usuarioDTO.setTipo(TipoUsuario.RECEPTOR);
+			return repositorio.save(usuarioDTO.getUsuario());
+		} else {
+			return user;
+		}
 	}
 	
 	public Usuario criarDoadorReceptor(UsuarioDTO usuarioDTO) {
-		Usuario user = usuarioDTO.getUsuario();
-		user.setTipo(TipoUsuario.DOADOR_RECEPTOR);
-		return repositorio.save(user);	
+		Usuario user = repositorio.findByEmail(usuarioDTO.getEmail());
+		if (user == null) {
+			usuarioDTO.setTipo(TipoUsuario.DOADOR_RECEPTOR);
+			return repositorio.save(usuarioDTO.getUsuario());
+		} else {
+			return user;
+		}
+		
 	}
 	
 	public Usuario criarAdmin(UsuarioDTO usuarioDTO) {
-		Usuario user = usuarioDTO.getUsuario();
-		user.setTipo(TipoUsuario.ADMIN);
-		return repositorio.save(user);
+		Usuario user = repositorio.findByEmail(usuarioDTO.getEmail());
+		if (user == null) {
+			usuarioDTO.setTipo(TipoUsuario.ADMIN);
+			return repositorio.save(usuarioDTO.getUsuario());
+		} else {
+			return user;
+		}
 	}
 	
 	public Usuario adicionarUsuario(UsuarioDTO user) {

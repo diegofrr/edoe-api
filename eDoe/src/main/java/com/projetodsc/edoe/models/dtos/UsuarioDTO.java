@@ -15,23 +15,22 @@ public class UsuarioDTO {
 	private int celular;
 	private ClasseUsuario classe;
 	private int docIdentificacao;
-	private TipoUsuario tipo;
+	private TipoUsuario tipo = TipoUsuario.DOADOR;
 
 	public UsuarioDTO() {
 		super();
 	}
 
-	public UsuarioDTO(String nome, String email, int celular, ClasseUsuario classe, int doc, TipoUsuario tipo) {
+	public UsuarioDTO(String nome, String email, int celular, ClasseUsuario classe, int doc) {
 		this.nome = nome;
 		this.email = email;
 		this.celular = celular;
 		this.classe = classe;
 		this.docIdentificacao = doc;
-		this.tipo = tipo;
 	}
 
 	public Usuario getUsuario() {
-		return new Usuario(this.id, this.nome, this.email, this.celular, this.classe, this.docIdentificacao, this.tipo);
+		return new Usuario(this.id, this.nome, this.email, this.celular, this.classe, this.docIdentificacao);
 	}
 
 }
