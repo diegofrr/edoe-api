@@ -5,21 +5,17 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.projetodsc.edoe.models.TipoUsuario;
 import com.projetodsc.edoe.models.Usuario;
 import com.projetodsc.edoe.models.dtos.UsuarioDTO;
-import com.projetodsc.edoe.repository.UsuarioDAO;
 import com.projetodsc.edoe.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
 
 	@Autowired
-	private UsuarioDAO repositorio;
+	private UsuarioRepository repositorio;
 
 	public Usuario criarDoador(UsuarioDTO usuarioDTO) {
 		Usuario user = repositorio.findByEmail(usuarioDTO.getEmail());
