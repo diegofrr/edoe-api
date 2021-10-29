@@ -1,8 +1,8 @@
 package com.projetodsc.edoe.services;
 
-import java.util.Collection;
+
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,6 +72,13 @@ public class UsuarioService {
 	public Usuario validaUsuario(Usuario usuario) {
 		Usuario user = repositorio.findByEmail(usuario.getEmail());
 		return user;
+	}
+	
+	public Usuario logar(UsuarioDTO user) {
+		Usuario usuario = repositorio.findByEmail(user.getEmail());
+		if (usuario.getSenha().equals(user.getSenha())) {
+			return usuario;
+		} return null;
 	}
 	
 	

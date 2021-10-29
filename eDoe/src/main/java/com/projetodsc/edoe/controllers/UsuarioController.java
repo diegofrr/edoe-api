@@ -23,9 +23,9 @@ public class UsuarioController {
 	@Autowired
 	UsuarioService usuarioService;
 	
-	@GetMapping("/usuario/{id}")
-	public ResponseEntity<Usuario> consultar(@PathVariable("id") Long id) {
-		return null;
+	@PostMapping("/usuarios/login")
+	public ResponseEntity<Usuario> logar(@RequestBody UsuarioDTO usuarioDTO) {
+		return new ResponseEntity<Usuario>(usuarioService.logar(usuarioDTO), HttpStatus.OK);
 	}
 	
 	@GetMapping("/usuarios")

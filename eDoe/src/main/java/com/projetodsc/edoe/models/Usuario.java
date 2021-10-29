@@ -25,6 +25,9 @@ public class Usuario implements Serializable{
 	@Column(nullable = false, length = 30, unique = true)
 	private String email;
 	
+	@Column(nullable = false, length = 12)
+	private String senha;
+	
 	@Column(nullable = false, length = 11)
 	private int celular;
 	
@@ -41,10 +44,11 @@ public class Usuario implements Serializable{
 		super();
 	}
 	
-	public Usuario(Long id, String nome, String email, int celular, ClasseUsuario classe, int doc) {
+	public Usuario(Long id, String nome, String email, String senha, int celular, ClasseUsuario classe, int doc) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
+		this.senha = senha;
 		this.celular = celular;
 		this.classe = classe;
 		this.docIdentificacao = doc;
