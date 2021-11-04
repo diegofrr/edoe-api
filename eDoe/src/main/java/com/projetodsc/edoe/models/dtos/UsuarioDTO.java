@@ -39,6 +39,7 @@ public class UsuarioDTO {
 	public Usuario getUsuario() {
 		return new Usuario(this.id, this.nome, this.email, this.senha, this.celular, this.classe, this.docIdentificacao);
 	}
+
 	
 
 }

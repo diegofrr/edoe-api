@@ -60,7 +60,7 @@ public class UsuarioService {
 	
 	public Usuario adicionarUsuario(UsuarioDTO user) {
 		Usuario usuario = user.getUsuario();
-		if (repositorio.findAll().size() == 0) usuario.setTipo(TipoUsuario.ADMIN); // caso não haja nenhum usuário no sistema, o primeiro cadastrado será o admin
+		if (repositorio.findAll().size() == 0) usuario.setTipo(TipoUsuario.ADMIN);// caso não haja nenhum usuário no sistema, o primeiro cadastrado será o admin
 		return repositorio.save(usuario);
 	}
 
