@@ -13,16 +13,15 @@ import lombok.Data;
 @Entity(name = "usuario")
 public class Usuario implements Serializable{
 	private static final long serialVersionUID = 1L;
-
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private long id;
 	
 	@Column(nullable = false, length = 50)
 	private String nome;
 	
-	@Column(nullable = false, length = 30, unique = true)
+	@Column(nullable = false, length = 30)
 	private String email;
 	
 	@Column(nullable = false, length = 12)
@@ -38,7 +37,7 @@ public class Usuario implements Serializable{
 	private int docIdentificacao;
 	
 	@Column(nullable = false)
-	private TipoUsuario tipo;
+	private TipoUsuario tipo = TipoUsuario.DOADOR;
 	
 	public Usuario() {
 		super();
@@ -52,7 +51,6 @@ public class Usuario implements Serializable{
 		this.celular = celular;
 		this.classe = classe;
 		this.docIdentificacao = doc;
-		this.tipo = TipoUsuario.DOADOR;
 	}
 
 
