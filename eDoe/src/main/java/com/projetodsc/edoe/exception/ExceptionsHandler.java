@@ -4,8 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import com.projetodsc.edoe.model.dto.DetalhesProblema;
+import com.projetodsc.edoe.model.dto.ProblemDetails;
 
 @RestControllerAdvice
 public class ExceptionsHandler {
@@ -13,8 +12,8 @@ public class ExceptionsHandler {
 	private static String ADICIONA_USUARIO_URI = "https://servidor:8080/api/usuarios";
 
 	@ExceptionHandler(UsuarioInvalidoException.class)
-	public ResponseEntity<DetalhesProblema> usuarioInvalido(UsuarioInvalidoException e){
-		DetalhesProblema problema = new DetalhesProblema();
+	public ResponseEntity<ProblemDetails> usuarioInvalido(UsuarioInvalidoException e){
+		ProblemDetails problema = new ProblemDetails();
 		problema.setStatus(HttpStatus.BAD_REQUEST.value());
 		problema.setTitle(e.getTitulo());
 		problema.setType(ADICIONA_USUARIO_URI);
@@ -23,8 +22,8 @@ public class ExceptionsHandler {
 	}
 	
 	@ExceptionHandler(UsuarioNaoExisteException.class)
-	public ResponseEntity<DetalhesProblema> usuarioInvalido(UsuarioNaoExisteException e){
-		DetalhesProblema problema = new DetalhesProblema();
+	public ResponseEntity<ProblemDetails> usuarioInvalido(UsuarioNaoExisteException e){
+		ProblemDetails problema = new ProblemDetails();
 		problema.setStatus(HttpStatus.BAD_REQUEST.value());
 		problema.setTitle(e.getTitulo());
 		problema.setType(ADICIONA_USUARIO_URI);
@@ -33,8 +32,8 @@ public class ExceptionsHandler {
 	}
 	
 	@ExceptionHandler(NaoAutenticadoException.class)
-	public ResponseEntity<DetalhesProblema> usuarioInvalido(NaoAutenticadoException e){
-		DetalhesProblema problema = new DetalhesProblema();
+	public ResponseEntity<ProblemDetails> usuarioInvalido(NaoAutenticadoException e){
+		ProblemDetails problema = new ProblemDetails();
 		problema.setStatus(HttpStatus.BAD_REQUEST.value());
 		problema.setTitle(e.getTitulo());
 		problema.setType(ADICIONA_USUARIO_URI);
