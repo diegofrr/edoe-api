@@ -1,4 +1,4 @@
-package com.projetodsc.edoe.models;
+package com.projetodsc.edoe.model;
 
 import java.io.Serializable;
 

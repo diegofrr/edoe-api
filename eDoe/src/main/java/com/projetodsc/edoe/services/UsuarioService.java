@@ -6,9 +6,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.projetodsc.edoe.models.TipoUsuario;
-import com.projetodsc.edoe.models.Usuario;
-import com.projetodsc.edoe.models.dtos.UsuarioDTO;
+import com.projetodsc.edoe.model.TipoUsuario;
+import com.projetodsc.edoe.model.Usuario;
+import com.projetodsc.edoe.model.dto.UsuarioDTO;
 import com.projetodsc.edoe.repository.UsuarioRepository;
 
 @Service
@@ -16,6 +16,13 @@ public class UsuarioService {
 
 	@Autowired
 	private UsuarioRepository repositorio;
+	
+	private Usuario usuarioLogado;
+	
+	public void alteraFuncao(Usuario usuario, TipoUsuario novoTipo) {
+		if (usuarioLogado.getTipo() == TipoUsuario.ADMIN)
+			usuario.setTipo(novoTipo);
+	}
 
 	public Usuario criarDoador(UsuarioDTO usuarioDTO) {
 		Usuario user = repositorio.findByEmail(usuarioDTO.getEmail());
@@ -77,6 +84,7 @@ public class UsuarioService {
 	public Usuario logar(UsuarioDTO user) {
 		Usuario usuario = repositorio.findByEmail(user.getEmail());
 		if (usuario.getSenha().equals(user.getSenha())) {
+			usuarioLogado = usuario;
 			return usuario;
 		} return null;
 	}

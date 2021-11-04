@@ -1,8 +1,8 @@
-package com.projetodsc.edoe.models.dtos;
+package com.projetodsc.edoe.model.dto;
 
-import com.projetodsc.edoe.models.ClasseUsuario;
-import com.projetodsc.edoe.models.TipoUsuario;
-import com.projetodsc.edoe.models.Usuario;
+import com.projetodsc.edoe.model.ClasseUsuario;
+import com.projetodsc.edoe.model.TipoUsuario;
+import com.projetodsc.edoe.model.Usuario;
 
 import lombok.Data;
 
