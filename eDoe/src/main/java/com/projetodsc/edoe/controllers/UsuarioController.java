@@ -24,10 +24,10 @@ public class UsuarioController {
 	@Autowired
 	UsuarioService usuarioService;
 	
-	@PostMapping("/usuarios/login")
-	public ResponseEntity<Usuario> logar(@RequestBody UsuarioDTO usuarioDTO) {
-		return new ResponseEntity<Usuario>(usuarioService.logar(usuarioDTO), HttpStatus.OK);
-	}
+//	@PostMapping("/usuarios/login")
+//	public ResponseEntity<Usuario> logar(@RequestBody UsuarioDTO usuarioDTO) {
+//		return new ResponseEntity<Usuario>(usuarioService.logar(usuarioDTO), HttpStatus.OK);
+//	}
 	
 	@GetMapping("/usuarios")
 	public ResponseEntity<List<Usuario>> getUsuarios(){
@@ -35,12 +35,8 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/usuarios")
-	public ResponseEntity<Optional<Usuario>> adicionarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
-		try{
-			return new ResponseEntity<Optional<Usuario>>(Optional.ofNullable(usuarioService.adicionarUsuario(usuarioDTO)), HttpStatus.CREATED);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.CONFLICT);
-		}
+	public ResponseEntity<Usuario> adicionaUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+		return new ResponseEntity<Usuario>(usuarioService.adicionaUsuario(usuarioDTO), HttpStatus.OK);
 	
 	}
 	

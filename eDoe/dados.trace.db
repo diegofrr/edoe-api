@@ -856,3 +856,6 @@ ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 0 [90009-200]
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:831)
+2021-11-04 17:07:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "EMAIL VARCHAR(30)": "'diegossss@gmail.com@outlook.com@dcx.ufpb.br@hotmail.com' (55)"; SQL statement:
+insert into usuario (celular, classe, doc_identificacao, email, nome, senha, tipo, id) values (?, ?, ?, ?, ?, ?, ?, ?) [22001-200]

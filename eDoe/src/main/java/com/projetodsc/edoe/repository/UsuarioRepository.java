@@ -10,8 +10,8 @@ import com.projetodsc.edoe.model.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-	public Usuario findByEmail(String email); // sem Optional
-	public Optional<Usuario> findByNome(String nome); // usando Optional
+	public Optional<Usuario> findByEmail(String email); 
+	public Optional<Usuario> findByNome(String nome); 
 	public List<Usuario> findByNomeContaining(String padrao);
 	public boolean existsByNome(String nome);
 

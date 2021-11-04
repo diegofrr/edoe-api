@@ -11,8 +11,6 @@ import com.projetodsc.edoe.model.dto.DetalhesProblema;
 public class ExceptionsHandler {
 	
 	private static String ADICIONA_USUARIO_URI = "https://servidor:8080/v1/api/produtos";
-	private static String FALHA_DE_LOGIN_URI = "https://servidor:8080/auth/login";
-	private static String GERENCIA_DE_USUARIOS_URI = "https://servidor:8080/auth/usuarios";
 
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<DetalhesProblema> usuarioInvalido(UsuarioInvalidoException e){
