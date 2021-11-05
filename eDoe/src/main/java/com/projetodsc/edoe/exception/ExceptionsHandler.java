@@ -41,4 +41,14 @@ public class ExceptionsHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problema);
 	}
 	
+	@ExceptionHandler(NaoAutorizadoException.class)
+	public ResponseEntity<ProblemDetails> usuarioInvalido(NaoAutorizadoException e){
+		ProblemDetails problema = new ProblemDetails();
+		problema.setStatus(HttpStatus.BAD_REQUEST.value());
+		problema.setTitle(e.getTitulo());
+		problema.setType(ADICIONA_USUARIO_URI);
+		problema.setDetail(e.getDetalhe());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problema);
+	}
+	
 }
