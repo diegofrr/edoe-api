@@ -9,7 +9,6 @@ import lombok.Data;
 @Data
 public class UsuarioDTO {
 
-	private long id;
 	private String nome;
 	private String email;
 	private String senha;
@@ -32,7 +31,7 @@ public class UsuarioDTO {
 	}	
 
 	public Usuario getUsuario() {
-		return new Usuario(this.id, this.nome, this.email, this.senha, this.celular, this.classe, this.docIdentificacao);
+		return new Usuario(this.nome, this.email, this.senha, this.celular, this.classe, this.docIdentificacao);
 	}
 	
 	public boolean validaUsuario() {

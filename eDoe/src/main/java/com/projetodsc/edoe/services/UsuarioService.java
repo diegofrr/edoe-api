@@ -3,16 +3,14 @@ package com.projetodsc.edoe.services;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.projetodsc.edoe.exception.NaoAutenticadoException;
 import com.projetodsc.edoe.exception.NaoAutorizadoException;
 import com.projetodsc.edoe.exception.UsuarioInvalidoException;
 import com.projetodsc.edoe.exception.UsuarioNaoExisteException;
 import com.projetodsc.edoe.model.TipoUsuario;
 import com.projetodsc.edoe.model.Usuario;
+import com.projetodsc.edoe.model.dto.LoginDTO;
 import com.projetodsc.edoe.model.dto.UsuarioDTO;
 import com.projetodsc.edoe.repository.UsuariosRepository;
 
@@ -30,7 +28,7 @@ public class UsuarioService {
 	public UsuarioService() {}
 	
 	public Usuario addUsuario(Usuario user) {
-		return repositorio.save(user);
+		return this.repositorio.save(user);
 	}
 	
 	public String alteraFuncao(UsuarioDTO usuarioDTO) {
@@ -62,7 +60,7 @@ public class UsuarioService {
 			return optUsuario.get();
 		}
 		throw new NaoAutorizadoException("Usuario nao tem permissao",
-				"A operacao requerida nao pode ser realizada por este usuario: " + jwtService.getTokenSubject(authHeader) + ".");
+				"A operacao requerida nao pode ser realizada por este usuario: " + jwtService.getSujeitoDoToken(authHeader) + ".");
 	}
 	
 	
@@ -79,9 +77,9 @@ public class UsuarioService {
 		return repositorio.findAll();
 	}
 	
-	public Usuario login(UsuarioDTO usuario) {	
+	public Usuario login(LoginDTO login) {	
 		for (Usuario u : repositorio.findAll()) {
-			if (usuario.getEmail().equals(u.getEmail()) && usuario.getSenha().equals(u.getSenha())) {
+			if (login.getEmail().equals(u.getEmail()) && login.getSenha().equals(u.getSenha())) {
 				usuarioLogado = u;
 				return u;
 			}
@@ -89,16 +87,16 @@ public class UsuarioService {
 		throw new UsuarioInvalidoException("Falha de login!", "Credenciais inválidas");	
 	}
 	
-	public boolean validaLogin(UsuarioDTO usuario) {
-		Optional<Usuario> user = repositorio.findByEmail(usuario.getEmail());
-		if (user.isPresent() && user.get().getSenha().equals(usuario.getSenha()))
+	public boolean validaLogin(LoginDTO loginDTO) {
+		Optional<Usuario> user = repositorio.findByEmail(loginDTO.getEmail());
+		if (user.isPresent() && user.get().getSenha().equals(loginDTO.getSenha()))
 			return true;
 		return false;
 		
 	}
 	
 	public boolean usuarioTemPermissao(String authHeader, String email) {
-		String subject = jwtService.getTokenSubject(authHeader);
+		String subject = jwtService.getSujeitoDoToken(authHeader);
 		Optional<Usuario> usuario = repositorio.findByEmail(subject);
 		return usuario.isPresent() && usuario.get().getEmail().equals(email);
 	}

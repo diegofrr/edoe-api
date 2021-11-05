@@ -13,9 +13,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.web.filter.GenericFilterBean;
-
 import com.projetodsc.edoe.services.JWTService;
 
 public class FiltersToken extends GenericFilterBean {
@@ -28,8 +26,7 @@ public class FiltersToken extends GenericFilterBean {
 		String header = req.getHeader("Authorization");
 
 		if (header == null || !header.startsWith("Bearer ")) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED,
-					"Token inexistente ou mal formatado");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token inexistente ou mal formatado");
 
 			return;
 		}

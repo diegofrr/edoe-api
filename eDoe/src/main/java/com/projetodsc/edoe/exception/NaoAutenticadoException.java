@@ -1,10 +1,7 @@
 package com.projetodsc.edoe.exception;
 
-import lombok.Data;
-
-@Data
 public class NaoAutenticadoException extends RuntimeException {
-	
+
 	private String titulo;
 	private String detalhe;
 
@@ -13,6 +10,14 @@ public class NaoAutenticadoException extends RuntimeException {
 		super();
 		this.detalhe = detalhe;
 		this.titulo = titulo;
+	}
+	
+	public String getTitulo() {
+		return this.titulo;
+	}
+	
+	public String getDetalhes() {
+		return this.detalhe;
 	}
 	
 }

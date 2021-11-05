@@ -8,7 +8,7 @@ import com.projetodsc.edoe.model.Usuario;
 
 @Repository
 public interface UsuariosRepository extends JpaRepository<Usuario, String> {
-	public Optional<Usuario> findByEmail(String email);
-	public boolean existsByEmail(String email); 
+	Optional<Usuario> findByEmail(String email);
+	boolean existsByEmail(String email); 
 
 }

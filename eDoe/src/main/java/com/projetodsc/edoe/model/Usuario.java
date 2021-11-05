@@ -15,9 +15,6 @@ public class Usuario implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	
 	@Column(nullable = false, length = 50)
 	private String nome;
 	
@@ -43,8 +40,7 @@ public class Usuario implements Serializable{
 		super();
 	}
 	
-	public Usuario(Long id, String nome, String email, String senha, int celular, ClasseUsuario classe, int doc) {
-		this.id = id;
+	public Usuario(String nome, String email, String senha, int celular, ClasseUsuario classe, int doc) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
