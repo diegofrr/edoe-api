@@ -14,13 +14,13 @@ import com.projetodsc.edoe.exception.UsuarioNaoExisteException;
 import com.projetodsc.edoe.model.TipoUsuario;
 import com.projetodsc.edoe.model.Usuario;
 import com.projetodsc.edoe.model.dto.UsuarioDTO;
-import com.projetodsc.edoe.repository.UsuarioDAO;
+import com.projetodsc.edoe.repository.UsuariosRepository;
 
 @Service
 public class UsuarioService {
 
 	@Autowired
-	private UsuarioDAO repositorio;
+	private UsuariosRepository repositorio;
 	
 	@Autowired
 	private JWTService jwtService;
