@@ -32,7 +32,7 @@ public class UsuarioController {
 	
 	}
 	
-	@PostMapping("usuarios/funcao")
+	@PostMapping("/usuarios/funcao")
 	public ResponseEntity<String> alteraFuncao(@RequestBody UsuarioDTO usuarioDTO){
 		return new ResponseEntity<String>(usuarioService.alteraFuncao(usuarioDTO), HttpStatus.OK);
 	}

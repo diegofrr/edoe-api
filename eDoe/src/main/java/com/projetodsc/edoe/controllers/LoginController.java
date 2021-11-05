@@ -19,7 +19,7 @@ public class LoginController {
 	@Autowired
 	private JWTService jwtService;
 	
-	@PostMapping("auth/login")
+	@PostMapping("/auth/login")
 	public ResponseEntity<LoginResponse> autentica(@RequestBody LoginDTO loginDTO) throws ServletException {
 		return new ResponseEntity<LoginResponse>(jwtService.autentica(loginDTO), HttpStatus.OK);
 	}
