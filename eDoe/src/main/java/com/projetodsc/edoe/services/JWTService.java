@@ -22,6 +22,7 @@ public class JWTService {
 			throw new NaoAutenticadoException("Login falhou", "Usuário não autenticado.");
 
 		String token = geraToken(loginDTO.getEmail());
+		usuarioService.usuarioLogado(loginDTO.getEmail());
 		return new LoginResponse(token);
 	}
 

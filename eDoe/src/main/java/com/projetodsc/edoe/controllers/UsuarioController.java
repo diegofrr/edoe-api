@@ -7,9 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.projetodsc.edoe.model.Usuario;
+import com.projetodsc.edoe.model.dto.AlteraTipo;
 import com.projetodsc.edoe.model.dto.UsuarioDTO;
 import com.projetodsc.edoe.services.UsuarioService;
 
@@ -33,8 +35,8 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/usuarios/funcao")
-	public ResponseEntity<String> alteraFuncao(@RequestBody UsuarioDTO usuarioDTO){
-		return new ResponseEntity<String>(usuarioService.alteraFuncao(usuarioDTO), HttpStatus.OK);
+	public ResponseEntity<String> alteraFuncao(@RequestBody AlteraTipo dados, @RequestHeader("Authorization") String header){
+		return new ResponseEntity<String>(usuarioService.alteraTipo(dados, header), HttpStatus.OK);
 	}
 
 }

@@ -11,6 +11,7 @@ public class ExceptionsHandler {
 	
 	private static String ADICIONA_USUARIO_URI = "https://servidor:8080/api/usuarios";
 	private static String FALHA_DE_LOGIN_URI = "https://servidor:8080/auth/login";
+	private static String SEM_PERMISSAO_URI = "/api/usuarios/funcao";
 	
 	
 	@ExceptionHandler(UsuarioInvalidoException.class)
@@ -39,6 +40,16 @@ public class ExceptionsHandler {
 		problema.setStatus(HttpStatus.BAD_REQUEST.value());
 		problema.setTitle(e.getTitulo());
 		problema.setType(FALHA_DE_LOGIN_URI);
+		problema.setDetail(e.getDetalhes());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problema);
+	}
+	
+	@ExceptionHandler(NaoAutorizadoException.class)
+	public ResponseEntity<ProblemDetails> usuarioNaoAutorizado(NaoAutorizadoException e){
+		ProblemDetails problema = new ProblemDetails();
+		problema.setStatus(HttpStatus.BAD_REQUEST.value());
+		problema.setTitle(e.getTitulo());
+		problema.setType(SEM_PERMISSAO_URI);
 		problema.setDetail(e.getDetalhes());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problema);
 	}
