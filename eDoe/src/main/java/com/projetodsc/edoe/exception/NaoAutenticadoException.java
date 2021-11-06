@@ -2,14 +2,10 @@ package com.projetodsc.edoe.exception;
 
 public class NaoAutenticadoException extends RuntimeException {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String titulo;
 	private String detalhe;
 
-	
 	public NaoAutenticadoException(String titulo, String detalhe) {
 		super();
 		this.detalhe = detalhe;

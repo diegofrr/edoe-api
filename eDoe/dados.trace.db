@@ -859,3 +859,9 @@ ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 0 [90009-200]
 2021-11-04 17:07:32 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLDataException: Value too long for column "EMAIL VARCHAR(30)": "'diegossss@gmail.com@outlook.com@dcx.ufpb.br@hotmail.com' (55)"; SQL statement:
 insert into usuario (celular, classe, doc_identificacao, email, nome, senha, tipo, id) values (?, ?, ?, ?, ?, ?, ?, ?) [22001-200]
+2021-11-06 19:44:36 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DESCRICAO_ID[*]"; expected "DELETE, DROP, DECLARE, DEALLOCATE"; SQL statement:
+DESCRICAO_ID [42001-200]
+2021-11-06 19:44:59 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DESCRICAO_ID[*]"; expected "DELETE, DROP, DECLARE, DEALLOCATE"; SQL statement:
+DESCRICAO_ID [42001-200]
