@@ -8,30 +8,21 @@ import lombok.Data;
 public class ItemDTO {
 	
 	private String nome;
-	private DescricaoItem descricao;
+	private int idDescricao;
 	private int quantidade;
 	private boolean disponivel;
 	
 	public ItemDTO() {}
 	
-	public ItemDTO(String nome, DescricaoItem descricao, int quantidade) {
+	public ItemDTO(String nome, int idDescricao, int quantidade) {
 		this.nome = nome;
-		this.descricao = descricao;
+		this.idDescricao = idDescricao;
 		this.quantidade = quantidade;
 	}
 	
 	public Item getItem() {
-		return new Item(this.nome, this.descricao, this.quantidade);
+		return new Item(this.nome, this.idDescricao, this.quantidade);
 	}
-	
-	public String toString() {
-		return "Nome:" + nome + "\n" +
-				"Descricao: " + descricao.toString() + "\n" +
-				"Quantidade: " + quantidade + "\n";
 
-	}
-	
-
-	
 
 }

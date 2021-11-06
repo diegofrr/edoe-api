@@ -865,3 +865,15 @@ DESCRICAO_ID [42001-200]
 2021-11-06 19:44:59 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DESCRICAO_ID[*]"; expected "DELETE, DROP, DECLARE, DEALLOCATE"; SQL statement:
 DESCRICAO_ID [42001-200]
+2021-11-06 19:58:42 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP ITENS[*]"; expected "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, VIEW, ROLE, ALIAS, SCHEMA, ALL, DOMAIN, TYPE, DATATYPE, AGGREGATE, SYNONYM"; SQL statement:
+DROP ITENS [42001-200]
+2021-11-06 19:58:53 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DESCRICAO_ITEM[*]"; expected "DELETE, DROP, DECLARE, DEALLOCATE"; SQL statement:
+DESCRICAO_ITEM [42001-200]
+2021-11-06 20:08:06 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP ITEM[*]"; expected "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, VIEW, ROLE, ALIAS, SCHEMA, ALL, DOMAIN, TYPE, DATATYPE, AGGREGATE, SYNONYM"; SQL statement:
+DROP ITEM [42001-200]
+2021-11-06 20:08:23 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DESCRICAO[*]"; expected "DELETE, DROP, DECLARE, DEALLOCATE"; SQL statement:
+DESCRICAO [42001-200]

@@ -12,7 +12,7 @@ import lombok.Data;
 public class DescricaoItem {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	private long id;
 	
 	@Column(unique = true, nullable = false)
@@ -22,6 +22,10 @@ public class DescricaoItem {
 
 	public DescricaoItem(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public String toString() {
+		return descricao;
 	}
 
 }
