@@ -15,7 +15,7 @@ public class UsuarioDTO {
 	private int celular;
 	private ClasseUsuario classe;
 	private int docIdentificacao;
-	private TipoUsuario tipo;
+	private TipoUsuario tipo = TipoUsuario.DOADOR;
 	
 	public UsuarioDTO() {
 		super();
@@ -31,7 +31,7 @@ public class UsuarioDTO {
 	}	
 
 	public Usuario getUsuario() {
-		return new Usuario(this.nome, this.email, this.senha, this.celular, this.classe, this.docIdentificacao);
+		return new Usuario(this.nome, this.email, this.senha, this.celular, this.classe, this.docIdentificacao, this.tipo);
 	}
 	
 	public boolean validaUsuario() {

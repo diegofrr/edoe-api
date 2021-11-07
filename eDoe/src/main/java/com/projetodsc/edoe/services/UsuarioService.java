@@ -75,6 +75,9 @@ public class UsuarioService {
 		if (repositorio.existsByEmail(user.getEmail()))
 			throw new UsuarioInvalidoException("E-mail já cadastrado!", "Já existe um usuário cadastrado com o este e-mail!");
 
+		// caso nao tennha nenhum usuário cadastrado no banco, o primeiro será do tipo admin
+		if (repositorio.findAll().size() == 0)
+			user.setTipo(TipoUsuario.ADMIN);
 		return repositorio.save(user.getUsuario());
 	}
 
