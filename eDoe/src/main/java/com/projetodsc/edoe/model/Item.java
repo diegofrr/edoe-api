@@ -1,48 +1,52 @@
 package com.projetodsc.edoe.model;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 
 @Data
 @Entity
-public class Item implements Serializable{
-		
+public class Item implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	private long id;
-	
+
 	@Column(nullable = false)
 	private String nome;
-	
+
 	@Column(nullable = false)
 	private int quantidade;
-	
-	@ManyToOne
-	private DescricaoItem descricao;
-	
-	private boolean disponivel;
-	
-	public Item() {}
-	
-	public Item(String nome, int idDescricao, int quantidade) {
-		this.nome = nome;
-		this.quantidade = quantidade;
+
+	@ManyToMany
+	@JoinTable(name = "item_keyword", 
+	joinColumns = @JoinColumn(name = "item_id"), 
+	inverseJoinColumns = @JoinColumn(name = "keyword_id")) 
+	private List<Descritor> descritores;
+
+	private boolean disponivel = false;
+
+	public Item() {
 	}
-	
-	public boolean getDisponibilidade() {
-		if (quantidade == 0)
-			return false;
-		return true;
+
+	public Item(String nome, List<Descritor> descritores, int quantidade, boolean disponivel) {
+		this.nome = nome;
+		this.descritores = descritores;
+		this.quantidade = quantidade;
+		if (quantidade > 0)
+			this.disponivel = true;
 	}
 
 }

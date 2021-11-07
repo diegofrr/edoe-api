@@ -1,6 +1,7 @@
 package com.projetodsc.edoe.model.dto;
+import java.util.List;
 
-import com.projetodsc.edoe.model.DescricaoItem;
+import com.projetodsc.edoe.model.Descritor;
 import com.projetodsc.edoe.model.Item;
 import lombok.Data;
 
@@ -8,20 +9,22 @@ import lombok.Data;
 public class ItemDTO {
 	
 	private String nome;
-	private int idDescricao;
+	private List<Descritor> descritores;
 	private int quantidade;
-	private boolean disponivel;
+	private boolean disponivel = false;
 	
 	public ItemDTO() {}
 	
-	public ItemDTO(String nome, int idDescricao, int quantidade) {
+	public ItemDTO(String nome, List<Descritor> descritores, int quantidade) {
 		this.nome = nome;
-		this.idDescricao = idDescricao;
+		this.descritores = descritores;
 		this.quantidade = quantidade;
+		if (quantidade > 0)
+			this.disponivel = true;
 	}
 	
 	public Item getItem() {
-		return new Item(this.nome, this.idDescricao, this.quantidade);
+		return new Item(this.nome, this.descritores, this.quantidade, this.disponivel);
 	}
 
 

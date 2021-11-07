@@ -2,7 +2,7 @@ package com.projetodsc.edoe.services;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import java.util.Date;	
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.projetodsc.edoe.exception.NaoAutenticadoException;

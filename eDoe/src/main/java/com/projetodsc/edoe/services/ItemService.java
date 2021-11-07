@@ -10,15 +10,15 @@ import com.projetodsc.edoe.repository.ItensRepository;
 
 @Service
 public class ItemService {
-	
+
 	@Autowired
 	private ItensRepository repositorio;
-	
+
 	public Item addItem(ItemDTO item) {
 		return repositorio.save(item.getItem());
 	}
-	
-	public List<Item> getItens(){
+
+	public List<Item> getItens() {
 		return repositorio.findAll();
 	}
 
