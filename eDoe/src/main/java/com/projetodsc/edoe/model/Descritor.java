@@ -1,5 +1,6 @@
 package com.projetodsc.edoe.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import lombok.Data;
@@ -9,6 +10,7 @@ import lombok.Data;
 public class Descritor {
 
 	@Id
+	@Column
 	public String descricao;
 
 	public Descritor() {

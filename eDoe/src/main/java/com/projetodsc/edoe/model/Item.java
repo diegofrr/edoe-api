@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
@@ -30,23 +30,18 @@ public class Item implements Serializable {
 	@Column(nullable = false)
 	private int quantidade;
 
-	@ManyToMany
-	@JoinTable(name = "item_keyword", 
-	joinColumns = @JoinColumn(name = "item_id"), 
-	inverseJoinColumns = @JoinColumn(name = "keyword_id")) 
-	private List<Descritor> descritores;
-
-	private boolean disponivel = false;
+	@ManyToOne
+	@JoinColumn
+	private Descritor descritor;
 
 	public Item() {
 	}
 
-	public Item(String nome, List<Descritor> descritores, int quantidade, boolean disponivel) {
+	public Item(String nome, Descritor descritor, int quantidade) {
 		this.nome = nome;
-		this.descritores = descritores;
+		this.descritor = descritor;
 		this.quantidade = quantidade;
-		if (quantidade > 0)
-			this.disponivel = true;
+
 	}
 
 }
