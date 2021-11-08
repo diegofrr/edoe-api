@@ -7,6 +7,4 @@ import com.projetodsc.edoe.model.Item;
 @Repository
 public interface ItensRepository extends JpaRepository<Item, Long>{
 	
-
-
 }

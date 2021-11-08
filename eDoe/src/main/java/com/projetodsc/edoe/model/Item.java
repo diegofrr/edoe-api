@@ -26,6 +26,9 @@ public class Item implements Serializable {
 
 	@Column(nullable = false)
 	private String nome;
+	
+	@Column(nullable = false)
+	private String descricaoDetalhada;
 
 	@Column(nullable = false)
 	private int quantidade;
@@ -37,8 +40,9 @@ public class Item implements Serializable {
 	public Item() {
 	}
 
-	public Item(String nome, Descritor descritor, int quantidade) {
+	public Item(String nome, String descricaoDetalhada, Descritor descritor, int quantidade) {
 		this.nome = nome;
+		this.descricaoDetalhada = descricaoDetalhada;
 		this.descritor = descritor;
 		this.quantidade = quantidade;
 
