@@ -36,6 +36,22 @@ public class ItemService {
 	@Autowired
 	private JWTService jwtService;
 	
+	public Item alteraDados(Item item, Item itemAtt) {
+		item.setNome(itemAtt.getNome());
+		item.setDescricaoDetalhada(itemAtt.getDescricaoDetalhada());
+		item.setQuantidadeDoacao(itemAtt.getQuantidadeDoacao());
+		item.setDescritor(itemAtt.getDescritor());
+		return item;
+	}
+	
+	public Item atualizaItem(long id, ItemDTO itemAtualizado) {
+		if (!itensRepositorio.existsById(id))
+			throw new ItemNaoEncontradoException("Item não encontrado!", "Nenhum item com o id " + id + " no sistema.");
+		
+		Item item = itensRepositorio.findById(id).get();
+		return itensRepositorio.save(alteraDados(item, itemAtualizado.getItem()));
+	}
+	
 	public List<ResponseItemDTO> getItensByDescritor(Descritor descritor){
 		if (!descritoresRepositorio.existsByDescricao(descritor.getDescricao()))
 			throw new DescritorInvalidoException("Descritor inválido", "Este descritor não existe no sistema.");
