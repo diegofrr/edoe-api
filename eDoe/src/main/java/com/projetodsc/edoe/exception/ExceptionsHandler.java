@@ -14,7 +14,8 @@ public class ExceptionsHandler {
 	private static String DESCRITOR_NAO_EXISTE_URI = "https://localhost:8080/api/descritores/cadastro";
 	private static String DESCRITOR_JA_EXISTE_URI = "https://localhost:8080/api/descritores";
 	private static String DESCRITOR_INVALIDO_URI = "https://localhost:8080/api/descritores/cadastro";
-	private static String NAO_AUTORIZADO_URI = "https://localhost:8080/api/auth/logi";
+	private static String NAO_AUTORIZADO_URI = "https://localhost:8080/api/auth/login";
+	private static String ITEM_NAO_ENCONTRADO_URI = "https://localhost:8080/api/itens/";
 	
 	@ExceptionHandler(UsuarioInvalidoException.class)
 	public ResponseEntity<ProblemDetails> usuarioInvalido(UsuarioInvalidoException e) {
@@ -84,5 +85,15 @@ public class ExceptionsHandler {
 		problema.setType(DESCRITOR_INVALIDO_URI);
 		problema.setDetail(e.getDetalhes());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problema);
+	}
+	
+	@ExceptionHandler(ItemNaoEncontradoException.class)
+	public ResponseEntity<ProblemDetails> descritorInvalido(ItemNaoEncontradoException e) {
+		ProblemDetails problema = new ProblemDetails();
+		problema.setStatus(HttpStatus.NOT_FOUND.value());
+		problema.setTitle(e.getTitulo());
+		problema.setType(ITEM_NAO_ENCONTRADO_URI);
+		problema.setDetail(e.getDetalhes());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(problema);
 	}
 }

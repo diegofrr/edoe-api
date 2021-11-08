@@ -25,6 +25,11 @@ public class ItemDTO {
 		this.quantidadeDoacao = quantidadeDoacao;
 		
 	}
+	
+	public ItemDTO(String nome, String descricaoDetalhada) {
+		this.nome = nome;
+		this.descricaoDetalhada = descricaoDetalhada;
+	}
 
 	public Item getItem() {
 		return new Item(this.nome, this.descricaoDetalhada, this.descritor, this.quantidadeDoacao);

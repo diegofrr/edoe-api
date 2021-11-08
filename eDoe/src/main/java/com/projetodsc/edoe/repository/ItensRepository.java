@@ -4,6 +4,9 @@ import org.springframework.stereotype.Repository;
 import com.projetodsc.edoe.model.Item;
 
 @Repository
-public interface ItensRepository extends JpaRepository<Item, String>{
+public interface ItensRepository extends JpaRepository<Item, Long>{
+	
+	boolean existsById(long id);
+	
 	
 }

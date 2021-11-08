@@ -4838,3 +4838,9 @@ DROP TABLE USUARIO [90107-200]
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
+2021-11-08 03:40:33 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'' (ITEM: ""ID"" BIGINT NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."ITEM"("ID","DESCRICAO_DETALHADA","NOME","QUANTIDADE_DOACAO","DESCRITOR_DESCRICAO","DOADOR_EMAIL")VALUES(?,?,?,?,?,?) [22018-200]
+2021-11-08 03:40:33 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'' (ITEM: ""ID"" BIGINT NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."ITEM"("ID","DESCRICAO_DETALHADA","NOME","QUANTIDADE_DOACAO","DESCRITOR_DESCRICAO","DOADOR_EMAIL")VALUES(?,?,?,?,?,?) [22018-200]

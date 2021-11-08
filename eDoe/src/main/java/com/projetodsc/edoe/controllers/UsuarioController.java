@@ -41,5 +41,5 @@ public class UsuarioController {
 	public ResponseEntity<String> alteraFuncao(@RequestBody AlteraTipo dados, @RequestHeader("Authorization") String header) throws ServletException{
 		return new ResponseEntity<String>(usuarioService.alteraTipo(dados, header), HttpStatus.OK);
 	}
-
+	
 }
