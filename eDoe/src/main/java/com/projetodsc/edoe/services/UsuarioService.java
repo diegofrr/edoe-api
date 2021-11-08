@@ -32,6 +32,7 @@ public class UsuarioService {
 	}
 	
 	public String alteraTipo(AlteraTipo dados, String authHeader) {
+		dados.setEmail(dados.getEmail().toUpperCase());
 		
 		String email = dados.getEmail();
 		TipoUsuario novoTipo = dados.getNovoTipo();
@@ -65,6 +66,8 @@ public class UsuarioService {
 	
 	
 	public Usuario adicionaUsuario(UsuarioDTO user) {
+		user.setNome(user.getNome().toUpperCase());
+		user.setEmail(user.getEmail().toUpperCase());
 		
 		user.validaUsuario();
 		if (repositorio.existsByEmail(user.getEmail()))

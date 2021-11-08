@@ -37,7 +37,7 @@ public class UsuarioDTO {
 	public boolean validaUsuario() {
 		if (nome == null || nome.isBlank() || nome.isEmpty())
 			throw new UsuarioInvalidoException("Nome inválido!", "Confira o nome fornecido e tente novamente!");
-		if (!email.contains("@gmail.com") && !email.contains("@dcx.ufpb.br") && !email.contains("@outlook.com") && !email.contains("@hotmail.com"))
+		if (!email.contains("@GMAIL.COM") && !email.contains("@DCX.UFPB.BR") && !email.contains("@OUTLOOK.COM") && !email.contains("@HOTMAIL.COM"))
 			throw new UsuarioInvalidoException("E-mail inválido!", "Confira o e-mail fornecido e tente novamente!");
 		if (senha == null || senha.isBlank()  || senha.isEmpty())
 			throw new UsuarioInvalidoException("Senha inválida!", "Sua senha não pode ficar em branco");

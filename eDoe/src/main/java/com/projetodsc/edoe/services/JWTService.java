@@ -19,6 +19,8 @@ public class JWTService {
 	public static final String TOKEN_KEY = "wdsjfhkwbfdgwuierhweij";
 	
 	public LoginResponse autentica(LoginDTO loginDTO) {
+		loginDTO.setEmail(loginDTO.getEmail().toUpperCase());
+		
 		if (!usuarioService.validaLogin(loginDTO))
 			throw new NaoAutenticadoException("Login falhou", "Usuário não autenticado.");
 

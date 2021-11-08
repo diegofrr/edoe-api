@@ -4844,3 +4844,9 @@ INSERT INTO "PUBLIC"."ITEM"("ID","DESCRICAO_DETALHADA","NOME","QUANTIDADE_DOACAO
 2021-11-08 03:40:33 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'' (ITEM: ""ID"" BIGINT NOT NULL)"; SQL statement:
 INSERT INTO "PUBLIC"."ITEM"("ID","DESCRICAO_DETALHADA","NOME","QUANTIDADE_DOACAO","DESCRITOR_DESCRICAO","DOADOR_EMAIL")VALUES(?,?,?,?,?,?) [22018-200]
+2021-11-08 17:05:47 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DETELE[*] USUARIO"; expected "DELETE, DROP, DECLARE, DEALLOCATE"; SQL statement:
+DETELE USUARIO [42001-200]
+2021-11-08 17:05:58 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DETELE[*] USUARIO"; expected "DELETE, DROP, DECLARE, DEALLOCATE"; SQL statement:
+DETELE USUARIO [42001-200]

@@ -45,6 +45,9 @@ public class ItemService {
 	}
 	
 	public Item atualizaItem(long id, ItemDTO itemAtualizado, String authHeader) {
+		itemAtualizado.setNome(itemAtualizado.getNome().toUpperCase());
+		itemAtualizado.setDescricaoDetalhada(itemAtualizado.getDescricaoDetalhada().toUpperCase());
+		
 		if (!itensRepositorio.existsById(id))
 			throw new ItemNaoEncontradoException("Item não encontrado!", "Nenhum item com o id " + id + " no sistema.");
 		Item item = itensRepositorio.findById(id).get();
@@ -56,7 +59,9 @@ public class ItemService {
 	}
 	
 	public List<ResponseItemDTO> getItensByDescritor(Descritor descritor){
-		if (!descritoresRepositorio.existsByDescricao(descritor.getDescricao()))
+		descritor.setDescricao(descritor.getDescricao().toUpperCase());
+		
+		if (!descritoresRepositorio.existsByDescricao(descritor.getDescricao().toUpperCase()))
 			throw new DescritorInvalidoException("Descritor inválido", "Este descritor não existe no sistema.");
 
 		List<ResponseItemDTO> response = new ArrayList<>();
@@ -69,6 +74,9 @@ public class ItemService {
 	}
 		
 	public Item addItem(ItemDTO itemDTO, String authHeader) {
+		itemDTO.setNome(itemDTO.getNome().toUpperCase());
+		itemDTO.setDescricaoDetalhada(itemDTO.getDescricaoDetalhada().toUpperCase());
+		
 		String subject = jwtService.getSujeitoDoToken(authHeader);
 		Optional<Usuario> usuarioDoToken = usuariosRepositorio.findByEmail(subject);
 		
