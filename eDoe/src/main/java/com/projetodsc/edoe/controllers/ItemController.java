@@ -53,8 +53,8 @@ public class ItemController {
 	}
 	
 	@PutMapping("/itens/{id}")
-	public ResponseEntity<Item> atualizaItem(@PathVariable long id, @RequestBody ItemDTO itemAtualizado) throws ServletException {
-		return new ResponseEntity<Item>(itemService.atualizaItem(id, itemAtualizado), HttpStatus.OK);
+	public ResponseEntity<Item> atualizaItem(@PathVariable long id, @RequestBody ItemDTO itemAtualizado, @RequestHeader("Authorization") String authHeader) throws ServletException {
+		return new ResponseEntity<Item>(itemService.atualizaItem(id, itemAtualizado, authHeader), HttpStatus.OK);
 		
 	}
 	

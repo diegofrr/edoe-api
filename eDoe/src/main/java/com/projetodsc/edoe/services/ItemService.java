@@ -44,11 +44,14 @@ public class ItemService {
 		return item;
 	}
 	
-	public Item atualizaItem(long id, ItemDTO itemAtualizado) {
+	public Item atualizaItem(long id, ItemDTO itemAtualizado, String authHeader) {
 		if (!itensRepositorio.existsById(id))
 			throw new ItemNaoEncontradoException("Item não encontrado!", "Nenhum item com o id " + id + " no sistema.");
-		
 		Item item = itensRepositorio.findById(id).get();
+		String subject = jwtService.getSujeitoDoToken(authHeader);
+		Optional<Usuario> usuarioDoToken = usuariosRepositorio.findByEmail(subject);
+		if (usuarioDoToken.get() != item.getDoador())
+			throw new NaoAutorizadoException("Não autorizado", "Este item pertence a outro doador.");
 		return itensRepositorio.save(alteraDados(item, itemAtualizado.getItem()));
 	}
 	
