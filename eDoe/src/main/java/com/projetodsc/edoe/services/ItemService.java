@@ -1,16 +1,22 @@
 package com.projetodsc.edoe.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.projetodsc.edoe.exception.DescritorInvalidoException;
 import com.projetodsc.edoe.exception.DescritorNaoExisteException;
 import com.projetodsc.edoe.exception.ItemNaoEncontradoException;
 import com.projetodsc.edoe.exception.NaoAutorizadoException;
+import com.projetodsc.edoe.model.Descritor;
 import com.projetodsc.edoe.model.Item;
 import com.projetodsc.edoe.model.Usuario;
 import com.projetodsc.edoe.model.dto.ItemDTO;
 import com.projetodsc.edoe.model.dto.ItemDTODeleted;
+import com.projetodsc.edoe.model.dto.ResponseDoadorDTO;
+import com.projetodsc.edoe.model.dto.ResponseItemDTO;
 import com.projetodsc.edoe.repository.DescritoresRepository;
 import com.projetodsc.edoe.repository.ItensRepository;
 import com.projetodsc.edoe.repository.UsuariosRepository;
@@ -29,6 +35,19 @@ public class ItemService {
 	
 	@Autowired
 	private JWTService jwtService;
+	
+	public List<ResponseItemDTO> getItensByDescritor(Descritor descritor){
+		if (!descritoresRepositorio.existsByDescricao(descritor.getDescricao()))
+			throw new DescritorInvalidoException("Descritor inválido", "Este descritor não existe no sistema.");
+
+		List<ResponseItemDTO> response = new ArrayList<>();
+		for (Item i : itensRepositorio.findByDescritor(descritor).get()) {
+			response.add(new ResponseItemDTO(i, new ResponseDoadorDTO(i.getDoador())));
+		}
+		return response;
+		
+		
+	}
 		
 	public Item addItem(ItemDTO itemDTO, String authHeader) {
 		String subject = jwtService.getSujeitoDoToken(authHeader);

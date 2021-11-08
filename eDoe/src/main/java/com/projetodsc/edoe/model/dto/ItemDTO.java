@@ -13,7 +13,7 @@ public class ItemDTO {
 	private String descricaoDetalhada;
 	private Descritor descritor;
 	private int quantidadeDoacao;
-	private Usuario doador;
+	private UsuarioDTO doador;
 
 	public ItemDTO() {
 	}
@@ -23,7 +23,6 @@ public class ItemDTO {
 		this.descricaoDetalhada = descricaoDetalhada;
 		this.descritor = descritor;
 		this.quantidadeDoacao = quantidadeDoacao;
-		
 	}
 	
 	public ItemDTO(String nome, String descricaoDetalhada) {

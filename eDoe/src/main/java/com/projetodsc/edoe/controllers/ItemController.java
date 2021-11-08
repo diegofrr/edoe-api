@@ -1,23 +1,25 @@
 package com.projetodsc.edoe.controllers;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.ServletException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.projetodsc.edoe.model.Descritor;
 import com.projetodsc.edoe.model.Item;
 import com.projetodsc.edoe.model.dto.ItemDTO;
 import com.projetodsc.edoe.model.dto.ItemDTODeleted;
+import com.projetodsc.edoe.model.dto.ResponseItemDTO;
 import com.projetodsc.edoe.services.ItemService;
 
 @RestController
@@ -41,6 +43,11 @@ public class ItemController {
 	@DeleteMapping("/itens/{id}")
 	public ResponseEntity<ItemDTODeleted> removeItem(@PathVariable("id") long id_item, @RequestHeader("Authorization") String header) throws ServletException{
 		return new ResponseEntity<ItemDTODeleted>(itemService.removeItem(id_item, header), HttpStatus.OK);
+	}
+	
+	@GetMapping("/itens/{descricao}")
+	public ResponseEntity<List<ResponseItemDTO>> getByDescritor(@PathVariable String descricao){
+		return new ResponseEntity<List<ResponseItemDTO>>(itemService.getItensByDescritor(new Descritor(descricao)), HttpStatus.OK);
 	}
 	
 
