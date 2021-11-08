@@ -9,12 +9,12 @@ import com.projetodsc.edoe.model.dto.ProblemDetails;
 @RestControllerAdvice
 public class ExceptionsHandler {
 
-	private static String ADICIONA_USUARIO_URI = "localhost:8080/api/usuarios";
-	private static String FALHA_DE_LOGIN_URI = "localhost:8080/auth/login";
-	private static String SEM_PERMISSAO_URI = "localhost:8080/api/usuarios/funcao";
-	private static String DESCRITOR_NAO_EXISTE_URI = "localhost:8080/api/descritores/cadastro";
-	private static String DESCRITOR_JA_EXISTE_URI = "localhost:8080/api/descritores";
-	private static String DESCRITOR_INVALIDO_URI = "localhost:8080/api/descritores/cadastro";
+	private static String ADICIONA_USUARIO_URI = "https://localhost:8080/api/usuarios";
+	private static String FALHA_DE_LOGIN_URI = "https://localhost:8080/api/auth/login";
+	private static String DESCRITOR_NAO_EXISTE_URI = "https://localhost:8080/api/descritores/cadastro";
+	private static String DESCRITOR_JA_EXISTE_URI = "https://localhost:8080/api/descritores";
+	private static String DESCRITOR_INVALIDO_URI = "https://localhost:8080/api/descritores/cadastro";
+	private static String NAO_AUTORIZADO_URI = "https://localhost:8080/api/auth/logi";
 	
 	@ExceptionHandler(UsuarioInvalidoException.class)
 	public ResponseEntity<ProblemDetails> usuarioInvalido(UsuarioInvalidoException e) {
@@ -39,11 +39,11 @@ public class ExceptionsHandler {
 	@ExceptionHandler(NaoAutenticadoException.class)
 	public ResponseEntity<ProblemDetails> usuarioNaoAutenticado(NaoAutenticadoException e) {
 		ProblemDetails problema = new ProblemDetails();
-		problema.setStatus(HttpStatus.BAD_REQUEST.value());
+		problema.setStatus(HttpStatus.UNAUTHORIZED.value());
 		problema.setTitle(e.getTitulo());
 		problema.setType(FALHA_DE_LOGIN_URI);
 		problema.setDetail(e.getDetalhes());
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problema);
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(problema);
 	}
 
 	@ExceptionHandler(NaoAutorizadoException.class)
@@ -51,7 +51,7 @@ public class ExceptionsHandler {
 		ProblemDetails problema = new ProblemDetails();
 		problema.setStatus(HttpStatus.BAD_REQUEST.value());
 		problema.setTitle(e.getTitulo());
-		problema.setType(SEM_PERMISSAO_URI);
+		problema.setType(NAO_AUTORIZADO_URI);
 		problema.setDetail(e.getDetalhes());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problema);
 	}

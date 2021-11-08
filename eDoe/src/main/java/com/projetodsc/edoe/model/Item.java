@@ -28,20 +28,24 @@ public class Item implements Serializable {
 	private String descricaoDetalhada;
 
 	@Column(nullable = false)
-	private int quantidade;
+	private int quantidadeDoacao;
 
 	@ManyToOne
 	@JoinColumn
 	private Descritor descritor;
+	
+	@ManyToOne
+	@JoinColumn
+	private Usuario doador;
 
 	public Item() {
 	}
 
-	public Item(String nome, String descricaoDetalhada, Descritor descritor, int quantidade) {
+	public Item(String nome, String descricaoDetalhada, Descritor descritor, int quantidadeDoacao) {
 		this.nome = nome;
 		this.descricaoDetalhada = descricaoDetalhada;
 		this.descritor = descritor;
-		this.quantidade = quantidade;
+		this.quantidadeDoacao = quantidadeDoacao;
 
 	}
 

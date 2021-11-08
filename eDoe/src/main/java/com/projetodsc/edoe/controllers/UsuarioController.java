@@ -1,6 +1,9 @@
 package com.projetodsc.edoe.controllers;
 
 import java.util.List;
+
+import javax.servlet.ServletException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +38,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/usuarios/funcao")
-	public ResponseEntity<String> alteraFuncao(@RequestBody AlteraTipo dados, @RequestHeader("Authorization") String header){
+	public ResponseEntity<String> alteraFuncao(@RequestBody AlteraTipo dados, @RequestHeader("Authorization") String header) throws ServletException{
 		return new ResponseEntity<String>(usuarioService.alteraTipo(dados, header), HttpStatus.OK);
 	}
 

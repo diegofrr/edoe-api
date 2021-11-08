@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.projetodsc.edoe.exception.NaoAutenticadoException;
 import com.projetodsc.edoe.exception.NaoAutorizadoException;
 import com.projetodsc.edoe.exception.UsuarioInvalidoException;
@@ -25,9 +24,7 @@ public class UsuarioService {
 	
 	@Autowired
 	private JWTService jwtService;	
-	
-	Usuario usuarioLogado;
-	
+		
 	public UsuarioService() {}
 	
 	public Usuario addUsuario(Usuario user) {
@@ -35,13 +32,11 @@ public class UsuarioService {
 	}
 	
 	public String alteraTipo(AlteraTipo dados, String authHeader) {
+		
 		String email = dados.getEmail();
 		TipoUsuario novoTipo = dados.getNovoTipo();
 		String subject = jwtService.getSujeitoDoToken(authHeader);
 		Optional<Usuario> usuarioDoToken = repositorio.findByEmail(subject);
-		
-		if (usuarioLogado == null)
-			throw new UsuarioInvalidoException("Não logado!", "Faça login no sistema!");
 			
 		if (usuarioDoToken.get().getTipo() != TipoUsuario.ADMIN)
 			throw new NaoAutorizadoException("Sem permissão!", "Somente administradores");
@@ -113,12 +108,6 @@ public class UsuarioService {
 			repositorio.delete(usuario);
 		}
 		return usuario;
-	}
-	
-	public void usuarioLogado(String email) {
-		usuarioLogado = repositorio.findByEmail(email).get();
-	}
-	
-	
+	}	
 	
 }

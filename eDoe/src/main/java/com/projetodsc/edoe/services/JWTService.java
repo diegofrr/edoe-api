@@ -6,6 +6,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.projetodsc.edoe.exception.NaoAutenticadoException;
+import com.projetodsc.edoe.exception.NaoAutorizadoException;
 import com.projetodsc.edoe.filter.FiltersToken;
 import com.projetodsc.edoe.model.dto.LoginDTO;
 import com.projetodsc.edoe.model.dto.LoginResponse;
@@ -16,13 +17,12 @@ public class JWTService {
 	@Autowired
 	private UsuarioService usuarioService;
 	public static final String TOKEN_KEY = "wdsjfhkwbfdgwuierhweij";
-
+	
 	public LoginResponse autentica(LoginDTO loginDTO) {
 		if (!usuarioService.validaLogin(loginDTO))
 			throw new NaoAutenticadoException("Login falhou", "Usuário não autenticado.");
 
 		String token = geraToken(loginDTO.getEmail());
-		usuarioService.usuarioLogado(loginDTO.getEmail());
 		return new LoginResponse(token);
 	}
 
