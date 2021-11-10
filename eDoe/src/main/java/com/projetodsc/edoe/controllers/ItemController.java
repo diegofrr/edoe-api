@@ -35,8 +35,8 @@ public class ItemController {
 
 	
 	@PostMapping("/itens/cadastrar")
-	public ResponseEntity<Item> adicionaItem(@RequestBody ItemDTO itemDTO, @RequestHeader("Authorization") String header) throws ServletException{
-		return new ResponseEntity<Item>(itemService.addItem(itemDTO, header), HttpStatus.OK);
+	public ResponseEntity<ResponseItemDTO> adicionaItem(@RequestBody ItemDTO itemDTO, @RequestHeader("Authorization") String header) throws ServletException{
+		return new ResponseEntity<ResponseItemDTO>(itemService.addItem(itemDTO, header), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/itens/{id}")
@@ -53,6 +53,11 @@ public class ItemController {
 	public ResponseEntity<Item> atualizaItem(@PathVariable long id, @RequestBody ItemDTO itemAtualizado, @RequestHeader("Authorization") String authHeader) throws ServletException {
 		return new ResponseEntity<Item>(itemService.atualizaItem(id, itemAtualizado, authHeader), HttpStatus.OK);
 		
+	}
+	
+	@GetMapping("/itens/ranking_quantity")
+	public ResponseEntity<List<ResponseItemDTO>> getItensOrderByQuantidadeDesc() throws ServletException{
+		return new ResponseEntity<List<ResponseItemDTO>>(itemService.getItensOrderByQuantidadeDesc(), HttpStatus.OK);
 	}
 	
 

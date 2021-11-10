@@ -17,7 +17,15 @@ public class ItemDTO {
 
 	public ItemDTO() {
 	}
-
+	
+	public ItemDTO(Item item) {
+		this.nome = item.getNome();
+		this.descricaoDetalhada = item.getDescricaoDetalhada();
+		this.quantidadeDoacao = item.getQuantidadeDoacao();
+		this.descritor = item.getDescritor();
+		this.doador = new UsuarioDTO(item.getDoador());
+	}
+	
 	public ItemDTO(String nome, String descricaoDetalhada, Descritor descritor, int quantidadeDoacao) {
 		this.nome = nome;
 		this.descricaoDetalhada = descricaoDetalhada;

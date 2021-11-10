@@ -10,8 +10,10 @@ import com.projetodsc.edoe.exception.DescritorInvalidoException;
 import com.projetodsc.edoe.exception.DescritorNaoExisteException;
 import com.projetodsc.edoe.exception.ItemNaoEncontradoException;
 import com.projetodsc.edoe.exception.NaoAutorizadoException;
+import com.projetodsc.edoe.exception.UsuarioInvalidoException;
 import com.projetodsc.edoe.model.Descritor;
 import com.projetodsc.edoe.model.Item;
+import com.projetodsc.edoe.model.TipoUsuario;
 import com.projetodsc.edoe.model.Usuario;
 import com.projetodsc.edoe.model.dto.ItemDTO;
 import com.projetodsc.edoe.model.dto.ItemDTODeleted;
@@ -35,6 +37,16 @@ public class ItemService {
 	
 	@Autowired
 	private JWTService jwtService;
+	
+	public List<ResponseItemDTO> getItensOrderByQuantidadeDesc(){
+		List<Item> itens = itensRepositorio.findTop10ByOrderByQuantidadeDoacaoDesc().get();
+		List<ResponseItemDTO> listResponse = new ArrayList<>();
+		for (Item i : itens) {
+			ResponseItemDTO newItem = new ResponseItemDTO(i, i.getDoador());
+			listResponse.add(newItem);
+		}
+		return listResponse;
+	}
 	
 	public Item alteraDados(Item item, Item itemAtt) {
 		item.setNome(itemAtt.getNome());
@@ -66,14 +78,14 @@ public class ItemService {
 
 		List<ResponseItemDTO> response = new ArrayList<>();
 		for (Item i : itensRepositorio.findByDescritor(descritor).get()) {
-			response.add(new ResponseItemDTO(i, new ResponseDoadorDTO(i.getDoador())));
+			response.add(new ResponseItemDTO(i, i.getDoador()));
 		}
 		return response;
 		
 		
 	}
 		
-	public Item addItem(ItemDTO itemDTO, String authHeader) {
+	public ResponseItemDTO addItem(ItemDTO itemDTO, String authHeader) {
 		itemDTO.setNome(itemDTO.getNome().toUpperCase());
 		itemDTO.setDescricaoDetalhada(itemDTO.getDescricaoDetalhada().toUpperCase());
 		
@@ -83,10 +95,15 @@ public class ItemService {
 		if (!descritoresRepositorio.existsByDescricao(itemDTO.getDescritor().getDescricao()))
 			throw new DescritorNaoExisteException("Descritor não existe", "Este descritor não está cadastrado no sistema.");
 		
+		if (usuarioDoToken.get().getTipo() != TipoUsuario.DOADOR_RECEPTOR && usuarioDoToken.get().getTipo() != TipoUsuario.DOADOR && usuarioDoToken.get().getTipo() != TipoUsuario.ADMIN) {
+			throw new NaoAutorizadoException("Usuário não autorizado", "Você precisar ser um doador para utilizar esta funcionalidade.");
+		}
+		
 		itemDTO.setDescritor(descritoresRepositorio.findByDescricao(itemDTO.getDescritor().getDescricao()).get());
 		Item item = itemDTO.getItem();
 		item.setDoador(usuarioDoToken.get());
-		return itensRepositorio.save(item);
+		itensRepositorio.save(item);
+		return new ResponseItemDTO(item, item.getDoador());
 	}
 
 	public List<Item> getItens() {

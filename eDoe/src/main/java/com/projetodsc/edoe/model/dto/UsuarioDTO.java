@@ -20,6 +20,11 @@ public class UsuarioDTO {
 	public UsuarioDTO() {
 		super();
 	}
+	
+	public UsuarioDTO(Usuario usuario) {
+		this.nome = usuario.getNome();
+		this.email = usuario.getEmail();
+	}
 
 	public UsuarioDTO(String nome, String email, String senha, int celular, ClasseUsuario classe, int doc) {
 		this.nome = nome;
@@ -28,7 +33,7 @@ public class UsuarioDTO {
 		this.celular = celular;
 		this.classe = classe;
 		this.docIdentificacao = doc;
-	}	
+	}
 
 	public Usuario getUsuario() {
 		return new Usuario(this.nome, this.email, this.senha, this.celular, this.classe, this.docIdentificacao, this.tipo);

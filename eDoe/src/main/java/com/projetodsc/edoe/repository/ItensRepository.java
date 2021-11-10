@@ -12,6 +12,6 @@ public interface ItensRepository extends JpaRepository<Item, Long>{
 	
 	boolean existsById(long id);
 	Optional<List<Item>> findByDescritor(Descritor descritor);
-	
+	Optional<List<Item>> findTop10ByOrderByQuantidadeDoacaoDesc();
 	
 }
