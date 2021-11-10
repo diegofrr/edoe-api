@@ -6,18 +6,18 @@ import com.projetodsc.edoe.models.Usuario;
 import lombok.Data;
 
 @Data
-public class ResponseItemDTO {
+public class ItemDTOResponse {
 	
 	private String nome;
 	private String descricao;
 	private int quantidadeDoacao;
-	private ResponseDoadorDTO doador;
+	private DoadorDTOResponse doador;
 	
-	public ResponseItemDTO(ItemDoacao item, Usuario doador) {
+	public ItemDTOResponse(ItemDoacao item, Usuario doador) {
 		this.nome = item.getNome();
 		this.descricao = item.getDescricaoDetalhada();
 		this.quantidadeDoacao = item.getQuantidadeDoacao();
-		this.doador = new ResponseDoadorDTO(doador);
+		this.doador = new DoadorDTOResponse(doador);
 	}
 
 }

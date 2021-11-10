@@ -5,12 +5,12 @@ import com.projetodsc.edoe.models.Usuario;
 import lombok.Data;
 
 @Data
-public class ResponseDoadorDTO {
+public class DoadorDTOResponse {
 	
 	private String nome;
 	private String email;
 	
-	public ResponseDoadorDTO(Usuario doador) {
+	public DoadorDTOResponse(Usuario doador) {
 		this.nome = doador.getNome();
 		this.email = doador.getEmail();
 	}

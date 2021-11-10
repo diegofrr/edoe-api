@@ -17,8 +17,8 @@ import com.projetodsc.edoe.models.TipoUsuario;
 import com.projetodsc.edoe.models.Usuario;
 import com.projetodsc.edoe.models.dtos.ItemDTODeleted;
 import com.projetodsc.edoe.models.dtos.ItemDoacaoDTO;
-import com.projetodsc.edoe.models.dtos.ResponseDoadorDTO;
-import com.projetodsc.edoe.models.dtos.ResponseItemDTO;
+import com.projetodsc.edoe.models.dtos.DoadorDTOResponse;
+import com.projetodsc.edoe.models.dtos.ItemDTOResponse;
 import com.projetodsc.edoe.repositories.DescritoresRepository;
 import com.projetodsc.edoe.repositories.ItensRepository;
 import com.projetodsc.edoe.repositories.UsuariosRepository;
@@ -38,11 +38,11 @@ public class ItemService {
 	@Autowired
 	private JWTService jwtService;
 	
-	public List<ResponseItemDTO> getItensOrderByQuantidadeDesc(){
+	public List<ItemDTOResponse> getItensOrderByQuantidadeDesc(){
 		List<ItemDoacao> itens = itensRepositorio.findTop10ByOrderByQuantidadeDoacaoDesc().get();
-		List<ResponseItemDTO> listResponse = new ArrayList<>();
+		List<ItemDTOResponse> listResponse = new ArrayList<>();
 		for (ItemDoacao i : itens) {
-			ResponseItemDTO newItem = new ResponseItemDTO(i, i.getDoador());
+			ItemDTOResponse newItem = new ItemDTOResponse(i, i.getDoador());
 			listResponse.add(newItem);
 		}
 		return listResponse;
@@ -70,22 +70,22 @@ public class ItemService {
 		return itensRepositorio.save(alteraDados(item, itemAtualizado.getItem()));
 	}
 	
-	public List<ResponseItemDTO> getItensByDescritor(Descritor descritor){
+	public List<ItemDTOResponse> getItensByDescritor(Descritor descritor){
 		descritor.setDescricao(descritor.getDescricao().toUpperCase());
 		
 		if (!descritoresRepositorio.existsByDescricao(descritor.getDescricao().toUpperCase()))
 			throw new DescritorInvalidoException("Descritor inválido", "Este descritor não existe no sistema.");
 
-		List<ResponseItemDTO> response = new ArrayList<>();
+		List<ItemDTOResponse> response = new ArrayList<>();
 		for (ItemDoacao i : itensRepositorio.findByDescritor(descritor).get()) {
-			response.add(new ResponseItemDTO(i, i.getDoador()));
+			response.add(new ItemDTOResponse(i, i.getDoador()));
 		}
 		return response;
 		
 		
 	}
 		
-	public ResponseItemDTO addItem(ItemDoacaoDTO itemDTO, String authHeader) {
+	public ItemDTOResponse addItem(ItemDoacaoDTO itemDTO, String authHeader) {
 		itemDTO.setNome(itemDTO.getNome().toUpperCase());
 		itemDTO.setDescricaoDetalhada(itemDTO.getDescricaoDetalhada().toUpperCase());
 		
@@ -103,7 +103,7 @@ public class ItemService {
 		ItemDoacao item = itemDTO.getItem();
 		item.setDoador(usuarioDoToken.get());
 		itensRepositorio.save(item);
-		return new ResponseItemDTO(item, item.getDoador());
+		return new ItemDTOResponse(item, item.getDoador());
 	}
 
 	public List<ItemDoacao> getItens() {

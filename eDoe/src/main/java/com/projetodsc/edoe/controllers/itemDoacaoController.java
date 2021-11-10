@@ -19,7 +19,7 @@ import com.projetodsc.edoe.models.Descritor;
 import com.projetodsc.edoe.models.ItemDoacao;
 import com.projetodsc.edoe.models.dtos.ItemDTODeleted;
 import com.projetodsc.edoe.models.dtos.ItemDoacaoDTO;
-import com.projetodsc.edoe.models.dtos.ResponseItemDTO;
+import com.projetodsc.edoe.models.dtos.ItemDTOResponse;
 import com.projetodsc.edoe.services.ItemService;
 
 @RestController
@@ -36,8 +36,8 @@ public class itemDoacaoController {
 
 	
 	@PostMapping("/doacao/cadastrar")
-	public ResponseEntity<ResponseItemDTO> adicionaItem(@RequestBody ItemDoacaoDTO itemDTO, @RequestHeader("Authorization") String header) throws ServletException{
-		return new ResponseEntity<ResponseItemDTO>(itemService.addItem(itemDTO, header), HttpStatus.OK);
+	public ResponseEntity<ItemDTOResponse> adicionaItem(@RequestBody ItemDoacaoDTO itemDTO, @RequestHeader("Authorization") String header) throws ServletException{
+		return new ResponseEntity<ItemDTOResponse>(itemService.addItem(itemDTO, header), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/doacao/{id}")
@@ -46,8 +46,8 @@ public class itemDoacaoController {
 	}
 	
 	@GetMapping("/doacao/buscar={descricao}")
-	public ResponseEntity<List<ResponseItemDTO>> getByDescritor(@PathVariable String descricao) throws ServletException {
-		return new ResponseEntity<List<ResponseItemDTO>>(itemService.getItensByDescritor(new Descritor(descricao)), HttpStatus.OK);
+	public ResponseEntity<List<ItemDTOResponse>> getByDescritor(@PathVariable String descricao) throws ServletException {
+		return new ResponseEntity<List<ItemDTOResponse>>(itemService.getItensByDescritor(new Descritor(descricao)), HttpStatus.OK);
 	}
 	
 	@PutMapping("/doacao/{id}")
@@ -57,8 +57,8 @@ public class itemDoacaoController {
 	}
 	
 	@GetMapping("/doacao/ranking_quantity")
-	public ResponseEntity<List<ResponseItemDTO>> getItensOrderByQuantidadeDesc() throws ServletException{
-		return new ResponseEntity<List<ResponseItemDTO>>(itemService.getItensOrderByQuantidadeDesc(), HttpStatus.OK);
+	public ResponseEntity<List<ItemDTOResponse>> getItensOrderByQuantidadeDesc() throws ServletException{
+		return new ResponseEntity<List<ItemDTOResponse>>(itemService.getItensOrderByQuantidadeDesc(), HttpStatus.OK);
 	}
 	
 
