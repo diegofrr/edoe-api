@@ -23,7 +23,7 @@ public class ItemNecessarioDTO {
 		this.descritor = descritor;
 	}
 	
-	public ItemNecessario getItemNecessario() {
+	public ItemNecessario getItem() {
 		return new ItemNecessario(this.nome, this.motivacao, this.quantidadeNecessaria, this.descritor);
 	}
 

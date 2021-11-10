@@ -6,13 +6,13 @@ import lombok.Data;
 public class ItemDTODeleted {
 	
 	private String nome;
-	private String descricaoDetalhada;
+	private String descricao;
 	
 	public ItemDTODeleted() {}
 	
-	public ItemDTODeleted(String nome, String descricaoDetalhada) {
+	public ItemDTODeleted(String nome, String descricao) {
 		this.nome = nome;
-		this.descricaoDetalhada = descricaoDetalhada;
+		this.descricao = descricao;
 	}
 
 }

@@ -26,7 +26,7 @@ public class UsuarioDTO {
 		this.nome = usuario.getNome();
 		this.email = usuario.getEmail();
 	}
-
+	
 	public UsuarioDTO(String nome, String email, String senha, int celular, ClasseUsuario classe, int doc) {
 		this.nome = nome;
 		this.email = email;

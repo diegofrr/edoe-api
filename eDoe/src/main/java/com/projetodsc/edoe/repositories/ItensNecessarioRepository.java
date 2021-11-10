@@ -1,18 +1,18 @@
 package com.projetodsc.edoe.repositories;
+
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 import com.projetodsc.edoe.models.Descritor;
-import com.projetodsc.edoe.models.ItemDoacao;
+import com.projetodsc.edoe.models.ItemNecessario;
 
 @Repository
-public interface ItensRepository extends JpaRepository<ItemDoacao, Long>{
+public interface ItensNecessarioRepository extends JpaRepository<ItemNecessario, Long>{
 	
 	boolean existsById(long id);
-	Optional<List<ItemDoacao>> findByDescritor(Descritor descritor);
-	Optional<List<ItemDoacao>> findTop10ByOrderByQuantidadeDoacaoDesc();
+	Optional<List<ItemNecessario>> findByDescritor(Descritor descritor);
+	Optional<List<ItemNecessario>> findTop10ByOrderByQuantidadeNecessariaDesc();
 	
 }
+

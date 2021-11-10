@@ -14,7 +14,10 @@ public class EDoeApplication {
 	public FilterRegistrationBean<FiltersToken> filterJwt(){
 		FilterRegistrationBean<FiltersToken> filterRB = new FilterRegistrationBean<FiltersToken>();
 		filterRB.setFilter(new FiltersToken());
-		filterRB.addUrlPatterns("/auth/login", "/api/itens/doacao", "/api/itens/doacao/cadastrar");
+		filterRB.addUrlPatterns("/auth/login",
+				"/api/itens/doacao",
+				"/api/itens/doacao/cadastrar",
+				"/api/itens/necessario/cadastrar");
 		return filterRB;
 	}
 

@@ -14,7 +14,7 @@ public class ItemDoacaoDTO {
 	private String descricaoDetalhada;
 	private Descritor descritor;
 	private int quantidadeDoacao;
-	private UsuarioDTO doador;
+	private DoadorDTOResponse doador;
 
 	public ItemDoacaoDTO() {
 	}
@@ -24,7 +24,7 @@ public class ItemDoacaoDTO {
 		this.descricaoDetalhada = item.getDescricaoDetalhada();
 		this.quantidadeDoacao = item.getQuantidadeDoacao();
 		this.descritor = item.getDescritor();
-		this.doador = new UsuarioDTO(item.getDoador());
+		this.doador = new DoadorDTOResponse(item.getDoador());
 	}
 	
 	public ItemDoacaoDTO(String nome, String descricaoDetalhada, Descritor descritor, int quantidadeDoacao) {

@@ -13,21 +13,28 @@ import com.projetodsc.edoe.exceptions.NaoAutorizadoException;
 import com.projetodsc.edoe.exceptions.UsuarioInvalidoException;
 import com.projetodsc.edoe.models.Descritor;
 import com.projetodsc.edoe.models.ItemDoacao;
+import com.projetodsc.edoe.models.ItemNecessario;
 import com.projetodsc.edoe.models.TipoUsuario;
 import com.projetodsc.edoe.models.Usuario;
 import com.projetodsc.edoe.models.dtos.ItemDTODeleted;
 import com.projetodsc.edoe.models.dtos.ItemDoacaoDTO;
+import com.projetodsc.edoe.models.dtos.ItemNecessarioDTO;
+import com.projetodsc.edoe.models.dtos.ItemNecessarioDTOResponse;
 import com.projetodsc.edoe.models.dtos.DoadorDTOResponse;
-import com.projetodsc.edoe.models.dtos.ItemDTOResponse;
+import com.projetodsc.edoe.models.dtos.ItemDoacaoDTOResponse;
 import com.projetodsc.edoe.repositories.DescritoresRepository;
-import com.projetodsc.edoe.repositories.ItensRepository;
+import com.projetodsc.edoe.repositories.ItensDoacaoRepository;
+import com.projetodsc.edoe.repositories.ItensNecessarioRepository;
 import com.projetodsc.edoe.repositories.UsuariosRepository;
 
 @Service
 public class ItemService {
 
 	@Autowired
-	private ItensRepository itensRepositorio;
+	private ItensDoacaoRepository itensDoacaoRepositorio;
+	
+	@Autowired
+	private ItensNecessarioRepository itensNecessarioRepositorio;
 	
 	@Autowired
 	private DescritoresRepository descritoresRepositorio;
@@ -38,17 +45,23 @@ public class ItemService {
 	@Autowired
 	private JWTService jwtService;
 	
-	public List<ItemDTOResponse> getItensOrderByQuantidadeDesc(){
-		List<ItemDoacao> itens = itensRepositorio.findTop10ByOrderByQuantidadeDoacaoDesc().get();
-		List<ItemDTOResponse> listResponse = new ArrayList<>();
+	@Autowired
+	private DescritorService descritorService;
+	
+	
+	
+	
+	public List<ItemDoacaoDTOResponse> getItensOrderByQuantidadeDesc(){
+		List<ItemDoacao> itens = itensDoacaoRepositorio.findTop10ByOrderByQuantidadeDoacaoDesc().get();
+		List<ItemDoacaoDTOResponse> listResponse = new ArrayList<>();
 		for (ItemDoacao i : itens) {
-			ItemDTOResponse newItem = new ItemDTOResponse(i, i.getDoador());
+			ItemDoacaoDTOResponse newItem = new ItemDoacaoDTOResponse(i, i.getDoador());
 			listResponse.add(newItem);
 		}
 		return listResponse;
 	}
 	
-	public ItemDoacao alteraDados(ItemDoacao item, ItemDoacao itemAtt) {
+	public ItemDoacao alteraDadosItemDoacao(ItemDoacao item, ItemDoacao itemAtt) {
 		item.setNome(itemAtt.getNome());
 		item.setDescricaoDetalhada(itemAtt.getDescricaoDetalhada());
 		item.setQuantidadeDoacao(itemAtt.getQuantidadeDoacao());
@@ -56,36 +69,89 @@ public class ItemService {
 		return item;
 	}
 	
-	public ItemDoacao atualizaItem(long id, ItemDoacaoDTO itemAtualizado, String authHeader) {
+	public ItemNecessario alteraDadosItemNecessario(ItemNecessario item, ItemNecessario itemAtt) {
+		item.setNome(itemAtt.getNome());
+		item.setMotivacao(itemAtt.getMotivacao());
+		item.setQuantidadeNecessaria(itemAtt.getQuantidadeNecessaria());
+		item.setDescritor(itemAtt.getDescritor());
+		return item;
+	}
+	
+	public ItemDoacaoDTOResponse atualizaItemDoacao(long id, ItemDoacaoDTO itemAtualizado, String authHeader) {
 		itemAtualizado.setNome(itemAtualizado.getNome().toUpperCase());
 		itemAtualizado.setDescricaoDetalhada(itemAtualizado.getDescricaoDetalhada().toUpperCase());
 		
-		if (!itensRepositorio.existsById(id))
+		if (!itensDoacaoRepositorio.existsById(id))
 			throw new ItemNaoEncontradoException("Item não encontrado!", "Nenhum item com o id " + id + " no sistema.");
-		ItemDoacao item = itensRepositorio.findById(id).get();
+		ItemDoacao item = itensDoacaoRepositorio.findById(id).get();
 		String subject = jwtService.getSujeitoDoToken(authHeader);
 		Optional<Usuario> usuarioDoToken = usuariosRepositorio.findByEmail(subject);
 		if (usuarioDoToken.get() != item.getDoador())
 			throw new NaoAutorizadoException("Não autorizado", "Este item pertence a outro doador.");
-		return itensRepositorio.save(alteraDados(item, itemAtualizado.getItem()));
+		ItemDoacao itemDoacao = itensDoacaoRepositorio.save(alteraDadosItemDoacao(item, itemAtualizado.getItem()));
+		return new ItemDoacaoDTOResponse(itemDoacao, usuarioDoToken.get());
 	}
 	
-	public List<ItemDTOResponse> getItensByDescritor(Descritor descritor){
+	public ItemNecessarioDTOResponse atualizaItemNecessario(long id, ItemNecessarioDTO itemAtualizado, String authHeader) {
+		itemAtualizado.setNome(itemAtualizado.getNome().toUpperCase());
+		itemAtualizado.setMotivacao(itemAtualizado.getMotivacao().toUpperCase());
+		
+		if (!itensNecessarioRepositorio.existsById(id))
+			throw new ItemNaoEncontradoException("Item não encontrado!", "Nenhum item com o id " + id + " no sistema.");
+		
+		if (!descritoresRepositorio.existsByDescricao(itemAtualizado.getDescritor().getDescricao()))
+				descritoresRepositorio.save(itemAtualizado.getDescritor());
+			
+		ItemNecessario item = itensNecessarioRepositorio.findById(id).get();
+		String subject = jwtService.getSujeitoDoToken(authHeader);
+		Optional<Usuario> usuarioDoToken = usuariosRepositorio.findByEmail(subject);
+		if (usuarioDoToken.get() != item.getReceptor())
+			throw new NaoAutorizadoException("Não autorizado", "Este item pertence a outro doador.");
+		ItemNecessario itemNecessario = itensNecessarioRepositorio.save(alteraDadosItemNecessario(item, itemAtualizado.getItem()));
+		return new ItemNecessarioDTOResponse(itemNecessario, usuarioDoToken.get());
+		
+		
+	
+	}
+	
+	
+	public List<ItemDoacaoDTOResponse> getItensByDescritor(Descritor descritor){
 		descritor.setDescricao(descritor.getDescricao().toUpperCase());
 		
 		if (!descritoresRepositorio.existsByDescricao(descritor.getDescricao().toUpperCase()))
 			throw new DescritorInvalidoException("Descritor inválido", "Este descritor não existe no sistema.");
 
-		List<ItemDTOResponse> response = new ArrayList<>();
-		for (ItemDoacao i : itensRepositorio.findByDescritor(descritor).get()) {
-			response.add(new ItemDTOResponse(i, i.getDoador()));
+		List<ItemDoacaoDTOResponse> response = new ArrayList<>();
+		for (ItemDoacao i : itensDoacaoRepositorio.findByDescritor(descritor).get()) {
+			response.add(new ItemDoacaoDTOResponse(i, i.getDoador()));
 		}
 		return response;
 		
 		
 	}
+	
+	public ItemNecessarioDTOResponse addItemNecessario(ItemNecessarioDTO itemDTO, String authHeader) {
+		itemDTO.setNome(itemDTO.getNome().toUpperCase());
+		itemDTO.setMotivacao(itemDTO.getMotivacao().toUpperCase());
+	
+		String subject = jwtService.getSujeitoDoToken(authHeader);
+		Optional<Usuario> usuarioDoToken = usuariosRepositorio.findByEmail(subject);
 		
-	public ItemDTOResponse addItem(ItemDoacaoDTO itemDTO, String authHeader) {
+		if (!descritoresRepositorio.existsByDescricao(itemDTO.getDescritor().getDescricao()))
+			descritorService.addDescritor(itemDTO.getDescritor());
+		
+		if (usuarioDoToken.get().getTipo() == TipoUsuario.DOADOR) {
+			throw new NaoAutorizadoException("Usuário não autorizado", "Você precisa ser um receptor para utilizar esta funcionalidade.");
+		}
+		
+		ItemNecessario item = itemDTO.getItem();
+		item.setReceptor(usuarioDoToken.get());
+		itensNecessarioRepositorio.save(item);
+		return new ItemNecessarioDTOResponse(item, item.getReceptor());
+		
+	}
+		
+	public ItemDoacaoDTOResponse addItemDoacao(ItemDoacaoDTO itemDTO, String authHeader) {
 		itemDTO.setNome(itemDTO.getNome().toUpperCase());
 		itemDTO.setDescricaoDetalhada(itemDTO.getDescricaoDetalhada().toUpperCase());
 		
@@ -95,39 +161,49 @@ public class ItemService {
 		if (!descritoresRepositorio.existsByDescricao(itemDTO.getDescritor().getDescricao()))
 			throw new DescritorNaoExisteException("Descritor não existe", "Este descritor não está cadastrado no sistema.");
 		
-		if (usuarioDoToken.get().getTipo() != TipoUsuario.DOADOR_RECEPTOR && usuarioDoToken.get().getTipo() != TipoUsuario.DOADOR && usuarioDoToken.get().getTipo() != TipoUsuario.ADMIN) {
-			throw new NaoAutorizadoException("Usuário não autorizado", "Você precisar ser um doador para utilizar esta funcionalidade.");
+		if (usuarioDoToken.get().getTipo() == TipoUsuario.RECEPTOR) {
+			throw new NaoAutorizadoException("Usuário não autorizado", "Você precisa ser um doador para utilizar esta funcionalidade.");
 		}
 		
-		itemDTO.setDescritor(descritoresRepositorio.findByDescricao(itemDTO.getDescritor().getDescricao()).get());
 		ItemDoacao item = itemDTO.getItem();
 		item.setDoador(usuarioDoToken.get());
-		itensRepositorio.save(item);
-		return new ItemDTOResponse(item, item.getDoador());
+		itensDoacaoRepositorio.save(item);
+		return new ItemDoacaoDTOResponse(item, item.getDoador());
 	}
 
 	public List<ItemDoacao> getItens() {
-		return itensRepositorio.findAll();
+		return itensDoacaoRepositorio.findAll();
 	}
 	
-	public ItemDTODeleted removeItem(long id, String authHeader) {
+	public ItemDTODeleted removeItemNecessario(long id, String authHeader) {
 		String subject = jwtService.getSujeitoDoToken(authHeader);
 		Optional<Usuario> usuarioDoToken = usuariosRepositorio.findByEmail(subject);
 		
-		if (!itensRepositorio.existsById(id))
+		if (!itensDoacaoRepositorio.existsById(id))
 			throw new ItemNaoEncontradoException("Item não encontrado!", "Nenhum item com o id " + id + " no sistema.");
 		
-		if (usuarioDoToken.get() != verificaDoadorDoItem(id)) 
+		if (itensNecessarioRepositorio.findById(id).get().getReceptor() != usuarioDoToken.get())
 			throw new NaoAutorizadoException("Usuário não autorizado!", "Este item é de propriedade de outro usuário.");
-		
-		ItemDoacao itemResponse = itensRepositorio.findById(id).get();
-		itensRepositorio.delete(itemResponse);
-		return new ItemDTODeleted(itemResponse.getNome(), itemResponse.getDescricaoDetalhada());
-		
+		ItemNecessario itemResponse = itensNecessarioRepositorio.findById(id).get();
+		itensNecessarioRepositorio.delete(itemResponse);
+		return new ItemDTODeleted(itemResponse.getNome(), itemResponse.getMotivacao());
+	
 	}
 	
-	public Usuario verificaDoadorDoItem(long id_item) {
-		return itensRepositorio.findById(id_item).get().getDoador();
+	public ItemDTODeleted removeItemDoacao(long id, String authHeader) {
+		String subject = jwtService.getSujeitoDoToken(authHeader);
+		Optional<Usuario> usuarioDoToken = usuariosRepositorio.findByEmail(subject);
+		
+		if (!itensDoacaoRepositorio.existsById(id))
+			throw new ItemNaoEncontradoException("Item não encontrado!", "Nenhum item com o id " + id + " no sistema.");
+		
+		if (itensDoacaoRepositorio.findById(id).get().getDoador() != usuarioDoToken.get()) 
+			throw new NaoAutorizadoException("Usuário não autorizado!", "Este item é de propriedade de outro usuário.");
+		
+		ItemDoacao itemResponse = itensDoacaoRepositorio.findById(id).get();
+		itensDoacaoRepositorio.delete(itemResponse);
+		return new ItemDTODeleted(itemResponse.getNome(), itemResponse.getDescricaoDetalhada());
+		
 	}
 	
 }
