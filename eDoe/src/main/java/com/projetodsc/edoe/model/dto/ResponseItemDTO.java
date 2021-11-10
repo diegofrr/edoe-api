@@ -1,6 +1,6 @@
 package com.projetodsc.edoe.model.dto;
 
-import com.projetodsc.edoe.model.Item;
+import com.projetodsc.edoe.model.ItemDoacao;
 import com.projetodsc.edoe.model.Usuario;
 
 import lombok.Data;
@@ -13,7 +13,7 @@ public class ResponseItemDTO {
 	private int quantidadeDoacao;
 	private ResponseDoadorDTO doador;
 	
-	public ResponseItemDTO(Item item, Usuario doador) {
+	public ResponseItemDTO(ItemDoacao item, Usuario doador) {
 		this.nome = item.getNome();
 		this.descricao = item.getDescricaoDetalhada();
 		this.quantidadeDoacao = item.getQuantidadeDoacao();

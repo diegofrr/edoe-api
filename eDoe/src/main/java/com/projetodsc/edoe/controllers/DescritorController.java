@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.projetodsc.edoe.model.Descritor;
-import com.projetodsc.edoe.model.Item;
+import com.projetodsc.edoe.model.ItemDoacao;
 import com.projetodsc.edoe.services.DescritorService;
 import com.projetodsc.edoe.services.ItemService;
 

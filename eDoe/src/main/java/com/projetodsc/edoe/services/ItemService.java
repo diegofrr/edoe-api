@@ -12,10 +12,10 @@ import com.projetodsc.edoe.exception.ItemNaoEncontradoException;
 import com.projetodsc.edoe.exception.NaoAutorizadoException;
 import com.projetodsc.edoe.exception.UsuarioInvalidoException;
 import com.projetodsc.edoe.model.Descritor;
-import com.projetodsc.edoe.model.Item;
+import com.projetodsc.edoe.model.ItemDoacao;
 import com.projetodsc.edoe.model.TipoUsuario;
 import com.projetodsc.edoe.model.Usuario;
-import com.projetodsc.edoe.model.dto.ItemDTO;
+import com.projetodsc.edoe.model.dto.ItemDoacaoDTO;
 import com.projetodsc.edoe.model.dto.ItemDTODeleted;
 import com.projetodsc.edoe.model.dto.ResponseDoadorDTO;
 import com.projetodsc.edoe.model.dto.ResponseItemDTO;
@@ -39,16 +39,16 @@ public class ItemService {
 	private JWTService jwtService;
 	
 	public List<ResponseItemDTO> getItensOrderByQuantidadeDesc(){
-		List<Item> itens = itensRepositorio.findTop10ByOrderByQuantidadeDoacaoDesc().get();
+		List<ItemDoacao> itens = itensRepositorio.findTop10ByOrderByQuantidadeDoacaoDesc().get();
 		List<ResponseItemDTO> listResponse = new ArrayList<>();
-		for (Item i : itens) {
+		for (ItemDoacao i : itens) {
 			ResponseItemDTO newItem = new ResponseItemDTO(i, i.getDoador());
 			listResponse.add(newItem);
 		}
 		return listResponse;
 	}
 	
-	public Item alteraDados(Item item, Item itemAtt) {
+	public ItemDoacao alteraDados(ItemDoacao item, ItemDoacao itemAtt) {
 		item.setNome(itemAtt.getNome());
 		item.setDescricaoDetalhada(itemAtt.getDescricaoDetalhada());
 		item.setQuantidadeDoacao(itemAtt.getQuantidadeDoacao());
@@ -56,13 +56,13 @@ public class ItemService {
 		return item;
 	}
 	
-	public Item atualizaItem(long id, ItemDTO itemAtualizado, String authHeader) {
+	public ItemDoacao atualizaItem(long id, ItemDoacaoDTO itemAtualizado, String authHeader) {
 		itemAtualizado.setNome(itemAtualizado.getNome().toUpperCase());
 		itemAtualizado.setDescricaoDetalhada(itemAtualizado.getDescricaoDetalhada().toUpperCase());
 		
 		if (!itensRepositorio.existsById(id))
 			throw new ItemNaoEncontradoException("Item não encontrado!", "Nenhum item com o id " + id + " no sistema.");
-		Item item = itensRepositorio.findById(id).get();
+		ItemDoacao item = itensRepositorio.findById(id).get();
 		String subject = jwtService.getSujeitoDoToken(authHeader);
 		Optional<Usuario> usuarioDoToken = usuariosRepositorio.findByEmail(subject);
 		if (usuarioDoToken.get() != item.getDoador())
@@ -77,7 +77,7 @@ public class ItemService {
 			throw new DescritorInvalidoException("Descritor inválido", "Este descritor não existe no sistema.");
 
 		List<ResponseItemDTO> response = new ArrayList<>();
-		for (Item i : itensRepositorio.findByDescritor(descritor).get()) {
+		for (ItemDoacao i : itensRepositorio.findByDescritor(descritor).get()) {
 			response.add(new ResponseItemDTO(i, i.getDoador()));
 		}
 		return response;
@@ -85,7 +85,7 @@ public class ItemService {
 		
 	}
 		
-	public ResponseItemDTO addItem(ItemDTO itemDTO, String authHeader) {
+	public ResponseItemDTO addItem(ItemDoacaoDTO itemDTO, String authHeader) {
 		itemDTO.setNome(itemDTO.getNome().toUpperCase());
 		itemDTO.setDescricaoDetalhada(itemDTO.getDescricaoDetalhada().toUpperCase());
 		
@@ -100,13 +100,13 @@ public class ItemService {
 		}
 		
 		itemDTO.setDescritor(descritoresRepositorio.findByDescricao(itemDTO.getDescritor().getDescricao()).get());
-		Item item = itemDTO.getItem();
+		ItemDoacao item = itemDTO.getItem();
 		item.setDoador(usuarioDoToken.get());
 		itensRepositorio.save(item);
 		return new ResponseItemDTO(item, item.getDoador());
 	}
 
-	public List<Item> getItens() {
+	public List<ItemDoacao> getItens() {
 		return itensRepositorio.findAll();
 	}
 	
@@ -120,7 +120,7 @@ public class ItemService {
 		if (usuarioDoToken.get() != verificaDoadorDoItem(id)) 
 			throw new NaoAutorizadoException("Usuário não autorizado!", "Este item é de propriedade de outro usuário.");
 		
-		Item itemResponse = itensRepositorio.findById(id).get();
+		ItemDoacao itemResponse = itensRepositorio.findById(id).get();
 		itensRepositorio.delete(itemResponse);
 		return new ItemDTODeleted(itemResponse.getNome(), itemResponse.getDescricaoDetalhada());
 		

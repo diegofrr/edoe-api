@@ -54,7 +54,6 @@ public class UsuarioDTO {
 		return true;
 	}
 	
-	
 	public UsuarioDTO(String email, String senha) {
 		this.email = email;
 		this.senha = senha;

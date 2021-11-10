@@ -68,14 +68,19 @@ public class UsuarioService {
 	public Usuario adicionaUsuario(UsuarioDTO user) {
 		user.setNome(user.getNome().toUpperCase());
 		user.setEmail(user.getEmail().toUpperCase());
-		
 		user.validaUsuario();
+			
 		if (repositorio.existsByEmail(user.getEmail()))
 			throw new UsuarioInvalidoException("E-mail já cadastrado!", "Já existe um usuário cadastrado com o este e-mail!");
 
 		// caso nao tennha nenhum usuário cadastrado no banco, o primeiro será do tipo admin
 		if (repositorio.findAll().size() == 0)
 			user.setTipo(TipoUsuario.ADMIN);
+		
+		// nao permite o cadastro de um usuário com o tipo admin
+		else
+			if (user.getTipo() == TipoUsuario.ADMIN)
+				throw new UsuarioInvalidoException("Você não pode se cadastrar como admin!", "Somente outros administradores do sistema podem atribuir o cargo de administrador para outro usuário.");
 		return repositorio.save(user.getUsuario());
 	}
 

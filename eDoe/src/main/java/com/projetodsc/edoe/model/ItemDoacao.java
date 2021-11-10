@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Item implements Serializable {
+public class ItemDoacao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -37,10 +37,10 @@ public class Item implements Serializable {
 	@JoinColumn
 	private Usuario doador;
 
-	public Item() {
+	public ItemDoacao() {
 	}
 
-	public Item(String nome, String descricaoDetalhada, Descritor descritor, int quantidadeDoacao) {
+	public ItemDoacao(String nome, String descricaoDetalhada, Descritor descritor, int quantidadeDoacao) {
 		this.nome = nome;
 		this.descricaoDetalhada = descricaoDetalhada;
 		this.descritor = descritor;
