@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.projetodsc.edoe.model.Usuario;
-import com.projetodsc.edoe.model.dto.AlteraTipo;
-import com.projetodsc.edoe.model.dto.UsuarioDTO;
+
+import com.projetodsc.edoe.models.Usuario;
+import com.projetodsc.edoe.models.dtos.AlteraTipo;
+import com.projetodsc.edoe.models.dtos.UsuarioDTO;
 import com.projetodsc.edoe.services.UsuarioService;
 
 

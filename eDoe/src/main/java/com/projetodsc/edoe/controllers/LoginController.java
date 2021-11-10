@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projetodsc.edoe.model.dto.LoginDTO;
+import com.projetodsc.edoe.models.dtos.LoginDTO;
+import com.projetodsc.edoe.models.dtos.LoginResponse;
 import com.projetodsc.edoe.services.JWTService;
-import com.projetodsc.edoe.model.dto.LoginResponse;
 
 @RestController
 @RequestMapping("/api")

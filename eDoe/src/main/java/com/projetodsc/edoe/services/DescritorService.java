@@ -4,10 +4,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projetodsc.edoe.exception.DescritorInvalidoException;
-import com.projetodsc.edoe.exception.DescritorJaExisteException;
-import com.projetodsc.edoe.model.Descritor;
-import com.projetodsc.edoe.repository.DescritoresRepository;
+import com.projetodsc.edoe.exceptions.DescritorInvalidoException;
+import com.projetodsc.edoe.exceptions.DescritorJaExisteException;
+import com.projetodsc.edoe.models.Descritor;
+import com.projetodsc.edoe.repositories.DescritoresRepository;
 
 @Service
 public class DescritorService {

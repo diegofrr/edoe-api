@@ -5,16 +5,17 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.projetodsc.edoe.exception.NaoAutenticadoException;
-import com.projetodsc.edoe.exception.NaoAutorizadoException;
-import com.projetodsc.edoe.exception.UsuarioInvalidoException;
-import com.projetodsc.edoe.exception.UsuarioNaoExisteException;
-import com.projetodsc.edoe.model.TipoUsuario;
-import com.projetodsc.edoe.model.Usuario;
-import com.projetodsc.edoe.model.dto.AlteraTipo;
-import com.projetodsc.edoe.model.dto.LoginDTO;
-import com.projetodsc.edoe.model.dto.UsuarioDTO;
-import com.projetodsc.edoe.repository.UsuariosRepository;
+
+import com.projetodsc.edoe.exceptions.NaoAutenticadoException;
+import com.projetodsc.edoe.exceptions.NaoAutorizadoException;
+import com.projetodsc.edoe.exceptions.UsuarioInvalidoException;
+import com.projetodsc.edoe.exceptions.UsuarioNaoExisteException;
+import com.projetodsc.edoe.models.TipoUsuario;
+import com.projetodsc.edoe.models.Usuario;
+import com.projetodsc.edoe.models.dtos.AlteraTipo;
+import com.projetodsc.edoe.models.dtos.LoginDTO;
+import com.projetodsc.edoe.models.dtos.UsuarioDTO;
+import com.projetodsc.edoe.repositories.UsuariosRepository;
 
 @Service
 public class UsuarioService {

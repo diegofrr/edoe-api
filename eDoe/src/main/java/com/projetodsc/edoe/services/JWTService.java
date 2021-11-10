@@ -5,11 +5,12 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.projetodsc.edoe.exception.NaoAutenticadoException;
-import com.projetodsc.edoe.exception.NaoAutorizadoException;
-import com.projetodsc.edoe.filter.FiltersToken;
-import com.projetodsc.edoe.model.dto.LoginDTO;
-import com.projetodsc.edoe.model.dto.LoginResponse;
+
+import com.projetodsc.edoe.exceptions.NaoAutenticadoException;
+import com.projetodsc.edoe.exceptions.NaoAutorizadoException;
+import com.projetodsc.edoe.filters.FiltersToken;
+import com.projetodsc.edoe.models.dtos.LoginDTO;
+import com.projetodsc.edoe.models.dtos.LoginResponse;
 
 @Service
 public class JWTService {

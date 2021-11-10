@@ -4,7 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import com.projetodsc.edoe.filter.FiltersToken;
+
+import com.projetodsc.edoe.filters.FiltersToken;
 
 @SpringBootApplication
 public class EDoeApplication {

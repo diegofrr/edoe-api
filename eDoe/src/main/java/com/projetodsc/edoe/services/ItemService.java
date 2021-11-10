@@ -6,22 +6,22 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projetodsc.edoe.exception.DescritorInvalidoException;
-import com.projetodsc.edoe.exception.DescritorNaoExisteException;
-import com.projetodsc.edoe.exception.ItemNaoEncontradoException;
-import com.projetodsc.edoe.exception.NaoAutorizadoException;
-import com.projetodsc.edoe.exception.UsuarioInvalidoException;
-import com.projetodsc.edoe.model.Descritor;
-import com.projetodsc.edoe.model.ItemDoacao;
-import com.projetodsc.edoe.model.TipoUsuario;
-import com.projetodsc.edoe.model.Usuario;
-import com.projetodsc.edoe.model.dto.ItemDoacaoDTO;
-import com.projetodsc.edoe.model.dto.ItemDTODeleted;
-import com.projetodsc.edoe.model.dto.ResponseDoadorDTO;
-import com.projetodsc.edoe.model.dto.ResponseItemDTO;
-import com.projetodsc.edoe.repository.DescritoresRepository;
-import com.projetodsc.edoe.repository.ItensRepository;
-import com.projetodsc.edoe.repository.UsuariosRepository;
+import com.projetodsc.edoe.exceptions.DescritorInvalidoException;
+import com.projetodsc.edoe.exceptions.DescritorNaoExisteException;
+import com.projetodsc.edoe.exceptions.ItemNaoEncontradoException;
+import com.projetodsc.edoe.exceptions.NaoAutorizadoException;
+import com.projetodsc.edoe.exceptions.UsuarioInvalidoException;
+import com.projetodsc.edoe.models.Descritor;
+import com.projetodsc.edoe.models.ItemDoacao;
+import com.projetodsc.edoe.models.TipoUsuario;
+import com.projetodsc.edoe.models.Usuario;
+import com.projetodsc.edoe.models.dtos.ItemDTODeleted;
+import com.projetodsc.edoe.models.dtos.ItemDoacaoDTO;
+import com.projetodsc.edoe.models.dtos.ResponseDoadorDTO;
+import com.projetodsc.edoe.models.dtos.ResponseItemDTO;
+import com.projetodsc.edoe.repositories.DescritoresRepository;
+import com.projetodsc.edoe.repositories.ItensRepository;
+import com.projetodsc.edoe.repositories.UsuariosRepository;
 
 @Service
 public class ItemService {

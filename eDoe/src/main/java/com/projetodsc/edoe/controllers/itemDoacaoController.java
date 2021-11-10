@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.projetodsc.edoe.model.Descritor;
-import com.projetodsc.edoe.model.ItemDoacao;
-import com.projetodsc.edoe.model.dto.ItemDoacaoDTO;
-import com.projetodsc.edoe.model.dto.ItemDTODeleted;
-import com.projetodsc.edoe.model.dto.ResponseItemDTO;
+
+import com.projetodsc.edoe.models.Descritor;
+import com.projetodsc.edoe.models.ItemDoacao;
+import com.projetodsc.edoe.models.dtos.ItemDTODeleted;
+import com.projetodsc.edoe.models.dtos.ItemDoacaoDTO;
+import com.projetodsc.edoe.models.dtos.ResponseItemDTO;
 import com.projetodsc.edoe.services.ItemService;
 
 @RestController
