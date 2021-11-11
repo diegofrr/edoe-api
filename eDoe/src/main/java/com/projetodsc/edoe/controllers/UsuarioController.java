@@ -38,7 +38,7 @@ public class UsuarioController {
 	
 	}
 	
-	@PostMapping("/usuarios/alterar_tipo")
+	@PostMapping("/usuarios/tipos")
 	public ResponseEntity<String> alteraFuncao(@RequestBody AlteraTipo dados, @RequestHeader("Authorization") String header) throws ServletException{
 		return new ResponseEntity<String>(usuarioService.alteraTipo(dados, header), HttpStatus.OK);
 	}

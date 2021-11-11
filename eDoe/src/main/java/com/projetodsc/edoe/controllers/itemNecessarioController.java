@@ -27,7 +27,7 @@ public class itemNecessarioController {
 	@Autowired
 	ItemService itemService;
 	
-	@PostMapping("/necessarios/cadastrar")
+	@PostMapping("/necessarios/cadastro")
 	public ResponseEntity<ItemNecessarioDTOResponse> adicionaItemNecessario(@RequestBody ItemNecessarioDTO itemDTO, @RequestHeader("Authorization") String header) throws ServletException{
 		return new ResponseEntity<ItemNecessarioDTOResponse>(itemService.addItemNecessario(itemDTO, header), HttpStatus.OK);
 	}
@@ -47,7 +47,7 @@ public class itemNecessarioController {
 		return new ResponseEntity<List<ItemNecessarioDTOResponse>>(itemService.getItensNecessarioByDescritor(new Descritor(descritor)), HttpStatus.OK);
 	}
 	
-	@GetMapping("/necessarios/ranking_quantity")
+	@GetMapping("/necessarios/ranking-quantidade")
 	public ResponseEntity<List<ItemNecessarioDTOResponse>> getItensNecessarioOrderByQuantidadeDesc() throws ServletException{
 		return new ResponseEntity<List<ItemNecessarioDTOResponse>>(itemService.getItensNecessarioOrderByQuantidadeDesc(), HttpStatus.OK);
 	}

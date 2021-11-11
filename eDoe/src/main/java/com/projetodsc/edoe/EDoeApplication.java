@@ -16,8 +16,8 @@ public class EDoeApplication {
 		filterRB.setFilter(new FiltersToken());
 		filterRB.addUrlPatterns("/auth/login",
 				"/api/itens/doacoes",
-				"/api/itens/doacoes/cadastrar",
-				"/api/itens/necessarios/cadastrar");
+				"/api/itens/doacoes/cadastro",
+				"/api/itens/necessarios/cadastro");
 		return filterRB;
 	}
 

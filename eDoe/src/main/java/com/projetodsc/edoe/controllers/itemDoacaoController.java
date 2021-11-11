@@ -35,7 +35,7 @@ public class itemDoacaoController {
 	}
 
 	
-	@PostMapping("/doacoes/cadastrar")
+	@PostMapping("/doacoes/cadastro")
 	public ResponseEntity<ItemDoacaoDTOResponse> adicionaItem(@RequestBody ItemDoacaoDTO itemDTO, @RequestHeader("Authorization") String header) throws ServletException{
 		return new ResponseEntity<ItemDoacaoDTOResponse>(itemService.addItemDoacao(itemDTO, header), HttpStatus.OK);
 	}
@@ -55,7 +55,7 @@ public class itemDoacaoController {
 		return new ResponseEntity<ItemDoacaoDTOResponse>(itemService.atualizaItemDoacao(id, itemAtualizado, authHeader), HttpStatus.OK);
 	}
 	
-	@GetMapping("/doacoes/ranking_quantity")
+	@GetMapping("/doacoes/ranking-quantidade")
 	public ResponseEntity<List<ItemDoacaoDTOResponse>> getItensOrderByQuantidadeDesc() throws ServletException{
 		return new ResponseEntity<List<ItemDoacaoDTOResponse>>(itemService.getItensDoacaoOrderByQuantidadeDesc(), HttpStatus.OK);
 	}
