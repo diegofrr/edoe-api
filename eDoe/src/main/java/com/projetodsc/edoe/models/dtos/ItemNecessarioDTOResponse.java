@@ -10,6 +10,7 @@ public class ItemNecessarioDTOResponse {
 	private String nome;
 	private String motivacao;
 	private int quantidadeNecessaria;
+	private String descritor;
 	private ReceptorDTOResponse receptor;
 	
 	public ItemNecessarioDTOResponse(ItemNecessario item, Usuario usuario) {
@@ -17,6 +18,7 @@ public class ItemNecessarioDTOResponse {
 		this.motivacao = item.getMotivacao();
 		this.quantidadeNecessaria = item.getQuantidadeNecessaria();
 		this.receptor = new ReceptorDTOResponse(usuario);
+		this.descritor = item.getDescritor().getDescricao();
 	}
 
 }

@@ -19,6 +19,14 @@ public class DescritorService {
 		return repositorio.findAll();
 	}
 	
+	public List<Descritor> getDescritoresByDescricao(String descricao){
+		return repositorio.findAllByDescricao(descricao).get();
+	}
+	
+	public Descritor save(Descritor descritor) {
+		return repositorio.save(descritor);
+	}
+	
 	public Descritor addDescritor(Descritor descritor) {
 		if(descritor.getDescricao() == null || descritor.getDescricao().isBlank() || descritor.getDescricao().isEmpty())
 			throw new DescritorInvalidoException("Descritor inválido", "O descritor não pode ficar em branco.");
@@ -26,6 +34,14 @@ public class DescritorService {
 		if(repositorio.existsByDescricao(descritor.getDescricao()))
 			throw new DescritorJaExisteException("Descritor já existe!", "Este descritor já existe no sistema.");		
 		return repositorio.save(descritor);
+	}
+	
+	public boolean existsByDescricao(String descricoa) {
+		return repositorio.existsByDescricao(descricoa);
+	}
+	
+	public List<Descritor> getDescritoresByDescricaoContaining(String string_busca){
+		return repositorio.findByDescricaoIgnoreCaseContaining(string_busca).get();
 	}
 
 }

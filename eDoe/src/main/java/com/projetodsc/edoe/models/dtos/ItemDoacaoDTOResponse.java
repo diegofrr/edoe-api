@@ -11,6 +11,7 @@ public class ItemDoacaoDTOResponse {
 	private String nome;
 	private String descricao;
 	private int quantidadeDoacao;
+	private String descritor;
 	private DoadorDTOResponse doador;
 	
 	public ItemDoacaoDTOResponse(ItemDoacao item, Usuario usuario) {
@@ -18,5 +19,6 @@ public class ItemDoacaoDTOResponse {
 		this.descricao = item.getDescricaoDetalhada();
 		this.quantidadeDoacao = item.getQuantidadeDoacao();
 		this.doador = new DoadorDTOResponse(usuario);
+		this.descritor = item.getDescritor().getDescricao();
 	}
 }

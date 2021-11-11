@@ -20,6 +20,7 @@ import com.projetodsc.edoe.models.ItemDoacao;
 import com.projetodsc.edoe.models.dtos.ItemDTODeleted;
 import com.projetodsc.edoe.models.dtos.ItemDoacaoDTO;
 import com.projetodsc.edoe.models.dtos.ItemDoacaoDTOResponse;
+import com.projetodsc.edoe.models.dtos.ItemNecessarioDTOResponse;
 import com.projetodsc.edoe.services.ItemService;
 
 @RestController
@@ -58,6 +59,11 @@ public class itemDoacaoController {
 	@GetMapping("/doacoes/ranking-quantidade")
 	public ResponseEntity<List<ItemDoacaoDTOResponse>> getItensOrderByQuantidadeDesc() throws ServletException{
 		return new ResponseEntity<List<ItemDoacaoDTOResponse>>(itemService.getItensDoacaoOrderByQuantidadeDesc(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/doacoes/buscar={string_busca}")
+	public ResponseEntity<List<ItemDoacaoDTOResponse>> getByParametroBusca(@PathVariable String string_busca) throws ServletException {
+		return new ResponseEntity<List<ItemDoacaoDTOResponse>>(itemService.getItensDoacaoByString_busca(string_busca), HttpStatus.OK);
 	}
 	
 

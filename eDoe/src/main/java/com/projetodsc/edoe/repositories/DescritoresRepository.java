@@ -13,5 +13,6 @@ public interface DescritoresRepository extends JpaRepository<Descritor, String>{
 	Optional<Descritor> findByDescricao(String descricao);
 	boolean existsByDescricao(String descricao);
 	Optional<List<Descritor>> findAllByDescricao(String descricao);
+	Optional<List<Descritor>> findByDescricaoIgnoreCaseContaining(String descricao);
 	
 }

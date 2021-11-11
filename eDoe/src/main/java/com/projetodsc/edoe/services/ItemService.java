@@ -34,9 +34,6 @@ public class ItemService {
 	private ItensNecessarioRepository itensNecessarioRepositorio;
 
 	@Autowired
-	private DescritoresRepository descritoresRepositorio;
-
-	@Autowired
 	private UsuariosRepository usuariosRepositorio;
 
 	@Autowired
@@ -44,15 +41,25 @@ public class ItemService {
 
 	@Autowired
 	private DescritorService descritorService;
+	
+	public List<ItemDoacaoDTOResponse> getItensDoacaoByString_busca(String string_busca) {
+		List<ItemDoacaoDTOResponse> listResponse = new ArrayList<>();
+		for (Descritor descritor : descritorService.getDescritoresByDescricaoContaining(string_busca)) {
+			List<ItemDoacao> itensDoac = itensDoacaoRepositorio.findByDescritor(descritor).get();
+			for (ItemDoacao it : itensDoac) {
+				listResponse.add(new ItemDoacaoDTOResponse(it, it.getDoador()));
+			}
+		}
+		return listResponse;
+	}
 
 	public List<ItemNecessarioDTOResponse> getItensNecessarioByString_busca(String string_busca) {
-		List<ItemNecessario> itens = itensNecessarioRepositorio.findByMotivacaoIgnoreCaseContaining(string_busca).get();
-		
 		List<ItemNecessarioDTOResponse> listResponse = new ArrayList<>();
-
-		for (ItemNecessario i : itens) {
-			ItemNecessarioDTOResponse newItem = new ItemNecessarioDTOResponse(i, i.getReceptor());
-			listResponse.add(newItem);
+		for (Descritor descritor : descritorService.getDescritoresByDescricaoContaining(string_busca)) {
+			List<ItemNecessario> itensNec = itensNecessarioRepositorio.findByDescritor(descritor).get();
+			for (ItemNecessario it : itensNec) {
+				listResponse.add(new ItemNecessarioDTOResponse(it, it.getReceptor()));
+			}
 		}
 		return listResponse;
 	}
@@ -116,8 +123,8 @@ public class ItemService {
 		if (!itensNecessarioRepositorio.existsById(id))
 			throw new ItemNaoEncontradoException("Item não encontrado!", "Nenhum item com o id " + id + " no sistema.");
 
-		if (!descritoresRepositorio.existsByDescricao(itemAtualizado.getDescritor().getDescricao()))
-			descritoresRepositorio.save(itemAtualizado.getDescritor());
+		if (!descritorService.existsByDescricao(itemAtualizado.getDescritor().getDescricao()))
+			descritorService.save(itemAtualizado.getDescritor());
 
 		ItemNecessario item = itensNecessarioRepositorio.findById(id).get();
 		String subject = jwtService.getSujeitoDoToken(authHeader);
@@ -133,7 +140,7 @@ public class ItemService {
 	public List<ItemNecessarioDTOResponse> getItensNecessarioByDescritor(Descritor descritor) {
 		descritor.setDescricao(descritor.getDescricao().toUpperCase());
 
-		if (!descritoresRepositorio.existsByDescricao(descritor.getDescricao().toUpperCase()))
+		if (!descritorService.existsByDescricao(descritor.getDescricao().toUpperCase()))
 			throw new DescritorInvalidoException("Descritor inválido", "Este descritor não existe no sistema.");
 
 		List<ItemNecessarioDTOResponse> response = new ArrayList<>();
@@ -146,7 +153,7 @@ public class ItemService {
 	public List<ItemDoacaoDTOResponse> getItensDoacaoByDescritor(Descritor descritor) {
 		descritor.setDescricao(descritor.getDescricao().toUpperCase());
 
-		if (!descritoresRepositorio.existsByDescricao(descritor.getDescricao().toUpperCase()))
+		if (!descritorService.existsByDescricao(descritor.getDescricao().toUpperCase()))
 			throw new DescritorInvalidoException("Descritor inválido", "Este descritor não existe no sistema.");
 
 		List<ItemDoacaoDTOResponse> response = new ArrayList<>();
@@ -163,7 +170,7 @@ public class ItemService {
 		String subject = jwtService.getSujeitoDoToken(authHeader);
 		Optional<Usuario> usuarioDoToken = usuariosRepositorio.findByEmail(subject);
 
-		if (!descritoresRepositorio.existsByDescricao(itemDTO.getDescritor().getDescricao()))
+		if (!descritorService.existsByDescricao(itemDTO.getDescritor().getDescricao()))
 			descritorService.addDescritor(itemDTO.getDescritor());
 
 		if (usuarioDoToken.get().getTipo() == TipoUsuario.DOADOR) {
@@ -185,7 +192,7 @@ public class ItemService {
 		String subject = jwtService.getSujeitoDoToken(authHeader);
 		Optional<Usuario> usuarioDoToken = usuariosRepositorio.findByEmail(subject);
 
-		if (!descritoresRepositorio.existsByDescricao(itemDTO.getDescritor().getDescricao()))
+		if (!descritorService.existsByDescricao(itemDTO.getDescritor().getDescricao()))
 			throw new DescritorNaoExisteException("Descritor não existe",
 					"Este descritor não está cadastrado no sistema.");
 

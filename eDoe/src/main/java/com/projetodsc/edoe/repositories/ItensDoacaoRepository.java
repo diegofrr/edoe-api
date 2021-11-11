@@ -14,5 +14,4 @@ public interface ItensDoacaoRepository extends JpaRepository<ItemDoacao, Long>{
 	boolean existsById(long id);
 	Optional<List<ItemDoacao>> findByDescritor(Descritor descritor);
 	Optional<List<ItemDoacao>> findTop10ByOrderByQuantidadeDoacaoDesc();
-	
 }

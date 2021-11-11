@@ -14,6 +14,5 @@ public interface ItensNecessarioRepository extends JpaRepository<ItemNecessario,
 	Optional<List<ItemNecessario>> findByDescritor(Descritor descritor);
 	Optional<List<ItemNecessario>> findTop10ByOrderByQuantidadeNecessariaDesc();
 	Optional<List<ItemNecessario>> findByMotivacaoIgnoreCaseContaining(String motivacao);
-	Optional<List<ItemNecessario>> findAllByDescritor(List<Descritor> descritores);
 }
 
