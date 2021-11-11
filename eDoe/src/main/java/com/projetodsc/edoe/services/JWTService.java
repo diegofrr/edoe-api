@@ -5,9 +5,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.projetodsc.edoe.exceptions.NaoAutenticadoException;
-import com.projetodsc.edoe.exceptions.NaoAutorizadoException;
 import com.projetodsc.edoe.filters.FiltersToken;
 import com.projetodsc.edoe.models.dtos.LoginDTO;
 import com.projetodsc.edoe.models.dtos.LoginResponse;

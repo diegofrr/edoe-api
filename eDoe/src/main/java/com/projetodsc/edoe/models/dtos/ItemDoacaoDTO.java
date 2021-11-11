@@ -2,9 +2,6 @@ package com.projetodsc.edoe.models.dtos;
 
 import com.projetodsc.edoe.models.Descritor;
 import com.projetodsc.edoe.models.ItemDoacao;
-import com.projetodsc.edoe.models.ItemNecessario;
-import com.projetodsc.edoe.models.Usuario;
-
 import lombok.Data;
 
 @Data
