@@ -30,6 +30,6 @@ public class DescritorController {
 
 	@PostMapping("/descritores/cadastro")
 	public ResponseEntity<Descritor> addDescritor(@RequestBody Descritor descritor) {
-		return new ResponseEntity<Descritor>(descritorService.addDescritor(descritor), HttpStatus.OK);
+		return new ResponseEntity<Descritor>(descritorService.addDescritor(descritor), HttpStatus.CREATED);
 	}
 }

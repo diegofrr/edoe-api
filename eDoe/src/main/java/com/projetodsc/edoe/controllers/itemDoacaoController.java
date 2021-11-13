@@ -37,7 +37,7 @@ public class itemDoacaoController {
 	@PostMapping("/doacoes/cadastro")
 	public ResponseEntity<ItemResponse> adicionaItem(@RequestBody ItemDTO item,
 			@RequestHeader("Authorization") String header) throws ServletException {
-		return new ResponseEntity<ItemResponse>(itemService.adicionaItem(item, TipoItem.DOACAO, header), HttpStatus.OK);
+		return new ResponseEntity<ItemResponse>(itemService.adicionaItem(item, TipoItem.DOACAO, header), HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/doacoes/remover/{id}")
