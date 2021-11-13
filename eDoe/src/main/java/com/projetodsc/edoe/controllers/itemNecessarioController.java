@@ -31,7 +31,7 @@ public class itemNecessarioController {
 	public ResponseEntity<ItemResponse> adicionaItemNecessario(@RequestBody ItemDTO itemDTO,
 			@RequestHeader("Authorization") String header) throws ServletException {
 		return new ResponseEntity<ItemResponse>(itemService.adicionaItem(itemDTO, TipoItem.NECESSARIO, header),
-				HttpStatus.OK);
+				HttpStatus.CREATED);
 	}
 
 	@PutMapping("/necessarios/atualizar/{id}")
