@@ -24,7 +24,7 @@ public class Doacao implements Serializable{
 	private long idItemDoacao;
 	
 	@Column
-	private long idItemNecessarios;
+	private long idItemNecessario;
 	
 	@Column
 	private int quantidadeDoacao;
@@ -32,9 +32,11 @@ public class Doacao implements Serializable{
 	@Column
 	private Date data;
 	
+	public Doacao() {}
+	
 	public Doacao(long idItemDoacao, long idItemNecessario, int quantidade) {
 		this.idItemDoacao = idItemDoacao;
-		this.idItemNecessarios = idItemNecessario;
+		this.idItemNecessario = idItemNecessario;
 		this.quantidadeDoacao = quantidade;
 		this.data = new Date();
 	}

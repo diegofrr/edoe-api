@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projetodsc.edoe.models.Descritor;
 import com.projetodsc.edoe.models.TipoItem;
 import com.projetodsc.edoe.models.dtos.Doacao;
+import com.projetodsc.edoe.models.dtos.DoacaoDTO;
+import com.projetodsc.edoe.models.dtos.DoacaoResponse;
 import com.projetodsc.edoe.models.dtos.ItemDTO;
 import com.projetodsc.edoe.models.dtos.ItemResponse;
 import com.projetodsc.edoe.services.ItemService;
@@ -76,5 +78,10 @@ public class itemDoacaoController {
 			throws ServletException {
 		return new ResponseEntity<ItemResponse>(itemService.realizarDoacao(dadosDoacao, authHeader), HttpStatus.OK);
 
+	}
+	
+	@GetMapping("/doacoes/historico")
+	public ResponseEntity<List<DoacaoResponse>> historioDeDoacoes() throws ServletException{
+		return new ResponseEntity<List<DoacaoResponse>>(itemService.historicoDeDoacoes(), HttpStatus.OK);
 	}
 }

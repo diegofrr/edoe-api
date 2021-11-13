@@ -19,7 +19,15 @@ public class DoacaoDTO {
 	}
 	
 	public Doacao getDoacao(Doacao dadosDoacao) {
-		return new Doacao(dadosDoacao.getIdItemDoacao(), dadosDoacao.getIdItemNecessarios(), dadosDoacao.getQuantidadeDoacao());
+		return new Doacao(dadosDoacao.getIdItemDoacao(), dadosDoacao.getIdItemNecessario(), dadosDoacao.getQuantidadeDoacao());
+	}
+	
+	public DoacaoDTO(Doacao dadosDoacao) {
+		this.idItemDoacao = dadosDoacao.getIdItemDoacao();
+		this.idItemNecessario = dadosDoacao.getIdItemNecessario();
+		this.quantidadeDoacao = dadosDoacao.getQuantidadeDoacao();
+		this.data = dadosDoacao.getData();
+		
 	}
 
 }

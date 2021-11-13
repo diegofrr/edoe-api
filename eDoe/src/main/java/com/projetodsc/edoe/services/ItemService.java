@@ -18,6 +18,8 @@ import com.projetodsc.edoe.models.TipoUsuario;
 import com.projetodsc.edoe.models.Usuario;
 import com.projetodsc.edoe.models.dtos.ItemResponse;
 import com.projetodsc.edoe.models.dtos.Doacao;
+import com.projetodsc.edoe.models.dtos.DoacaoDTO;
+import com.projetodsc.edoe.models.dtos.DoacaoResponse;
 import com.projetodsc.edoe.models.dtos.ItemDTO;
 import com.projetodsc.edoe.repositories.DoacoesRepository;
 import com.projetodsc.edoe.repositories.ItensRepository;
@@ -38,6 +40,14 @@ public class ItemService {
 	private DescritorService descritorService;
 
 	
+	public List<DoacaoResponse> historicoDeDoacoes(){
+		List<DoacaoResponse> listResponse = new ArrayList<>(); 
+		for (Doacao doacao : repositorioDeDoacoes.findAll()) {
+			listResponse.add(new DoacaoResponse(doacao));
+		}
+		return listResponse;
+	}
+	
 	public ItemResponse realizarDoacao(Doacao dadosDoacao, String authHeader){
 		
 		if (dadosDoacao.getQuantidadeDoacao() < 1)
@@ -50,11 +60,11 @@ public class ItemService {
 			throw new NaoAutorizadoException("Usuário não autorizado", "Esta funcionalidade é apenas para doadores.");
 
 		long idItemDoacao = dadosDoacao.getIdItemDoacao();
-		long idItemNecessario = dadosDoacao.getIdItemNecessarios();
+		long idItemNecessario = dadosDoacao.getIdItemNecessario();
 		int quantidadeDoacao = dadosDoacao.getQuantidadeDoacao();
 		
 		if (idItemDoacao == idItemNecessario)
-			throw new DoacaoInvalidaException("Falha na doação!", "Os itens têm id iguais. Rerifique-os e tente novamente.");
+			throw new DoacaoInvalidaException("Falha na doação!", "Os itens têm id iguais. Verifique-os e tente novamente.");
 		
 		if (!repositorioDeItens.existsById(idItemDoacao) || repositorioDeItens.findById(idItemDoacao).get().getTipo() != TipoItem.DOACAO)
 			throw new ItemInvalidoException("Item não encontrado", "O item com o id " + idItemDoacao + " não foi encontrado ou não é um item para doação.");
