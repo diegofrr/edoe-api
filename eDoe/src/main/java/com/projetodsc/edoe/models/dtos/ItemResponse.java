@@ -14,7 +14,7 @@ public class ItemResponse {
 	private Descritor descritor;
 	private TipoItem tipo;
 	private UsuarioResponse usuario;
-	
+
 	public ItemResponse(ItemDTO item) {
 		this.nome = item.getNome();
 		this.descricao = item.getDescricaoDetalhada();
@@ -23,7 +23,7 @@ public class ItemResponse {
 		this.tipo = item.getTipo();
 		this.usuario = new UsuarioResponse(item.getUsuario());
 	}
-	
+
 	public ItemResponse(Item item) {
 		this.nome = item.getNome();
 		this.descricao = item.getDescricaoDetalhada();

@@ -73,14 +73,14 @@ public class itemDoacaoController {
 	}
 
 	@GetMapping("/doacoes/realizar-doacao")
-	public ResponseEntity<ItemResponse> realizarDoacao(@RequestBody Doacao dadosDoacao, @RequestHeader("Authorization") String authHeader)
-			throws ServletException {
+	public ResponseEntity<ItemResponse> realizarDoacao(@RequestBody Doacao dadosDoacao,
+			@RequestHeader("Authorization") String authHeader) throws ServletException {
 		return new ResponseEntity<ItemResponse>(itemService.realizarDoacao(dadosDoacao, authHeader), HttpStatus.OK);
 
 	}
-	
+
 	@GetMapping("/doacoes/historico")
-	public ResponseEntity<List<DoacaoResponse>> historioDeDoacoes() throws ServletException{
+	public ResponseEntity<List<DoacaoResponse>> historioDeDoacoes() throws ServletException {
 		return new ResponseEntity<List<DoacaoResponse>>(itemService.historicoDeDoacoes(), HttpStatus.OK);
 	}
 }

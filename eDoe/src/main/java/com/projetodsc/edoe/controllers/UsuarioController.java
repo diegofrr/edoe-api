@@ -15,28 +15,28 @@ import com.projetodsc.edoe.models.dtos.UsuarioDTO;
 import com.projetodsc.edoe.models.dtos.UsuarioResponse;
 import com.projetodsc.edoe.services.UsuarioService;
 
-
 @RestController
 @RequestMapping("/api")
 public class UsuarioController {
-	
+
 	@Autowired
 	UsuarioService usuarioService;
-	
+
 	@GetMapping("/usuarios")
-	public ResponseEntity<List<UsuarioResponse>> getUsuarios(){
+	public ResponseEntity<List<UsuarioResponse>> getUsuarios() {
 		return new ResponseEntity<List<UsuarioResponse>>(usuarioService.listarUsuarios(), HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/usuarios/cadastro")
 	public ResponseEntity<UsuarioResponse> adicionaUsuario(@RequestBody UsuarioDTO usuarioDTO) {
 		return new ResponseEntity<UsuarioResponse>(usuarioService.adicionaUsuario(usuarioDTO), HttpStatus.CREATED);
-	
+
 	}
-	
+
 	@PostMapping("/usuarios/tipos")
-	public ResponseEntity<UsuarioResponse> alteraTipoUsuario(@RequestBody UsuarioDTO dados, @RequestHeader("Authorization") String header) throws ServletException{
+	public ResponseEntity<UsuarioResponse> alteraTipoUsuario(@RequestBody UsuarioDTO dados,
+			@RequestHeader("Authorization") String header) throws ServletException {
 		return new ResponseEntity<UsuarioResponse>(usuarioService.alteraTipo(dados, header), HttpStatus.OK);
 	}
-	
+
 }

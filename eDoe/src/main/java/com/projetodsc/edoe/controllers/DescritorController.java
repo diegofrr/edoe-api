@@ -16,21 +16,20 @@ import com.projetodsc.edoe.services.ItemService;
 @RestController
 @RequestMapping("/api")
 public class DescritorController {
-	
+
 	@Autowired
 	DescritorService descritorService;
-	
+
 	@Autowired
 	ItemService itemService;
 
 	@GetMapping("/descritores")
-	public ResponseEntity<List<Descritor>> getDescritores(){
+	public ResponseEntity<List<Descritor>> getDescritores() {
 		return new ResponseEntity<List<Descritor>>(descritorService.getDescritores(), HttpStatus.OK);
 	}
-	
-	
+
 	@PostMapping("/descritores/cadastro")
-	public ResponseEntity<Descritor> addDescritor(@RequestBody Descritor descritor){
+	public ResponseEntity<Descritor> addDescritor(@RequestBody Descritor descritor) {
 		return new ResponseEntity<Descritor>(descritorService.addDescritor(descritor), HttpStatus.OK);
 	}
 }

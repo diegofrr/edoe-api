@@ -18,10 +18,10 @@ public class Item implements Serializable {
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
 	@Column(nullable = false)
 	private String nome;
-	
+
 	@Column(nullable = false)
 	private String descricaoDetalhada;
 
@@ -31,7 +31,7 @@ public class Item implements Serializable {
 	@ManyToOne
 	@JoinColumn
 	private Descritor descritor;
-	
+
 	@ManyToOne
 	@JoinColumn
 	private Usuario usuario;
@@ -41,7 +41,8 @@ public class Item implements Serializable {
 	public Item() {
 	}
 
-	public Item(String nome, String descricaoDetalhada, int quantidade, Descritor descritor, Usuario usuario, TipoItem tipo) {
+	public Item(String nome, String descricaoDetalhada, int quantidade, Descritor descritor, Usuario usuario,
+			TipoItem tipo) {
 		this.nome = nome.toUpperCase();
 		this.descricaoDetalhada = descricaoDetalhada.toUpperCase();
 		this.quantidade = quantidade;

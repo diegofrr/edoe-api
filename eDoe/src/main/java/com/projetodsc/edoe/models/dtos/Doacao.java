@@ -12,28 +12,29 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Doacao implements Serializable{
+public class Doacao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
 	@Column
 	private long idItemDoacao;
-	
+
 	@Column
 	private long idItemNecessario;
-	
+
 	@Column
 	private int quantidadeDoacao;
-	
+
 	@Column
 	private Date data;
-	
-	public Doacao() {}
-	
+
+	public Doacao() {
+	}
+
 	public Doacao(long idItemDoacao, long idItemNecessario, int quantidade) {
 		this.idItemDoacao = idItemDoacao;
 		this.idItemNecessario = idItemNecessario;

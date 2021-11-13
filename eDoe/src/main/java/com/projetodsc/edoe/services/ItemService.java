@@ -38,20 +38,19 @@ public class ItemService {
 	@Autowired
 	private DescritorService descritorService;
 
-	
-	public List<DoacaoResponse> historicoDeDoacoes(){
-		List<DoacaoResponse> listResponse = new ArrayList<>(); 
+	public List<DoacaoResponse> historicoDeDoacoes() {
+		List<DoacaoResponse> listResponse = new ArrayList<>();
 		for (Doacao doacao : repositorioDeDoacoes.findAll()) {
 			listResponse.add(new DoacaoResponse(doacao));
 		}
 		return listResponse;
 	}
-	
-	public ItemResponse realizarDoacao(Doacao dadosDoacao, String authHeader){
-		
+
+	public ItemResponse realizarDoacao(Doacao dadosDoacao, String authHeader) {
+
 		if (dadosDoacao.getQuantidadeDoacao() < 1)
 			throw new DoacaoInvalidaException("Doação inválida!", "A quantia de doações deve ser maior que 0.");
-		
+
 		String subject = jwtService.getSujeitoDoToken(authHeader);
 		Optional<Usuario> usuarioDoToken = repositorioDeUsuarios.findByEmailIgnoreCase(subject);
 
@@ -61,48 +60,54 @@ public class ItemService {
 		long idItemDoacao = dadosDoacao.getIdItemDoacao();
 		long idItemNecessario = dadosDoacao.getIdItemNecessario();
 		int quantidadeDoacao = dadosDoacao.getQuantidadeDoacao();
-		
+
 		if (idItemDoacao == idItemNecessario)
-			throw new DoacaoInvalidaException("Falha na doação!", "Os itens têm id iguais. Verifique-os e tente novamente.");
-		
-		if (!repositorioDeItens.existsById(idItemDoacao) || repositorioDeItens.findById(idItemDoacao).get().getTipo() != TipoItem.DOACAO)
-			throw new ItemInvalidoException("Item não encontrado", "O item com o id " + idItemDoacao + " não foi encontrado ou não é um item para doação.");
-			
-		if (!repositorioDeItens.existsById(idItemNecessario) || repositorioDeItens.findById(idItemNecessario).get().getTipo() != TipoItem.NECESSARIO)
-			throw new ItemInvalidoException("Item não encontrado", "O item com o id " + idItemNecessario + " não foi encontrado ou não é um item necessário.");
-			
+			throw new DoacaoInvalidaException("Falha na doação!",
+					"Os itens têm id iguais. Verifique-os e tente novamente.");
+
+		if (!repositorioDeItens.existsById(idItemDoacao)
+				|| repositorioDeItens.findById(idItemDoacao).get().getTipo() != TipoItem.DOACAO)
+			throw new ItemInvalidoException("Item não encontrado",
+					"O item com o id " + idItemDoacao + " não foi encontrado ou não é um item para doação.");
+
+		if (!repositorioDeItens.existsById(idItemNecessario)
+				|| repositorioDeItens.findById(idItemNecessario).get().getTipo() != TipoItem.NECESSARIO)
+			throw new ItemInvalidoException("Item não encontrado",
+					"O item com o id " + idItemNecessario + " não foi encontrado ou não é um item necessário.");
+
 		Item itemDoacao = repositorioDeItens.findById(idItemDoacao).get();
 		Item itemNecessario = repositorioDeItens.findById(idItemNecessario).get();
-		
+
 		if (usuarioDoToken.get() != itemDoacao.getUsuario())
 			throw new NaoAutorizadoException("Não autorizado", "Este item pertence a outro doador.");
-		
+
 		if (itemDoacao.getUsuario() == itemNecessario.getUsuario())
 			throw new DoacaoInvalidaException("Falha da doação", "Você não pode realizar doações para si mesmo.");
 
 		if (itemDoacao.getDescritor() != itemNecessario.getDescritor())
 			throw new ItemInvalidoException("Falha na doação!", "Os itens não têm o mesmo descritor");
-		
+
 		if (itemDoacao.getQuantidade() < quantidadeDoacao)
 			throw new ItemInvalidoException("Falha na doação!", "Você não pode doar mais itens do que tem");
-		
+
 		if (quantidadeDoacao > itemNecessario.getQuantidade())
-			throw new ItemInvalidoException("Falha na doação!", "A quantidade máxima de doações para este item é " + itemNecessario.getQuantidade());
-		
+			throw new ItemInvalidoException("Falha na doação!",
+					"A quantidade máxima de doações para este item é " + itemNecessario.getQuantidade());
+
 		itemDoacao.setQuantidade(itemDoacao.getQuantidade() - quantidadeDoacao);
 		repositorioDeItens.save(itemDoacao);
 		itemNecessario.setQuantidade(itemNecessario.getQuantidade() - quantidadeDoacao);
 		repositorioDeItens.save(itemNecessario);
-		
+
 		repositorioDeDoacoes.save(new Doacao(idItemDoacao, idItemNecessario, quantidadeDoacao));
-		
+
 		if (itemDoacao.getQuantidade() == 0)
 			repositorioDeItens.delete(itemDoacao);
-		if(itemNecessario.getQuantidade() == 0)
+		if (itemNecessario.getQuantidade() == 0)
 			repositorioDeItens.delete(itemNecessario);
 		return new ItemResponse(itemDoacao);
 	}
-	
+
 	public List<ItemResponse> getItensByStringBusca(String stringBusca, TipoItem tipo) {
 		List<ItemResponse> listResponse = new ArrayList<>();
 		for (Descritor descritor : descritorService.getDescritoresByDescricaoContaining(stringBusca)) {
@@ -136,35 +141,33 @@ public class ItemService {
 		item.setDescritor(itemAtualizado.getDescritor());
 		return item;
 	}
-	
+
 	public List<ItemResponse> matchesById(long id, String authHeader) {
 		String subject = jwtService.getSujeitoDoToken(authHeader);
 		Optional<Usuario> usuarioDoToken = repositorioDeUsuarios.findByEmailIgnoreCase(subject);
 
 		if (usuarioDoToken.get().getTipo() == TipoUsuario.DOADOR)
 			throw new NaoAutorizadoException("Usuário não autorizado", "Esta funcionalidade é apenas para receptores.");
-		
+
 		if (!repositorioDeItens.existsById(id))
 			throw new ItemNaoEncontradoException("Item não encontrado!", "Nenhum item com o id " + id + " no sistema.");
-	
+
 		Item item = repositorioDeItens.findById(id).get();
-			if (item.getTipo() != TipoItem.NECESSARIO) {
-				throw new ItemInvalidoException("Item não encontrado", "Este id pertence a um item de doação.");
-			}
-		
+		if (item.getTipo() != TipoItem.NECESSARIO) {
+			throw new ItemInvalidoException("Item não encontrado", "Este id pertence a um item de doação.");
+		}
+
 		List<ItemResponse> listResponse = new ArrayList<>();
 		if (!repositorioDeItens.existsByDescritor(item.getDescritor()))
-			throw new ItemNaoEncontradoException("Item não encontrado!", "Não existem itens para doação com o descritor " + item.getDescritor().getDescricao());
+			throw new ItemNaoEncontradoException("Item não encontrado!",
+					"Não existem itens para doação com o descritor " + item.getDescritor().getDescricao());
 
-			
 		for (Item i : repositorioDeItens.findAllByDescritorAndTipo(item.getDescritor(), item.getTipo()).get()) {
 			listResponse.add(new ItemResponse(i));
 		}
 
 		return listResponse;
-			
-		
-		
+
 	}
 
 	public ItemResponse atualizaItem(long id, ItemDTO dadosAtualizados, TipoItem tipo, String authHeader) {
@@ -201,13 +204,14 @@ public class ItemService {
 		itemDTO.setDescricaoDetalhada(itemDTO.getDescricaoDetalhada().toUpperCase());
 		String subject = jwtService.getSujeitoDoToken(authHeader);
 		Optional<Usuario> usuarioDoToken = repositorioDeUsuarios.findByEmailIgnoreCase(subject);
-		
-		if (tipoItem == TipoItem.NECESSARIO && !descritorService.existsByDescricao(itemDTO.getDescritor().getDescricao()))
+
+		if (tipoItem == TipoItem.NECESSARIO
+				&& !descritorService.existsByDescricao(itemDTO.getDescritor().getDescricao()))
 			descritorService.addDescritor(itemDTO.getDescritor());
 		if (!descritorService.existsByDescricao(itemDTO.getDescritor().getDescricao()))
 			throw new DescritorNaoExisteException("Descritor não existe",
 					"Este descritor não está cadastrado no sistema.");
-		
+
 		if (itemDTO.getTipo() == TipoItem.DOACAO && usuarioDoToken.get().getTipo() == TipoUsuario.RECEPTOR)
 			throw new NaoAutorizadoException("Usuário não autorizado",
 					"Itens para doação só podem ser cadastrados por doadores.");
@@ -215,7 +219,6 @@ public class ItemService {
 		if (itemDTO.getTipo() == TipoItem.NECESSARIO && usuarioDoToken.get().getTipo() == TipoUsuario.DOADOR)
 			throw new NaoAutorizadoException("Usuário não autorizado",
 					"Itens necessários só podem ser cadastrados por receptores.");
-
 
 		Item item = itemDTO.getItem();
 		item.setUsuario(usuarioDoToken.get());

@@ -15,14 +15,13 @@ import com.projetodsc.edoe.services.JWTService;
 @RestController
 @RequestMapping("/api")
 public class LoginController {
-	
+
 	@Autowired
 	private JWTService jwtService;
-	
+
 	@PostMapping("/auth/login")
 	public ResponseEntity<LoginResponse> autentica(@RequestBody UsuarioDTO login) throws ServletException {
 		return new ResponseEntity<LoginResponse>(jwtService.autentica(login), HttpStatus.OK);
 	}
-	
 
 }
