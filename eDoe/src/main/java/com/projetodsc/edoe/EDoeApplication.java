@@ -15,9 +15,13 @@ public class EDoeApplication {
 		FilterRegistrationBean<FiltersToken> filterRB = new FilterRegistrationBean<FiltersToken>();
 		filterRB.setFilter(new FiltersToken());
 		filterRB.addUrlPatterns("/auth/login",
-				"/api/itens/doacoes",
+				"/api/usuarios/tipos",
+				"/api/itens/doacoes/atualizar/*",
+				"/api/itens/doacoes/remover/*",
 				"/api/itens/doacoes/cadastro",
-				"/api/itens/necessarios/cadastro");
+				"/api/itens/necessarios/cadastro",
+				"/api/itens/necessarios/atualizar/*",
+				"/api/itens/necessarios/remover/*");
 		return filterRB;
 	}
 

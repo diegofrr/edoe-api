@@ -10,9 +10,9 @@ import com.projetodsc.edoe.models.Descritor;
 @Repository
 public interface DescritoresRepository extends JpaRepository<Descritor, String>{
 
-	Optional<Descritor> findByDescricao(String descricao);
-	boolean existsByDescricao(String descricao);
-	Optional<List<Descritor>> findAllByDescricao(String descricao);
+	Optional<Descritor> findByDescricaoIgnoreCase(String descricao);
+	boolean existsByDescricaoIgnoreCase(String descricao);
+	Optional<List<Descritor>> findAllByDescricaoIgnoreCase(String descricao);
 	Optional<List<Descritor>> findByDescricaoIgnoreCaseContaining(String descricao);
 	
 }

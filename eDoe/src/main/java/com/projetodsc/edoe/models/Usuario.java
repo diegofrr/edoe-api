@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
 import lombok.Data;
 
 @Data
@@ -41,8 +40,8 @@ public class Usuario implements Serializable{
 	}
 	
 	public Usuario(String nome, String email, String senha, int celular, ClasseUsuario classe, int doc, TipoUsuario tipo) {
-		this.nome = nome;
-		this.email = email;
+		this.nome = nome.toUpperCase();
+		this.email = email.toUpperCase();
 		this.senha = senha;
 		this.celular = celular;
 		this.classe = classe;

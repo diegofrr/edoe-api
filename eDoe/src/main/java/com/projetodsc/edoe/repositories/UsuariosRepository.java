@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import com.projetodsc.edoe.models.Usuario;
 
 @Repository
-public interface UsuariosRepository extends JpaRepository<Usuario, Long> {
+public interface UsuariosRepository extends JpaRepository<Usuario, String> {
 	
-	Optional<Usuario> findByEmail(String email);
-	boolean existsByEmail(String email); 
+	Optional<Usuario> findByEmailIgnoreCase(String email);
+	boolean existsByEmailIgnoreCase(String email); 
 
 }

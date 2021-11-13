@@ -14,13 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.projetodsc.edoe.models.Descritor;
-import com.projetodsc.edoe.models.ItemDoacao;
-import com.projetodsc.edoe.models.dtos.ItemDTODeleted;
-import com.projetodsc.edoe.models.dtos.ItemDoacaoDTO;
-import com.projetodsc.edoe.models.dtos.ItemDoacaoDTOResponse;
-import com.projetodsc.edoe.models.dtos.ItemNecessarioDTOResponse;
+import com.projetodsc.edoe.models.TipoItem;
+import com.projetodsc.edoe.models.dtos.ItemDTO;
+import com.projetodsc.edoe.models.dtos.ItemResponse;
 import com.projetodsc.edoe.services.ItemService;
 
 @RestController
@@ -31,39 +28,38 @@ public class itemDoacaoController {
 	ItemService itemService;
 	
 	@GetMapping("/doacoes")
-	public ResponseEntity<List<ItemDoacao>> getItens(){
-		return new ResponseEntity<List<ItemDoacao>>(itemService.getItens(), HttpStatus.OK);
+	public ResponseEntity<List<ItemResponse>> getItens(){
+		return new ResponseEntity<List<ItemResponse>>(itemService.getItens(TipoItem.DOACAO), HttpStatus.OK);
 	}
 
-	
 	@PostMapping("/doacoes/cadastro")
-	public ResponseEntity<ItemDoacaoDTOResponse> adicionaItem(@RequestBody ItemDoacaoDTO itemDTO, @RequestHeader("Authorization") String header) throws ServletException{
-		return new ResponseEntity<ItemDoacaoDTOResponse>(itemService.addItemDoacao(itemDTO, header), HttpStatus.OK);
+	public ResponseEntity<ItemResponse> adicionaItem(@RequestBody ItemDTO item, @RequestHeader("Authorization") String header) throws ServletException{
+		return new ResponseEntity<ItemResponse>(itemService.adicionaItem(item, TipoItem.DOACAO, header), HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/doacoes/{id}")
-	public ResponseEntity<ItemDTODeleted> removeItem(@PathVariable("id") long id_item, @RequestHeader("Authorization") String header) throws ServletException{
-		return new ResponseEntity<ItemDTODeleted>(itemService.removeItemDoacao(id_item, header), HttpStatus.OK);
+	@DeleteMapping("/doacoes/remover/{id}")
+	public ResponseEntity<ItemResponse> removeItem(@PathVariable("id") long idItem, @RequestHeader("Authorization") String header) throws ServletException{
+		return new ResponseEntity<ItemResponse>(itemService.removeItem(idItem, header), HttpStatus.OK);
 	}
 	
-	@GetMapping("/doacoes/{descritor}")
-	public ResponseEntity<List<ItemDoacaoDTOResponse>> getByDescritor(@PathVariable String descritor) throws ServletException {
-		return new ResponseEntity<List<ItemDoacaoDTOResponse>>(itemService.getItensDoacaoByDescritor(new Descritor(descritor)), HttpStatus.OK);
+	@GetMapping("/doacoes/descritor={descritor}")
+	public ResponseEntity<List<ItemResponse>> getByDescritor(@PathVariable String descritor) throws ServletException {
+		return new ResponseEntity<List<ItemResponse>>(itemService.getItensByDescritor(new Descritor(descritor), TipoItem.DOACAO), HttpStatus.OK);
 	}
 	
-	@PutMapping("/doacoes/{id}")
-	public ResponseEntity<ItemDoacaoDTOResponse> atualizaItem(@PathVariable long id, @RequestBody ItemDoacaoDTO itemAtualizado, @RequestHeader("Authorization") String authHeader) throws ServletException {
-		return new ResponseEntity<ItemDoacaoDTOResponse>(itemService.atualizaItemDoacao(id, itemAtualizado, authHeader), HttpStatus.OK);
+	@PutMapping("/doacoes/atualizar/{id}")
+	public ResponseEntity<ItemResponse> atualizaItem(@PathVariable long id, @RequestBody ItemDTO dadosAtualizados, @RequestHeader("Authorization") String authHeader) throws ServletException {
+		return new ResponseEntity<ItemResponse>(itemService.atualizaItem(id, dadosAtualizados, TipoItem.DOACAO, authHeader), HttpStatus.OK);
 	}
 	
 	@GetMapping("/doacoes/ranking-quantidade")
-	public ResponseEntity<List<ItemDoacaoDTOResponse>> getItensOrderByQuantidadeDesc() throws ServletException{
-		return new ResponseEntity<List<ItemDoacaoDTOResponse>>(itemService.getItensDoacaoOrderByQuantidadeDesc(), HttpStatus.OK);
+	public ResponseEntity<List<ItemResponse>> getItensOrderByQuantidadeDesc() throws ServletException{
+		return new ResponseEntity<List<ItemResponse>>(itemService.getItensOrderByQuantidadeDesc(TipoItem.DOACAO), HttpStatus.OK);
 	}
 	
-	@GetMapping("/doacoes/buscar={string_busca}")
-	public ResponseEntity<List<ItemDoacaoDTOResponse>> getByParametroBusca(@PathVariable String string_busca) throws ServletException {
-		return new ResponseEntity<List<ItemDoacaoDTOResponse>>(itemService.getItensDoacaoByString_busca(string_busca), HttpStatus.OK);
+	@GetMapping("/doacoes/buscar={stringBusca}")
+	public ResponseEntity<List<ItemResponse>> getByParametroBusca(@PathVariable String stringBusca) throws ServletException {
+		return new ResponseEntity<List<ItemResponse>>(itemService.getItensByStringBusca(stringBusca, TipoItem.DOACAO), HttpStatus.OK);
 	}
 	
 

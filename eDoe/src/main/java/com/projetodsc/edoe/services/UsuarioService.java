@@ -1,20 +1,19 @@
 package com.projetodsc.edoe.services;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.projetodsc.edoe.exceptions.NaoAutenticadoException;
 import com.projetodsc.edoe.exceptions.NaoAutorizadoException;
 import com.projetodsc.edoe.exceptions.UsuarioInvalidoException;
 import com.projetodsc.edoe.exceptions.UsuarioNaoExisteException;
 import com.projetodsc.edoe.models.TipoUsuario;
 import com.projetodsc.edoe.models.Usuario;
-import com.projetodsc.edoe.models.dtos.AlteraTipo;
-import com.projetodsc.edoe.models.dtos.LoginDTO;
 import com.projetodsc.edoe.models.dtos.UsuarioDTO;
+import com.projetodsc.edoe.models.dtos.UsuarioResponse;
 import com.projetodsc.edoe.repositories.UsuariosRepository;
 
 @Service
@@ -32,32 +31,31 @@ public class UsuarioService {
 		return this.repositorio.save(user);
 	}
 	
-	public String alteraTipo(AlteraTipo dados, String authHeader) {
-		dados.setEmail(dados.getEmail().toUpperCase());
-		
-		String email = dados.getEmail();
-		TipoUsuario novoTipo = dados.getNovoTipo();
+	public UsuarioResponse alteraTipo(UsuarioDTO dados, String authHeader) {	
+		String email = dados.getEmail().toUpperCase();
+		TipoUsuario novoTipo = dados.getTipo();
 		String subject = jwtService.getSujeitoDoToken(authHeader);
-		Optional<Usuario> usuarioDoToken = repositorio.findByEmail(subject);
+		Optional<Usuario> usuarioDoToken = repositorio.findByEmailIgnoreCase(subject);
 			
 		if (usuarioDoToken.get().getTipo() != TipoUsuario.ADMIN)
 			throw new NaoAutorizadoException("Sem permissão!", "Somente administradores");
 		
-		if (!repositorio.existsByEmail(email))
+		if (!repositorio.existsByEmailIgnoreCase(email))
 			throw new UsuarioNaoExisteException("Usuário não encontrado!", "Este e-mail não corresponde à nenhum usuário!");
 		
-		if (repositorio.findByEmail(email).get().getTipo() == TipoUsuario.ADMIN)
+		if (repositorio.findByEmailIgnoreCase(email).get().getTipo() == TipoUsuario.ADMIN)
 			throw new NaoAutorizadoException("Sem permissão", "Não é possível alterar dados de outros administradores");
 		
-		Optional<Usuario> user = repositorio.findByEmail(email);
+		Optional<Usuario> user = repositorio.findByEmailIgnoreCase(email);
 		user.get().setTipo(novoTipo);
 		repositorio.save(user.get());
-		return "Função do usuário " + user.get().getNome() + " alterada para " + novoTipo;		
+		return new UsuarioResponse(user.get());
 			
 	}
 
 	public Usuario getUsuario(String email, String authHeader) {
-		Optional<Usuario> optUsuario = repositorio.findByEmail(email);
+		email = email.toUpperCase();
+		Optional<Usuario> optUsuario = repositorio.findByEmailIgnoreCase(email);
 		if (!optUsuario.isEmpty() && usuarioTemPermissao(authHeader, email)) {
 			return optUsuario.get();
 		}
@@ -66,32 +64,36 @@ public class UsuarioService {
 	}
 	
 	
-	public Usuario adicionaUsuario(UsuarioDTO user) {
+	public UsuarioResponse adicionaUsuario(UsuarioDTO user) {
 		user.setNome(user.getNome().toUpperCase());
 		user.setEmail(user.getEmail().toUpperCase());
-		user.validaUsuario();
-			
-		if (repositorio.existsByEmail(user.getEmail()))
-			throw new UsuarioInvalidoException("E-mail já cadastrado!", "Já existe um usuário cadastrado com o este e-mail!");
-
-		// caso nao tennha nenhum usuário cadastrado no banco, o primeiro será do tipo admin
+		user.validaUsuario();	
+		
+		if (user.getTipo() == TipoUsuario.ADMIN)
+			throw new UsuarioInvalidoException("Cadastro inválido!", "Somente outros administradores do sistema podem atribuir o cargo de administrador para outro usuário.");
+		
 		if (repositorio.findAll().size() == 0)
 			user.setTipo(TipoUsuario.ADMIN);
 		
-		// nao permite o cadastro de um usuário com o tipo admin
-		else
-			if (user.getTipo() == TipoUsuario.ADMIN)
-				throw new UsuarioInvalidoException("Você não pode se cadastrar como admin!", "Somente outros administradores do sistema podem atribuir o cargo de administrador para outro usuário.");
-		return repositorio.save(user.getUsuario());
+		else 
+			if (repositorio.existsByEmailIgnoreCase(user.getEmail()))
+				throw new UsuarioInvalidoException("E-mail já cadastrado!", "Já existe um usuário cadastrado com o este e-mail!");
+		
+		repositorio.save(user.getUsuario());
+		return new UsuarioResponse(user);
 	}
 
-	public List<Usuario> listaUsuarios() {
-		return repositorio.findAll();
+	public List<UsuarioResponse> listarUsuarios() {
+		List<UsuarioResponse> responseList = new ArrayList<>();
+		for (Usuario user : repositorio.findAll()) {
+			responseList.add(new UsuarioResponse(user));
+		}
+		return responseList;
 	}
 	
-	public boolean validaLogin(LoginDTO loginDTO) {
-		Optional<Usuario> user = repositorio.findByEmail(loginDTO.getEmail());
-		if (user.isPresent() && user.get().getSenha().equals(loginDTO.getSenha()))
+	public boolean validaLogin(UsuarioDTO login) {
+		Optional<Usuario> user = repositorio.findByEmailIgnoreCase(login.getEmail());
+		if (user.isPresent() && user.get().getSenha().equals(login.getSenha()))
 			return true;
 		return false;
 		
@@ -99,13 +101,13 @@ public class UsuarioService {
 	
 	public boolean usuarioTemPermissao(String authHeader, String email) {
 		String subject = jwtService.getSujeitoDoToken(authHeader);
-		Optional<Usuario> usuario = repositorio.findByEmail(subject);
+		Optional<Usuario> usuario = repositorio.findByEmailIgnoreCase(subject);
 		return usuario.isPresent() && usuario.get().getEmail().equals(email);
 	}
 	
 	public boolean usuarioEhAdmin(String authHeader) {
 		String subject = jwtService.getSujeitoDoToken(authHeader);
-		Optional<Usuario> usuario = repositorio.findByEmail(subject);
+		Optional<Usuario> usuario = repositorio.findByEmailIgnoreCase(subject);
 		if (usuario.get().getTipo() != TipoUsuario.ADMIN)
 			throw new NaoAutenticadoException("Sem permissão", "Esta funcionalidade é somente para administradores do sistema.");
 		return true;

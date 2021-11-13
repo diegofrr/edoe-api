@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
 import lombok.Data;
 
 @Data
@@ -35,20 +34,19 @@ public class Item implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn
-	private Usuario doador;
-	
-	@ManyToOne
-	@JoinColumn
+	private Usuario usuario;
+
 	private TipoItem tipo;
 
 	public Item() {
 	}
 
-	public Item(String nome, String descricaoDetalhada, Descritor descritor, int quantidade, TipoItem tipo) {
-		this.nome = nome;
-		this.descricaoDetalhada = descricaoDetalhada;
-		this.descritor = descritor;
+	public Item(String nome, String descricaoDetalhada, int quantidade, Descritor descritor, Usuario usuario, TipoItem tipo) {
+		this.nome = nome.toUpperCase();
+		this.descricaoDetalhada = descricaoDetalhada.toUpperCase();
 		this.quantidade = quantidade;
+		this.descritor = descritor;
+		this.usuario = usuario;
 		this.tipo = tipo;
 
 	}
