@@ -19,6 +19,7 @@ import com.projetodsc.edoe.models.Usuario;
 import com.projetodsc.edoe.models.dtos.ItemResponse;
 import com.projetodsc.edoe.models.dtos.Doacao;
 import com.projetodsc.edoe.models.dtos.ItemDTO;
+import com.projetodsc.edoe.repositories.DoacoesRepository;
 import com.projetodsc.edoe.repositories.ItensRepository;
 import com.projetodsc.edoe.repositories.UsuariosRepository;
 
@@ -27,16 +28,16 @@ public class ItemService {
 
 	@Autowired
 	private ItensRepository repositorioDeItens;
-
 	@Autowired
 	private UsuariosRepository repositorioDeUsuarios;
-
+	@Autowired
+	private DoacoesRepository repositorioDeDoacoes;
 	@Autowired
 	private JWTService jwtService;
-
 	@Autowired
 	private DescritorService descritorService;
 
+	
 	public ItemResponse realizarDoacao(Doacao dadosDoacao, String authHeader){
 		
 		if (dadosDoacao.getQuantidadeDoacao() < 1)
@@ -83,6 +84,9 @@ public class ItemService {
 		repositorioDeItens.save(itemDoacao);
 		itemNecessario.setQuantidade(itemNecessario.getQuantidade() - quantidadeDoacao);
 		repositorioDeItens.save(itemNecessario);
+		
+		repositorioDeDoacoes.save(new Doacao(idItemDoacao, idItemNecessario, quantidadeDoacao));
+		
 		if (itemDoacao.getQuantidade() == 0)
 			repositorioDeItens.delete(itemDoacao);
 		if(itemNecessario.getQuantidade() == 0)
