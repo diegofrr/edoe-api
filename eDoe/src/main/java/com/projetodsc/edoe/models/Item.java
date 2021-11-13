@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import lombok.Data;
 
 @Data
@@ -16,7 +19,8 @@ public class Item implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
 	private long id;
 	
 	@Column(nullable = false)
