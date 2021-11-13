@@ -21,7 +21,9 @@ public class EDoeApplication {
 				"/api/itens/doacoes/cadastro",
 				"/api/itens/necessarios/cadastro",
 				"/api/itens/necessarios/atualizar/*",
-				"/api/itens/necessarios/remover/*");
+				"/api/itens/necessarios/remover/*",
+				"/api/itens/necessarios/matches/*",
+				"/api/itens/doacoes/realizar-doacao");
 		return filterRB;
 	}
 

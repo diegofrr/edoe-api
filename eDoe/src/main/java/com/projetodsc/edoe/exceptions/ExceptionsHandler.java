@@ -17,6 +17,7 @@ public class ExceptionsHandler {
 	private static String DESCRITOR_INVALIDO_URI = "https://localhost:8080/api/descritores/cadastro";
 	private static String NAO_AUTORIZADO_URI = "https://localhost:8080/api/auth/login";
 	private static String ITEM_NAO_ENCONTRADO_URI = "https://localhost:8080/api/itens/";
+	private static String DOACAO_INVALIDA_URI = "https://localhost:8080/api/itens/doacoes/realizar-doacao";
 	
 	@ExceptionHandler(UsuarioInvalidoException.class)
 	public ResponseEntity<ProblemDetails> usuarioInvalido(UsuarioInvalidoException e) {
@@ -96,5 +97,25 @@ public class ExceptionsHandler {
 		problema.setType(ITEM_NAO_ENCONTRADO_URI);
 		problema.setDetail(e.getDetalhes());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(problema);
+	}
+	
+	@ExceptionHandler(ItemInvalidoException.class)
+	public ResponseEntity<ProblemDetails> itemInvalido(ItemInvalidoException e) {
+		ProblemDetails problema = new ProblemDetails();
+		problema.setStatus(HttpStatus.NOT_FOUND.value());
+		problema.setTitle(e.getTitulo());
+		problema.setType(DOACAO_INVALIDA_URI);
+		problema.setDetail(e.getDetalhes());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(problema);
+	}
+	
+	@ExceptionHandler(DoacaoInvalidaException.class)
+	public ResponseEntity<ProblemDetails> doacaoInvalida(DoacaoInvalidaException e) {
+		ProblemDetails problema = new ProblemDetails();
+		problema.setStatus(HttpStatus.BAD_REQUEST.value());
+		problema.setTitle(e.getTitulo());
+		problema.setType(ITEM_NAO_ENCONTRADO_URI);
+		problema.setDetail(e.getDetalhes());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problema);
 	}
 }

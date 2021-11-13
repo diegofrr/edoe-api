@@ -38,8 +38,8 @@ public class itemNecessarioController {
 	}
 	
 	@DeleteMapping("/necessarios/remover/{id}")
-	public ResponseEntity<ItemResponse> removeItem(@PathVariable("id") long id_item, @RequestHeader("Authorization") String header) throws ServletException{
-		return new ResponseEntity<ItemResponse>(itemService.removeItem(id_item, header), HttpStatus.OK);
+	public ResponseEntity<ItemResponse> removeItem(@PathVariable("id") long id, @RequestHeader("Authorization") String header) throws ServletException{
+		return new ResponseEntity<ItemResponse>(itemService.removeItem(id, header), HttpStatus.OK);
 	}
 	
 	@GetMapping("/necessarios/descritor={descritor}")
@@ -56,5 +56,11 @@ public class itemNecessarioController {
 	public ResponseEntity<List<ItemResponse>> getByParametroBusca(@PathVariable String stringBusca) throws ServletException {
 		return new ResponseEntity<List<ItemResponse>>(itemService.getItensByStringBusca(stringBusca, TipoItem.NECESSARIO), HttpStatus.OK);
 	}
+	
+	@GetMapping("/necessarios/matches/{id}")
+	public ResponseEntity<List<ItemResponse>> matches(@PathVariable("id") long id, @RequestHeader("Authorization") String header) throws ServletException{
+		return new ResponseEntity<List<ItemResponse>>(itemService.matchesById(id, header), HttpStatus.OK);
+	}
+	
 	
 }

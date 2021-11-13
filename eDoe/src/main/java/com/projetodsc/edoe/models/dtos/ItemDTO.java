@@ -37,6 +37,7 @@ public class ItemDTO {
 		this.tipo = item.getTipo();
 	}
 	
+	
 	public Item getItem() {
 		return new Item(this.nome, this.descricaoDetalhada, this.quantidade, this.descritor, this.usuario, this.tipo);
 	}
