@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projetodsc.edoe.models.Descritor;
 import com.projetodsc.edoe.models.TipoItem;
 import com.projetodsc.edoe.models.dtos.Doacao;
-import com.projetodsc.edoe.models.dtos.DoacaoDTO;
 import com.projetodsc.edoe.models.dtos.DoacaoResponse;
 import com.projetodsc.edoe.models.dtos.ItemDTO;
 import com.projetodsc.edoe.models.dtos.ItemResponse;

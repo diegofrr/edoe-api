@@ -4,8 +4,6 @@ import com.projetodsc.edoe.exceptions.UsuarioInvalidoException;
 import com.projetodsc.edoe.models.ClasseUsuario;
 import com.projetodsc.edoe.models.TipoUsuario;
 import com.projetodsc.edoe.models.Usuario;
-import com.projetodsc.edoe.repositories.UsuariosRepository;
-
 import lombok.Data;
 
 @Data
