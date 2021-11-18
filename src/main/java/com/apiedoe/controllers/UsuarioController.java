@@ -21,6 +21,11 @@ public class UsuarioController {
 
 	@Autowired
 	UsuarioService usuarioService;
+	
+	@GetMapping
+	public String whitelabel(){
+		return "Hello! Leia a documentação Swagger para navegar pelas rotas: https://edoe-api.herokuapp.com/swagger-ui.html#/";
+	}
 
 	@GetMapping("/usuarios")
 	public ResponseEntity<List<UsuarioResponse>> getUsuarios() {
