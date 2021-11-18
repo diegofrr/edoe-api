@@ -3,9 +3,14 @@ Projeto referente à disciplina de **Desenvolvimento de Sistemas Corporativo** o
 
 Discente: Diêgo Raian da Silva Ferreira
 
-#
 
-## 1. Links úteis
+## 1. Descrição
+
+Muitas pessoas tem interesse em fazer doações, mas as vezes não tem o tempo necessário para encontrar onde doar ou como doar. Como sabemos, vivemos em um país em que a desigualdade social é muito alta e por isso há muitas pessoas necessitadas, ainda mais agora em plena pandemia… De um lado pessoas que querem fazer algo para colaborar nesse momento tão delicado e por outro pessoas que realmente estão precisando de um apoio. Precisamos de um sistema para dar suporte a essa rede de doações: o eDoe.com. 
+
+No eDoe.com usuários de todo o campus IV da UFPB podem cadastrar itens a serem doados. Usuários da região ou do próprio campus devem poder cadastrar itens que gostariam de receber como doação (necessidades) e o sistema deve saber casar doações com necessidades para facilitar a doação. Uma vez fechada uma doação, o sistema ajuda a organizar o encontro de doador/receptor para a finalização.
+
+## 2. Links úteis
 [Vídeo explicativo](https://youtube.com)
 
 [Documentação Swagger](https://edoe-api.herokuapp.com/swagger-ui.html)
@@ -22,43 +27,21 @@ User Name: admin
 Password: admim
 ```
 
-## 2. JSON's prontos para exemplificação
-<img src="https://imgur.com/QyqvoZz.png"> **/api/usuarios/cadastro** -> Adicionar um novo usuário
+## 3. Segurança
 
-```json
-{
-    "nome": "Fulano",
-    "email": "fulano@gmail.com",
-    "senha": "fulano123",
-    "celular": 123456789,
-    "classe": "PESSOA_FISICA",
-    "docIdentificacao": 111222333,
-    "tipo": "DOADOR"
-}
+Foi utilizado o JSON Web Token (JWT), sendo necessário informar um token de acesso para realizar determinadas requisições. 
+O token de acesso é gerado quando o usuário faz login no sistema e tem duração de 60 minutos, por consequência, o sistema exige novamente as credenciais do usuário após o término deste tempo.
+
+### 3.1. Realizando login no sistema, recebendo um token de acesso e utilizando-o
+/i\ De preferência, utilize o Postman para realizar os passos a seguir:
 ```
-#
-
-<img src="https://imgur.com/QyqvoZz.png"> **/api/usuarios/login** -> Realizar login no sistema (retorna um  token de autenticação)
-
-```json
-{
-    "email": "fulano@gmail.com",
-    "senha": "fulano123",
-}
+Passo 1 - Se redirecione para https://edoe-api/herokuapp.com/api/auth/login;
+Passo 2 - Faça um POST passando no body da requisição um JSON com email e senha -> {"email": "...", "senha": "..."};
+Passo 3 - Caso as credenciais seja válidas, o sistema retorna o token de acesso que deve ser copiado;
+Passo 4 - Na aba "Auth" selecione Bearer Token como o tipo de autenticação e forneça seu token de acesso gerado.
 ```
-O token de autenticação, tem duração de 15 minutos, assim, quando expirado este tempo, o usuário necessita realizar login novamente no sistema para poder utilizar certas funções. Acredita-se que 15 minutos é um tempo razoavelmente bom para os usuários poderem utilizar o sistema. Toda via, caso esta API fosse aplicada realmente, poderia haver um cálculo de tempo médio gasto pelos usuários para, assim, poder definir um tempo mais preciso.
 
-#
 
-<img src="https://imgur.com/QyqvoZz.png"> **/api/usuarios/tipos** (Necessita autenticação) -> Altera o Tipo  de um usuário.
-
-```json
-{
-    "email": "fulano@gmail.com",
-    "tipo": "DOADOR_RECEPTOR",
-}
-```
-Os Tipos disponíveis no sistema são: DOADOR, RECEPTOR, DOADOR_RECEPTOR e ADMIN. Deve-se levar em consideração que SOMENTE administradores do sistema podem atribuir o Tipo ADMIN para outros usuários. Outro ponto bastante importante é que, caso não houver usuários cadastrados no sistema, o primeiro a ser cadastrado tem seu Tipo alterado para ADMIN automaticamente.
 
 
 ## ... Readme em construção ... 🚧
