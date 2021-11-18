@@ -48,15 +48,15 @@ O token de autenticação, tem duração de 15 minutos, assim, quando expirado e
 
 #
 
-<img src="https://imgur.com/QyqvoZz.png"> **/api/usuarios/tipos** (Necessita Autenticação) -> Altera o Tipo  de um usuário.
+<img src="https://imgur.com/QyqvoZz.png"> **/api/usuarios/tipos** (Necessita autenticação) -> Altera o Tipo  de um usuário.
 
 ```json
 {
     "email": "fulano@gmail.com",
-    "senha": "error404",
+    "tipo": "DOADOR_RECEPTOR",
 }
 ```
 Os Tipos disponíveis no sistema são: DOADOR, RECEPTOR, DOADOR_RECEPTOR e ADMIN. Deve-se levar em consideração que SOMENTE administradores do sistema podem atribuir o Tipo ADMIN para outros usuários. Outro ponto bastante importante é que, caso não houver usuários cadastrados no sistema, o primeiro a ser cadastrado tem seu Tipo alterado para ADMIN automaticamente.
 
 
-# Readme em construção... 🚧
+## ... Readme em construção ... 🚧
