@@ -11,15 +11,15 @@ Muitas pessoas tem interesse em fazer doações, mas as vezes não tem o tempo n
 No eDoe.com usuários de todo o campus IV da UFPB podem cadastrar itens a serem doados. Usuários da região ou do próprio campus devem poder cadastrar itens que gostariam de receber como doação (necessidades) e o sistema deve saber casar doações com necessidades para facilitar a doação. Uma vez fechada uma doação, o sistema ajuda a organizar o encontro de doador/receptor para a finalização.
 
 ## 2. Links úteis
-[URL base](https://edoe-api.herokuapp.com/api/)
+2.1. [URL base](https://edoe-api.herokuapp.com/api/)
 
-[Vídeo explicativo](https://youtube.com)
+2.2. [Vídeo explicativo](https://youtube.com)
 
-[Documentação Swagger](https://edoe-api.herokuapp.com/swagger-ui.html)
+2.3. [Documentação Swagger](https://edoe-api.herokuapp.com/swagger-ui.html)
 
-[Postman Colletion - JSON format](https://www.getpostman.com/collections/075d5afe1b7f0ef552ed)
+2.4. [Postman Colletion - JSON format](https://www.getpostman.com/collections/075d5afe1b7f0ef552ed)
 
-[Banco H2](https://edoe-api.herokuapp.com/h2)
+2.5. [Banco H2](https://edoe-api.herokuapp.com/h2)
 ```
 Saved Settings: Generic H2 (Embedded)
 Setting Name: Generic H2 (Embedded)
@@ -37,6 +37,17 @@ Método #2 - Antes de tudo, faça o clone do repositório ou baixe o arquivo zip
 mvn spring-boot:run
 ```
 Pronto! Após ser feita a instalação automática de algumas dependências, o sistema já estará rodando em ```localhost:8080/``` (esta será a URL base para a utilização do sistema)
+
+### 3.1 Importando coleção no Postman
+Faça a importação da coleção já com todas as rotas e métodos atribuídos para agilizar o processo de realização das requisições.
+
+```
+Passo 1 - Dentro do Postman, vá até a opção de Import nas suas coleções;
+Passo 2 - Na janela de Import, vá até a aba "Link";
+Passo 3 - Informe o link do Postman Colletion (item 2.4) informado no início e clique em Continue.
+```
+
+
 
 ## 4. Segurança
 
