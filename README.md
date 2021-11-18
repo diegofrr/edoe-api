@@ -7,7 +7,7 @@ Projeto referente à disciplina de Desenvolvimento de Sistemas Corporativo do cu
 
 [Documentação Swagger](https://edoe-api.herokuapp.com/swagger-ui.html)
 
-[Postman Colletion - JSON archive](https://www.getpostman.com/collections/075d5afe1b7f0ef552ed)
+[Postman Colletion - JSON format](https://www.getpostman.com/collections/075d5afe1b7f0ef552ed)
 
 [Banco H2](https://edoe-api.herokuapp.com/h2)
 ```
