@@ -9,14 +9,14 @@ import com.apiedoe.models.dtos.ProblemDetails;
 @RestControllerAdvice
 public class ExceptionsHandler {
 
-	private static String ADICIONA_USUARIO_URI = "https://localhost:8080/api/usuarios";
-	private static String FALHA_DE_LOGIN_URI = "https://localhost:8080/api/auth/login";
-	private static String DESCRITOR_NAO_EXISTE_URI = "https://localhost:8080/api/descritores/cadastro";
-	private static String DESCRITOR_JA_EXISTE_URI = "https://localhost:8080/api/descritores";
-	private static String DESCRITOR_INVALIDO_URI = "https://localhost:8080/api/descritores/cadastro";
-	private static String NAO_AUTORIZADO_URI = "https://localhost:8080/api/auth/login";
-	private static String ITEM_NAO_ENCONTRADO_URI = "https://localhost:8080/api/itens/";
-	private static String DOACAO_INVALIDA_URI = "https://localhost:8080/api/itens/doacoes/realizar-doacao";
+	private static String ADICIONA_USUARIO_URI = "https://edoe-api.herokuapp.com/api/usuarios";
+	private static String FALHA_DE_LOGIN_URI = "https://edoe-api.herokuapp.com/api/auth/login";
+	private static String DESCRITOR_NAO_EXISTE_URI = "https://edoe-api.herokuapp.com/api/descritores/cadastro";
+	private static String DESCRITOR_JA_EXISTE_URI = "https://edoe-api.herokuapp.com/api/descritores";
+	private static String DESCRITOR_INVALIDO_URI = "https://edoe-api.herokuapp.com/api/descritores/cadastro";
+	private static String NAO_AUTORIZADO_URI = "https://edoe-api.herokuapp.com/api/auth/login";
+	private static String ITEM_NAO_ENCONTRADO_URI = "https://edoe-api.herokuapp.com/api/itens/";
+	private static String DOACAO_INVALIDA_URI = "https://edoe-api.herokuapp.com/api/itens/doacoes/realizar-doacao";
 	
 	@ExceptionHandler(UsuarioInvalidoException.class)
 	public ResponseEntity<ProblemDetails> usuarioInvalido(UsuarioInvalidoException e) {
