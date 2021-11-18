@@ -3,7 +3,7 @@ Projeto referente à disciplina de Desenvolvimento de Sistemas Corporativo do cu
 
 
 ## 1. Links úteis
-[Vídeo explicativo](https://edoe-api.herokuapp.com/swagger-ui.html)
+[Vídeo explicativo](https://youtube.com)
 
 [Documentação Swagger](https://edoe-api.herokuapp.com/swagger-ui.html)
 
@@ -18,16 +18,15 @@ JDBC URL: jdbc:h2:~/dados
 User Name: admin
 Password: admim
 ```
-#
 
-## 2. JSON's prontos
+## 2. JSON's prontos para exemplificação
 <img src="https://imgur.com/QyqvoZz.png"> **/api/usuarios/cadastro** -> Adicionar um novo usuário
 
 ```json
 {
     "nome": "Fulano",
     "email": "fulano@gmail.com",
-    "senha": "error404",
+    "senha": "fulano123",
     "celular": 123456789,
     "classe": "PESSOA_FISICA",
     "docIdentificacao": 111222333,
@@ -41,7 +40,7 @@ Password: admim
 ```json
 {
     "email": "fulano@gmail.com",
-    "senha": "error404",
+    "senha": "fulano123",
 }
 ```
 O token de autenticação, tem duração de 15 minutos, assim, quando expirado este tempo, o usuário necessita realizar login novamente no sistema para poder utilizar certas funções. Acredita-se que 15 minutos é um tempo razoavelmente bom para os usuários poderem utilizar o sistema. Toda via, caso esta API fosse aplicada realmente, poderia haver um cálculo de tempo médio gasto pelos usuários para, assim, poder definir um tempo mais preciso.
