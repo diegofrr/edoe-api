@@ -1,6 +1,9 @@
 # eDoe.com
-Projeto referente à disciplina de Desenvolvimento de Sistemas Corporativo do curso de Sistemas de Informação - UFPB - Campus IV
+Projeto referente à disciplina de **Desenvolvimento de Sistemas Corporativo** orientada pela professora **Raquel Vigolvino** do curso de Sistemas de Informação - UFPB - Campus IV.
 
+Discente: Diêgo Raian da Silva Ferreira
+
+#
 
 ## 1. Links úteis
 [Vídeo explicativo](https://youtube.com)
