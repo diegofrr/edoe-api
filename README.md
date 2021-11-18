@@ -29,7 +29,7 @@ User Name: admin
 Password: admim
 ```
 
-## 3. Utilização/instalação
+## 3. Intalação e utilização
 Método #1 - Devido ao sistema já está implementado no Heroku, você pode simplesmente utilizar a [URL base](https://edoe-api.herokuapp.com/api/) informada mais acima e, com o auxílio da documentação Swagger para se direcionar entre as rotas existentes, realizar requisições ao sistema.
 
 Método #2 - Antes de tudo, faça o clone do repositório ou baixe o arquivo zipado do mesmo. Em seguida, dentro da pasta principal do projeto, basta executar o seguinte comando:
@@ -45,9 +45,8 @@ Faça a importação da coleção já com todas as rotas e métodos atribuídos 
 Passo 1 - Dentro do Postman, vá até a opção de Import nas suas coleções;
 Passo 2 - Na janela de Import, vá até a aba "Link";
 Passo 3 - Informe o link do Postman Colletion (item 2.4) informado no início e clique em Continue.
+Obs.: Os itens nomeados com um cadeado significam que necessitam de autenticação (veja o item 4.1)
 ```
-
-
 
 ## 4. Segurança
 
@@ -55,7 +54,7 @@ Foi utilizado o JSON Web Token (JWT), sendo necessário informar um token de ace
 O token de acesso é gerado quando o usuário faz login no sistema e tem duração de 60 minutos, por consequência, o sistema exige novamente as credenciais do usuário após o término deste tempo.
 
 ### 4.1. Realizando login no sistema, recebendo um token de acesso e utilizando-o
-/i\ De preferência, utilize o Postman para realizar os passos a seguir:
+/i\ Os passos a seguir foram realizados através do Postman.
 ```
 Passo 1) Se redirecione para https://edoe-api/herokuapp.com/api/auth/login;
 Passo 2) Faça um POST passando no body da requisição um JSON com email e senha -> {"email": "...", "senha": "..."};
