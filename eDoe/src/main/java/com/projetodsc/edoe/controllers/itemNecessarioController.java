@@ -34,14 +34,14 @@ public class itemNecessarioController {
 				HttpStatus.CREATED);
 	}
 
-	@PutMapping("/necessarios/atualizar/{id}")
+	@PutMapping("/necessarios/atualizacao/{id}")
 	public ResponseEntity<ItemResponse> atualizaItem(@PathVariable long id, @RequestBody ItemDTO itemAtualizado,
 			@RequestHeader("Authorization") String authHeader) throws ServletException {
 		return new ResponseEntity<ItemResponse>(
 				itemService.atualizaItem(id, itemAtualizado, TipoItem.NECESSARIO, authHeader), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/necessarios/remover/{id}")
+	@DeleteMapping("/necessarios/remove/{id}")
 	public ResponseEntity<ItemResponse> removeItem(@PathVariable("id") long id,
 			@RequestHeader("Authorization") String header) throws ServletException {
 		return new ResponseEntity<ItemResponse>(itemService.removeItem(id, header), HttpStatus.OK);

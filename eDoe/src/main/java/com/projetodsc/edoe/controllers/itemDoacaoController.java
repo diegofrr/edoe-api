@@ -40,7 +40,7 @@ public class itemDoacaoController {
 		return new ResponseEntity<ItemResponse>(itemService.adicionaItem(item, TipoItem.DOACAO, header), HttpStatus.CREATED);
 	}
 
-	@DeleteMapping("/doacoes/remover/{id}")
+	@DeleteMapping("/doacoes/remove/{id}")
 	public ResponseEntity<ItemResponse> removeItem(@PathVariable("id") long idItem,
 			@RequestHeader("Authorization") String header) throws ServletException {
 		return new ResponseEntity<ItemResponse>(itemService.removeItem(idItem, header), HttpStatus.OK);
@@ -52,7 +52,7 @@ public class itemDoacaoController {
 				itemService.getItensByDescritor(new Descritor(descritor), TipoItem.DOACAO), HttpStatus.OK);
 	}
 
-	@PutMapping("/doacoes/atualizar/{id}")
+	@PutMapping("/doacoes/atualizacao/{id}")
 	public ResponseEntity<ItemResponse> atualizaItem(@PathVariable long id, @RequestBody ItemDTO dadosAtualizados,
 			@RequestHeader("Authorization") String authHeader) throws ServletException {
 		return new ResponseEntity<ItemResponse>(
@@ -72,8 +72,8 @@ public class itemDoacaoController {
 				HttpStatus.OK);
 	}
 
-	@GetMapping("/doacoes/realizar-doacao")
-	public ResponseEntity<ItemResponse> realizarDoacao(@RequestBody Doacao dadosDoacao,
+	@PostMapping("/doacoes/nova-doacao")
+	public ResponseEntity<ItemResponse> realizaDoacao(@RequestBody Doacao dadosDoacao,
 			@RequestHeader("Authorization") String authHeader) throws ServletException {
 		return new ResponseEntity<ItemResponse>(itemService.realizarDoacao(dadosDoacao, authHeader), HttpStatus.OK);
 
