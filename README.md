@@ -31,7 +31,7 @@ Password: admim
 ```
 
 ## 3. Intalação e utilização
-Método #1 - Devido ao sistema já está implementado no Heroku, você pode simplesmente utilizar a [URL base](https://edoe-api.herokuapp.com/api/) informada mais acima e, com o auxílio da documentação Swagger para se direcionar entre as rotas existentes, realizar requisições ao sistema.
+Método #1 - Devido ao sistema já está implementado no **Heroku**, você pode simplesmente utilizar a [URL base](https://edoe-api.herokuapp.com/api/) informada mais acima e, com o auxílio da documentação Swagger para se direcionar entre as rotas existentes, realizar requisições ao sistema.
 
 Método #2 - Antes de tudo, faça o clone do repositório ou baixe o arquivo zipado do mesmo. Em seguida, dentro da pasta principal do projeto, basta executar o seguinte comando:
 ```
