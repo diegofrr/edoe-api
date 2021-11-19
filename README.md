@@ -3,12 +3,13 @@ Projeto referente à disciplina de **Desenvolvimento de Sistemas Corporativo** o
 
 Discente: Diêgo Raian da Silva Ferreira
 
-
 ## 1. Descrição
 
 Muitas pessoas tem interesse em fazer doações, mas as vezes não tem o tempo necessário para encontrar onde doar ou como doar. Como sabemos, vivemos em um país em que a desigualdade social é muito alta e por isso há muitas pessoas necessitadas, ainda mais agora em plena pandemia… De um lado pessoas que querem fazer algo para colaborar nesse momento tão delicado e por outro pessoas que realmente estão precisando de um apoio. Precisamos de um sistema para dar suporte a essa rede de doações: o eDoe.com. 
 
 No eDoe.com usuários de todo o campus IV da UFPB podem cadastrar itens a serem doados. Usuários da região ou do próprio campus devem poder cadastrar itens que gostariam de receber como doação (necessidades) e o sistema deve saber casar doações com necessidades para facilitar a doação. Uma vez fechada uma doação, o sistema ajuda a organizar o encontro de doador/receptor para a finalização.
+
+[Mais...](https://docs.google.com/document/d/1S2nt77eHhDRmc7L2CtRLEKP1rGfASmUscaRQE94ZHYw/edit#)
 
 ## 2. Links úteis
 2.1. [URL base](https://edoe-api.herokuapp.com/api/)
@@ -61,8 +62,3 @@ Passo 2) Faça um POST passando no body da requisição um JSON com email e senh
 Passo 3) Caso as credenciais seja válidas, o sistema retorna o token de acesso que deve ser copiado;
 Passo 4) Na aba "Auth" selecione Bearer Token como o tipo de autenticação e forneça seu token de acesso gerado.
 ```
-
-
-
-
-## ... Readme em construção ... 🚧
