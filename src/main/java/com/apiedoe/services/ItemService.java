@@ -21,6 +21,7 @@ import com.apiedoe.models.Usuario;
 import com.apiedoe.models.requestModels.ItemRequest;
 import com.apiedoe.models.responseModels.DoacaoResponse;
 import com.apiedoe.models.responseModels.ItemResponse;
+import com.apiedoe.models.dtos.DoacaoDTO;
 import com.apiedoe.models.dtos.ItemDTO;
 import com.apiedoe.repositories.DoacoesRepository;
 import com.apiedoe.repositories.ItensRepository;
@@ -48,7 +49,7 @@ public class ItemService {
 		return listResponse;
 	}
 
-	public ItemResponse realizarDoacao(Doacao dadosDoacao, String authHeader) {
+	public ItemResponse realizarDoacao(DoacaoDTO dadosDoacao, String authHeader) {
 
 		if (dadosDoacao.getQuantidadeDoacao() < 1)
 			throw new DoacaoInvalidaException("Doação inválida!", "A quantia de doações deve ser maior que 0.");

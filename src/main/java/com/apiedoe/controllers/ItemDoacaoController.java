@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.apiedoe.models.Descritor;
 import com.apiedoe.models.Doacao;
 import com.apiedoe.models.TipoItem;
+import com.apiedoe.models.dtos.DoacaoDTO;
 import com.apiedoe.models.requestModels.ItemRequest;
 import com.apiedoe.models.responseModels.DoacaoResponse;
 import com.apiedoe.models.responseModels.ItemResponse;
@@ -72,8 +73,8 @@ public class ItemDoacaoController {
 				HttpStatus.OK);
 	}
 
-	@GetMapping("/doacoes/realizar-doacao")
-	public ResponseEntity<ItemResponse> realizarDoacao(@RequestBody Doacao dadosDoacao,
+	@PostMapping("/doacoes/realizar-doacao")
+	public ResponseEntity<ItemResponse> realizarDoacao(@RequestBody DoacaoDTO dadosDoacao,
 			@RequestHeader("Authorization") String authHeader) throws ServletException {
 		return new ResponseEntity<ItemResponse>(itemService.realizarDoacao(dadosDoacao, authHeader), HttpStatus.OK);
 
