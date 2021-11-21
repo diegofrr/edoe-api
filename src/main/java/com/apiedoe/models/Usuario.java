@@ -12,23 +12,23 @@ public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(nullable = false, length = 50)
+	@Column(nullable = false)
 	private String nome;
 
 	@Id
-	@Column(unique = true, nullable = false, length = 30)
+	@Column(unique = true, nullable = false)
 	private String email;
 
-	@Column(nullable = false, length = 12)
+	@Column(nullable = false)
 	private String senha;
 
-	@Column(nullable = false, length = 11)
+	@Column(nullable = false)
 	private int celular;
 
-	@Column(nullable = false, length = 10)
+	@Column(nullable = false)
 	private ClasseUsuario classe;
 
-	@Column(nullable = false, length = 11)
+	@Column(nullable = false)
 	private int docIdentificacao;
 
 	@Column(nullable = false)
