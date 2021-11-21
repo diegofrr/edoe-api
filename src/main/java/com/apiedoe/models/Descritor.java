@@ -20,8 +20,5 @@ public class Descritor {
 		this.descricao = descricao.toUpperCase();
 	}
 
-	public String toString() {
-		return descricao;
-	}
 
 }
