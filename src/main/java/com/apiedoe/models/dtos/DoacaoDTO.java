@@ -12,6 +12,8 @@ public class DoacaoDTO {
 	private long idItemNecessario;
 	private int quantidadeDoacao;
 	private Date data;
+	
+	public DoacaoDTO() {}
 
 	public DoacaoDTO(long idItemDoacao, long idItemNecessario, int quantidadeDoacao) {
 		this.idItemDoacao = idItemDoacao;
