@@ -1,7 +1,6 @@
 package com.apiedoe.models.requestModels;
 
 import com.apiedoe.models.TipoUsuario;
-
 import lombok.Data;
 
 @Data
