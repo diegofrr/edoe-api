@@ -13,6 +13,8 @@ public class DoacaoResponse {
 	private int quantidadeDoacao;
 	private String data;
 
+	public DoacaoResponse() {}
+	
 	public DoacaoResponse(Doacao dadosDoacao) {
 		this.idItemDoacao = dadosDoacao.getIdItemDoacao();
 		this.idItemNecessario = dadosDoacao.getIdItemNecessario();

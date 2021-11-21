@@ -4,12 +4,14 @@ import com.apiedoe.models.TipoUsuario;
 import lombok.Data;
 
 @Data
-public class UsuarioAlteradoReq {
+public class UsuarioAlteradoRequest {
 	
 	private String email;
 	private TipoUsuario tipo;
 	
-	public UsuarioAlteradoReq(String email, TipoUsuario tipo) {
+	public UsuarioAlteradoRequest() {}
+	
+	public UsuarioAlteradoRequest(String email, TipoUsuario tipo) {
 		this.email = email;
 		this.tipo = tipo;
 	}

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.apiedoe.models.Descritor;
 import com.apiedoe.models.Doacao;
 import com.apiedoe.models.TipoItem;
-import com.apiedoe.models.requestModels.ItemReq;
+import com.apiedoe.models.requestModels.ItemRequest;
 import com.apiedoe.models.responseModels.DoacaoResponse;
 import com.apiedoe.models.responseModels.ItemResponse;
 import com.apiedoe.services.ItemService;
@@ -35,7 +35,7 @@ public class ItemDoacaoController {
 	}
 
 	@PostMapping("/doacoes/cadastro")
-	public ResponseEntity<ItemResponse> adicionaItem(@RequestBody ItemReq item,
+	public ResponseEntity<ItemResponse> adicionaItem(@RequestBody ItemRequest item,
 			@RequestHeader("Authorization") String header) throws ServletException {
 		return new ResponseEntity<ItemResponse>(itemService.adicionaItem(item, TipoItem.DOACAO, header), HttpStatus.CREATED);
 	}
@@ -53,7 +53,7 @@ public class ItemDoacaoController {
 	}
 
 	@PutMapping("/doacoes/atualizar/{id}")
-	public ResponseEntity<ItemResponse> atualizaItem(@PathVariable long id, @RequestBody ItemReq dadosAtualizados,
+	public ResponseEntity<ItemResponse> atualizaItem(@PathVariable long id, @RequestBody ItemRequest dadosAtualizados,
 			@RequestHeader("Authorization") String authHeader) throws ServletException {
 		return new ResponseEntity<ItemResponse>(
 				itemService.atualizaItem(id, dadosAtualizados, TipoItem.DOACAO, authHeader), HttpStatus.OK);

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.apiedoe.exceptions.NaoAutenticadoException;
 import com.apiedoe.filters.FiltersToken;
-import com.apiedoe.models.requestModels.LoginReq;
+import com.apiedoe.models.requestModels.LoginRequest;
 import com.apiedoe.models.responseModels.LoginResponse;
 
 @Service
@@ -18,7 +18,7 @@ public class JWTService {
 	private UsuarioService usuarioService;
 	public static final String TOKEN_KEY = "wdsjfhkwbfdgwuierhweij";
 
-	public LoginResponse autentica(LoginReq login) {
+	public LoginResponse autentica(LoginRequest login) {
 		if (!usuarioService.validaLogin(login))
 			throw new NaoAutenticadoException("Login falhou", "Usuário não autenticado.");
 
