@@ -29,9 +29,7 @@ public class JWTService {
 	private String geraToken(String email) {
 		return Jwts.builder().setHeaderParam("typ", "JWT").setSubject(email)
 				.signWith(SignatureAlgorithm.HS512, TOKEN_KEY)
-				.setExpiration(new Date(System.currentTimeMillis() + 15 * 60 * 1000)).compact(); // 10 minutos para a
-																									// expiração do
-																									// token.
+				.setExpiration(new Date(System.currentTimeMillis() + 60 * 60 * 1000)).compact();																								// token.
 	}
 
 	public String getSujeitoDoToken(String authorizationHeader) {
