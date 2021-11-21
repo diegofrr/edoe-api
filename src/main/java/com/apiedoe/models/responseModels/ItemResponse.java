@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class ItemResponse {
 	private String nome;
-	private String descricao;
+	private String descricaoDetalhada;
 	private int quantidade;
 	private Descritor descritor;
 	private TipoItem tipo;
@@ -20,7 +20,7 @@ public class ItemResponse {
 	
 	public ItemResponse(ItemDTO item) {
 		this.nome = item.getNome();
-		this.descricao = item.getDescricaoDetalhada();
+		this.descricaoDetalhada = item.getDescricaoDetalhada();
 		this.quantidade = item.getQuantidade();
 		this.descritor = item.getDescritor();
 		this.tipo = item.getTipo();
@@ -29,7 +29,7 @@ public class ItemResponse {
 
 	public ItemResponse(Item item) {
 		this.nome = item.getNome();
-		this.descricao = item.getDescricaoDetalhada();
+		this.descricaoDetalhada = item.getDescricaoDetalhada();
 		this.quantidade = item.getQuantidade();
 		this.descritor = item.getDescritor();
 		this.tipo = item.getTipo();
