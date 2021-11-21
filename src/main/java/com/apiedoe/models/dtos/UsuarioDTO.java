@@ -4,7 +4,7 @@ import com.apiedoe.exceptions.UsuarioInvalidoException;
 import com.apiedoe.models.ClasseUsuario;
 import com.apiedoe.models.TipoUsuario;
 import com.apiedoe.models.Usuario;
-import com.apiedoe.models.requestModels.UsuarioCadastro;
+import com.apiedoe.models.requestModels.UsuarioReq;
 
 import lombok.Data;
 
@@ -32,7 +32,7 @@ public class UsuarioDTO {
 		this.docIdentificacao = doc;
 	}
 	
-	public UsuarioDTO(UsuarioCadastro user) {
+	public UsuarioDTO(UsuarioReq user) {
 		this.nome = user.getNome();
 		this.email = user.getEmail();
 		this.senha = user.getSenha();

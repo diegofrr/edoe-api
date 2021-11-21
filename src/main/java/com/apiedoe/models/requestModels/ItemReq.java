@@ -4,7 +4,7 @@ import com.apiedoe.models.Descritor;
 import lombok.Data;
 
 @Data
-public class ItemRequest {
+public class ItemReq {
 	
 	private String nome;
 	private String descricaoDetalhada;
@@ -12,7 +12,7 @@ public class ItemRequest {
 	private Descritor descritor;
 	
 
-	public ItemRequest(String nome, String descricaoDetalhada, int quantidade, Descritor descritor) {
+	public ItemReq(String nome, String descricaoDetalhada, int quantidade, Descritor descritor) {
 		this.nome = nome;
 		this.descricaoDetalhada = descricaoDetalhada;
 		this.quantidade = quantidade;

@@ -18,7 +18,7 @@ import com.apiedoe.models.Item;
 import com.apiedoe.models.TipoItem;
 import com.apiedoe.models.TipoUsuario;
 import com.apiedoe.models.Usuario;
-import com.apiedoe.models.requestModels.ItemRequest;
+import com.apiedoe.models.requestModels.ItemReq;
 import com.apiedoe.models.responseModels.DoacaoResponse;
 import com.apiedoe.models.responseModels.ItemResponse;
 import com.apiedoe.models.dtos.ItemDTO;
@@ -136,7 +136,7 @@ public class ItemService {
 		return listResponse;
 	}
 
-	public Item setDados(Item item, ItemRequest itemAtualizado) {
+	public Item setDados(Item item, ItemReq itemAtualizado) {
 		item.setNome(itemAtualizado.getNome().toUpperCase());
 		item.setDescricaoDetalhada(itemAtualizado.getDescricaoDetalhada().toUpperCase());
 		item.setQuantidade(itemAtualizado.getQuantidade());
@@ -172,7 +172,7 @@ public class ItemService {
 
 	}
 
-	public ItemResponse atualizaItem(long id, ItemRequest dadosAtualizados, TipoItem tipo, String authHeader) {
+	public ItemResponse atualizaItem(long id, ItemReq dadosAtualizados, TipoItem tipo, String authHeader) {
 		if (!repositorioDeItens.existsById(id))
 			throw new ItemNaoEncontradoException("Item não encontrado!", "Nenhum item com o id " + id + " no sistema.");
 
@@ -200,7 +200,7 @@ public class ItemService {
 		return response;
 	}
 
-	public ItemResponse adicionaItem(ItemRequest requestItem, TipoItem tipoItem, String authHeader) {	
+	public ItemResponse adicionaItem(ItemReq requestItem, TipoItem tipoItem, String authHeader) {	
 		ItemDTO itemDTO = new ItemDTO(requestItem, tipoItem);
 		itemDTO.setNome(itemDTO.getNome().toUpperCase());
 		itemDTO.setDescricaoDetalhada(itemDTO.getDescricaoDetalhada().toUpperCase());

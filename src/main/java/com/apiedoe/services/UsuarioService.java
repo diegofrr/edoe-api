@@ -12,9 +12,9 @@ import com.apiedoe.exceptions.UsuarioNaoExisteException;
 import com.apiedoe.models.TipoUsuario;
 import com.apiedoe.models.Usuario;
 import com.apiedoe.models.dtos.UsuarioDTO;
-import com.apiedoe.models.requestModels.LoginRequest;
-import com.apiedoe.models.requestModels.UsuarioAlteradoRequest;
-import com.apiedoe.models.requestModels.UsuarioCadastro;
+import com.apiedoe.models.requestModels.LoginReq;
+import com.apiedoe.models.requestModels.UsuarioAlteradoReq;
+import com.apiedoe.models.requestModels.UsuarioReq;
 import com.apiedoe.models.responseModels.UsuarioResponse;
 import com.apiedoe.repositories.UsuariosRepository;
 
@@ -34,7 +34,7 @@ public class UsuarioService {
 		return this.repositorio.save(user);
 	}
 
-	public UsuarioResponse alteraTipo(UsuarioAlteradoRequest dados, String authHeader) {
+	public UsuarioResponse alteraTipo(UsuarioAlteradoReq dados, String authHeader) {
 		String email = dados.getEmail().toUpperCase();
 		TipoUsuario novoTipo = dados.getTipo();
 		String subject = jwtService.getSujeitoDoToken(authHeader);
@@ -68,7 +68,7 @@ public class UsuarioService {
 						+ jwtService.getSujeitoDoToken(authHeader) + ".");
 	}
 
-	public UsuarioResponse adicionaUsuario(UsuarioCadastro usuario) {
+	public UsuarioResponse adicionaUsuario(UsuarioReq usuario) {
 		UsuarioDTO user = new UsuarioDTO(usuario);
 		user.setNome(user.getNome().toUpperCase());
 		user.setEmail(user.getEmail().toUpperCase());
@@ -98,7 +98,7 @@ public class UsuarioService {
 		return responseList;
 	}
 
-	public boolean validaLogin(LoginRequest login) {
+	public boolean validaLogin(LoginReq login) {
 		Optional<Usuario> user = repositorio.findByEmailIgnoreCase(login.getEmail());
 		if (user.isPresent() && user.get().getSenha().equals(login.getSenha()))
 			return true;

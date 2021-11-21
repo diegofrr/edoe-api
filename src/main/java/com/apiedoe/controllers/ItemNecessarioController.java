@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.apiedoe.models.Descritor;
 import com.apiedoe.models.TipoItem;
-import com.apiedoe.models.requestModels.ItemRequest;
+import com.apiedoe.models.requestModels.ItemReq;
 import com.apiedoe.models.responseModels.ItemResponse;
 import com.apiedoe.services.ItemService;
 
@@ -28,14 +28,14 @@ public class ItemNecessarioController {
 	ItemService itemService;
 
 	@PostMapping("/necessarios/cadastro")
-	public ResponseEntity<ItemResponse> adicionaItemNecessario(@RequestBody ItemRequest itemDTO,
+	public ResponseEntity<ItemResponse> adicionaItemNecessario(@RequestBody ItemReq itemDTO,
 			@RequestHeader("Authorization") String header) throws ServletException {
 		return new ResponseEntity<ItemResponse>(itemService.adicionaItem(itemDTO, TipoItem.NECESSARIO, header),
 				HttpStatus.CREATED);
 	}
 
 	@PutMapping("/necessarios/atualizar/{id}")
-	public ResponseEntity<ItemResponse> atualizaItem(@PathVariable long id, @RequestBody ItemRequest itemAtualizado,
+	public ResponseEntity<ItemResponse> atualizaItem(@PathVariable long id, @RequestBody ItemReq itemAtualizado,
 			@RequestHeader("Authorization") String authHeader) throws ServletException {
 		return new ResponseEntity<ItemResponse>(
 				itemService.atualizaItem(id, itemAtualizado, TipoItem.NECESSARIO, authHeader), HttpStatus.OK);

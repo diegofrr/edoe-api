@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.apiedoe.models.requestModels.UsuarioAlteradoRequest;
-import com.apiedoe.models.requestModels.UsuarioCadastro;
+import com.apiedoe.models.requestModels.UsuarioAlteradoReq;
+import com.apiedoe.models.requestModels.UsuarioReq;
 import com.apiedoe.models.responseModels.UsuarioResponse;
 import com.apiedoe.services.UsuarioService;
 
@@ -34,13 +34,13 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/usuarios/cadastro")
-	public ResponseEntity<UsuarioResponse> adicionaUsuario(@RequestBody UsuarioCadastro usuario) throws ServletException {
+	public ResponseEntity<UsuarioResponse> adicionaUsuario(@RequestBody UsuarioReq usuario) throws ServletException {
 		return new ResponseEntity<UsuarioResponse>(usuarioService.adicionaUsuario(usuario), HttpStatus.CREATED);
 
 	}	
 
 	@PostMapping("/usuarios/tipos")
-	public ResponseEntity<UsuarioResponse> alteraTipoUsuario(@RequestBody UsuarioAlteradoRequest dados,
+	public ResponseEntity<UsuarioResponse> alteraTipoUsuario(@RequestBody UsuarioAlteradoReq dados,
 			@RequestHeader("Authorization") String header) throws ServletException {
 		return new ResponseEntity<UsuarioResponse>(usuarioService.alteraTipo(dados, header), HttpStatus.OK);
 	}
