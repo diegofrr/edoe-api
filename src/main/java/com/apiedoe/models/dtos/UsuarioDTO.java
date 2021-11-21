@@ -14,22 +14,22 @@ public class UsuarioDTO {
 	private String nome;
 	private String email;
 	private String senha;
-	private int celular;
+	private long celular;
 	private ClasseUsuario classe;
-	private int docIdentificacao;
+	private long docIdentificacao;
 	private TipoUsuario tipo = TipoUsuario.DOADOR;
 
 	public UsuarioDTO() {
 		super();
 	}
 
-	public UsuarioDTO(String nome, String email, String senha, int celular, ClasseUsuario classe, int doc) {
+	public UsuarioDTO(String nome, String email, String senha, long celular, ClasseUsuario classe, long docIdentificacao) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.celular = celular;
 		this.classe = classe;
-		this.docIdentificacao = doc;
+		this.docIdentificacao = docIdentificacao;
 	}
 	
 	public UsuarioDTO(UsuarioRequest user) {

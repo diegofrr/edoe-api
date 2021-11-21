@@ -11,7 +11,7 @@ public class UsuarioResponse {
 
 	private String nome;
 	private String email;
-	private int celular;
+	private long celular;
 	private ClasseUsuario classe;
 
 	public UsuarioResponse() {}

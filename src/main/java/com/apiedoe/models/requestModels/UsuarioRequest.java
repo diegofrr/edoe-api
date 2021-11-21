@@ -11,15 +11,15 @@ public class UsuarioRequest {
 	private String nome;
 	private String email;
 	private String senha;
-	private int celular;
+	private long celular;
 	private ClasseUsuario classe;
-	private int docIdentificacao;
+	private long docIdentificacao;
 	private TipoUsuario tipo;
 	
 	public UsuarioRequest() {}
 
-	public UsuarioRequest(String nome, String email, String senha, int celular, ClasseUsuario classe,
-			int docIdentificacao, TipoUsuario tipo) {
+	public UsuarioRequest(String nome, String email, String senha, long celular, ClasseUsuario classe,
+			long docIdentificacao, TipoUsuario tipo) {
 		this.nome = nome.toUpperCase();
 		this.email = email.toUpperCase();
 		this.senha = senha;

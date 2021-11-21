@@ -23,13 +23,13 @@ public class Usuario implements Serializable {
 	private String senha;
 
 	@Column(nullable = false)
-	private int celular;
+	private long celular;
 
 	@Column(nullable = false)
 	private ClasseUsuario classe;
 
 	@Column(nullable = false)
-	private int docIdentificacao;
+	private long docIdentificacao;
 
 	@Column(nullable = false)
 	private TipoUsuario tipo;
@@ -38,14 +38,14 @@ public class Usuario implements Serializable {
 		super();
 	}
 
-	public Usuario(String nome, String email, String senha, int celular, ClasseUsuario classe, int doc,
+	public Usuario(String nome, String email, String senha, long celular, ClasseUsuario classe, long docIdentificacao,
 			TipoUsuario tipo) {
 		this.nome = nome.toUpperCase();
 		this.email = email.toUpperCase();
 		this.senha = senha;
 		this.celular = celular;
 		this.classe = classe;
-		this.docIdentificacao = doc;
+		this.docIdentificacao = docIdentificacao;
 		this.tipo = tipo;
 	}
 
