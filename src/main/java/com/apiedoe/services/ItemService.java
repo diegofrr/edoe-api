@@ -204,6 +204,8 @@ public class ItemService {
 		ItemDTO itemDTO = new ItemDTO(requestItem, tipoItem);
 		itemDTO.setNome(itemDTO.getNome().toUpperCase());
 		itemDTO.setDescricaoDetalhada(itemDTO.getDescricaoDetalhada().toUpperCase());
+		itemDTO.getDescritor().setDescricao(requestItem.getDescritor().getDescricao().toUpperCase());
+		
 		String subject = jwtService.getSujeitoDoToken(authHeader);
 		Optional<Usuario> usuarioDoToken = repositorioDeUsuarios.findByEmailIgnoreCase(subject);
 
