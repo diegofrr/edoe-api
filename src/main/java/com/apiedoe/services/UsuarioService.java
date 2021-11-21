@@ -84,6 +84,7 @@ public class UsuarioService {
 		else if (repositorio.existsByEmailIgnoreCase(user.getEmail()))
 			throw new UsuarioInvalidoException("E-mail já cadastrado!",
 					"Já existe um usuário cadastrado com o este e-mail!");
+		
 
 		repositorio.save(user.getUsuario());
 		return new UsuarioResponse(user);
