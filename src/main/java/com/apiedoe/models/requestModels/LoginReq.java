@@ -8,6 +8,8 @@ public class LoginReq {
 	private String email;
 	private String senha;
 	
+	public LoginReq() {}
+	
 	public LoginReq(String email, String senha) {
 		this.email = email;
 		this.senha = senha;
