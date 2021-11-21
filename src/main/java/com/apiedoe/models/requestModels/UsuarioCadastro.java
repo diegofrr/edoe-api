@@ -6,7 +6,7 @@ import com.apiedoe.models.TipoUsuario;
 import lombok.Data;
 
 @Data
-public class UsuarioRequest {
+public class UsuarioCadastro {
 
 	private String nome;
 	private String email;
@@ -15,8 +15,10 @@ public class UsuarioRequest {
 	private ClasseUsuario classe;
 	private int docIdentificacao;
 	private TipoUsuario tipo;
+	
+	public UsuarioCadastro() {}
 
-	public UsuarioRequest(String nome, String email, String senha, int celular, ClasseUsuario classe,
+	public UsuarioCadastro(String nome, String email, String senha, int celular, ClasseUsuario classe,
 			int docIdentificacao, TipoUsuario tipo) {
 		this.nome = nome;
 		this.email = email;

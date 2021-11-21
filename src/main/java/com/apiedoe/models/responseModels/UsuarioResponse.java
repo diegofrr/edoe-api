@@ -14,6 +14,8 @@ public class UsuarioResponse {
 	private int celular;
 	private ClasseUsuario classe;
 
+	public UsuarioResponse() {}
+	
 	public UsuarioResponse(UsuarioDTO usuario) {
 		this.nome = usuario.getNome();
 		this.email = usuario.getEmail();

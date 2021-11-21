@@ -14,7 +14,7 @@ import com.apiedoe.models.Usuario;
 import com.apiedoe.models.dtos.UsuarioDTO;
 import com.apiedoe.models.requestModels.LoginRequest;
 import com.apiedoe.models.requestModels.UsuarioAlteradoRequest;
-import com.apiedoe.models.requestModels.UsuarioRequest;
+import com.apiedoe.models.requestModels.UsuarioCadastro;
 import com.apiedoe.models.responseModels.UsuarioResponse;
 import com.apiedoe.repositories.UsuariosRepository;
 
@@ -68,7 +68,7 @@ public class UsuarioService {
 						+ jwtService.getSujeitoDoToken(authHeader) + ".");
 	}
 
-	public UsuarioResponse adicionaUsuario(UsuarioRequest usuario) {
+	public UsuarioResponse adicionaUsuario(UsuarioCadastro usuario) {
 		UsuarioDTO user = new UsuarioDTO(usuario);
 		user.setNome(user.getNome().toUpperCase());
 		user.setEmail(user.getEmail().toUpperCase());

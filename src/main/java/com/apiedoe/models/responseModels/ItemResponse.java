@@ -16,6 +16,8 @@ public class ItemResponse {
 	private TipoItem tipo;
 	private UsuarioResponse usuario;
 
+	public ItemResponse() {}
+	
 	public ItemResponse(ItemDTO item) {
 		this.nome = item.getNome();
 		this.descricao = item.getDescricaoDetalhada();
