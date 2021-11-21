@@ -68,8 +68,8 @@ public class UsuarioService {
 						+ jwtService.getSujeitoDoToken(authHeader) + ".");
 	}
 
-	public UsuarioResponse adicionaUsuario(UsuarioRequest usuarioRequest) {
-		UsuarioDTO user = new UsuarioDTO(usuarioRequest);
+	public UsuarioResponse adicionaUsuario(UsuarioRequest usuario) {
+		UsuarioDTO user = new UsuarioDTO(usuario);
 		user.setNome(user.getNome().toUpperCase());
 		user.setEmail(user.getEmail().toUpperCase());
 		user.validaUsuario();

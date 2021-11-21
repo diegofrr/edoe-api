@@ -35,8 +35,8 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/usuarios/cadastro")
-	public ResponseEntity<UsuarioResponse> adicionaUsuario(@RequestBody UsuarioRequest usuarioRequest) {
-		return new ResponseEntity<UsuarioResponse>(usuarioService.adicionaUsuario(usuarioRequest), HttpStatus.CREATED);
+	public ResponseEntity<UsuarioResponse> adicionaUsuario(@RequestBody UsuarioRequest usuario) {
+		return new ResponseEntity<UsuarioResponse>(usuarioService.adicionaUsuario(usuario), HttpStatus.CREATED);
 
 	}	
 
