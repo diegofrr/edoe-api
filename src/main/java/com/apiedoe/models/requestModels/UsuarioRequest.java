@@ -20,8 +20,8 @@ public class UsuarioRequest {
 
 	public UsuarioRequest(String nome, String email, String senha, int celular, ClasseUsuario classe,
 			int docIdentificacao, TipoUsuario tipo) {
-		this.nome = nome;
-		this.email = email;
+		this.nome = nome.toUpperCase();
+		this.email = email.toUpperCase();
 		this.senha = senha;
 		this.celular = celular;
 		this.classe = classe;

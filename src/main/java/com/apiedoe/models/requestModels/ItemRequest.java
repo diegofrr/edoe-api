@@ -14,8 +14,8 @@ public class ItemRequest {
 	public ItemRequest() {}
 	
 	public ItemRequest(String nome, String descricaoDetalhada, int quantidade, Descritor descritor) {
-		this.nome = nome;
-		this.descricaoDetalhada = descricaoDetalhada;
+		this.nome = nome.toUpperCase();
+		this.descricaoDetalhada = descricaoDetalhada.toUpperCase();
 		this.quantidade = quantidade;
 		this.descritor = descritor;
 	}

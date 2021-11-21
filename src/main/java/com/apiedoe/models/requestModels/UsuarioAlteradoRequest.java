@@ -12,7 +12,7 @@ public class UsuarioAlteradoRequest {
 	public UsuarioAlteradoRequest() {}
 	
 	public UsuarioAlteradoRequest(String email, TipoUsuario tipo) {
-		this.email = email;
+		this.email = email.toUpperCase();
 		this.tipo = tipo;
 	}
 
