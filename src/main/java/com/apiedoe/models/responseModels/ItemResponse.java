@@ -1,8 +1,9 @@
-package com.apiedoe.models.dtos;
+package com.apiedoe.models.responseModels;
 
 import com.apiedoe.models.Descritor;
 import com.apiedoe.models.Item;
 import com.apiedoe.models.TipoItem;
+import com.apiedoe.models.dtos.ItemDTO;
 
 import lombok.Data;
 

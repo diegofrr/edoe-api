@@ -1,4 +1,4 @@
-package com.apiedoe.models.dtos;
+package com.apiedoe.models.responseModels;
 
 public class LoginResponse {
 	public String token;

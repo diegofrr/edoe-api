@@ -1,4 +1,4 @@
-package com.apiedoe.models.dtos;
+package com.apiedoe.models;
 
 import java.io.Serializable;
 import java.util.Date;

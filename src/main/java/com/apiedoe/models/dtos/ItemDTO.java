@@ -5,6 +5,7 @@ import com.apiedoe.models.Descritor;
 import com.apiedoe.models.Item;
 import com.apiedoe.models.TipoItem;
 import com.apiedoe.models.Usuario;
+import com.apiedoe.models.requestModels.ItemRequest;
 
 import lombok.Data;
 
@@ -20,24 +21,13 @@ public class ItemDTO {
 
 	public ItemDTO() {
 	}
-
-	public ItemDTO(String nome, String descricaoDetalhada, int quantidade, Descritor descritor, Usuario usuario,
-			TipoItem tipo) {
-		this.nome = nome;
-		this.descricaoDetalhada = descricaoDetalhada;
-		this.quantidade = quantidade;
-		this.descritor = descritor;
-		this.usuario = usuario;
-		this.tipo = tipo;
-	}
-
-	public ItemDTO(Item item) {
+	
+	public ItemDTO(ItemRequest item, TipoItem tipo) {
 		this.nome = item.getNome();
 		this.descricaoDetalhada = item.getDescricaoDetalhada();
 		this.quantidade = item.getQuantidade();
 		this.descritor = item.getDescritor();
-		this.usuario = item.getUsuario();
-		this.tipo = item.getTipo();
+		this.tipo = tipo;
 	}
 
 	public Item getItem() {

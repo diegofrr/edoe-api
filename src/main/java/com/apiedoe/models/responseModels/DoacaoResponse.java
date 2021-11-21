@@ -1,6 +1,9 @@
-package com.apiedoe.models.dtos;
+package com.apiedoe.models.responseModels;
 
 import java.text.SimpleDateFormat;
+
+import com.apiedoe.models.Doacao;
+
 import lombok.Data;
 
 @Data

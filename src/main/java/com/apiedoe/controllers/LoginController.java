@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.apiedoe.models.dtos.LoginResponse;
-import com.apiedoe.models.dtos.UsuarioDTO;
+
+import com.apiedoe.models.requestModels.LoginRequest;
+import com.apiedoe.models.responseModels.LoginResponse;
 import com.apiedoe.services.JWTService;
 
 @RestController
@@ -20,7 +21,7 @@ public class LoginController {
 	private JWTService jwtService;
 
 	@PostMapping("/auth/login")
-	public ResponseEntity<LoginResponse> autentica(@RequestBody UsuarioDTO login) throws ServletException {
+	public ResponseEntity<LoginResponse> autentica(@RequestBody LoginRequest login) throws ServletException {
 		return new ResponseEntity<LoginResponse>(jwtService.autentica(login), HttpStatus.OK);
 	}
 

@@ -1,7 +1,9 @@
-package com.apiedoe.models.dtos;
+package com.apiedoe.models.responseModels;
 
 import com.apiedoe.models.ClasseUsuario;
 import com.apiedoe.models.Usuario;
+import com.apiedoe.models.dtos.UsuarioDTO;
+
 import lombok.Data;
 
 @Data

@@ -4,6 +4,7 @@ import com.apiedoe.exceptions.UsuarioInvalidoException;
 import com.apiedoe.models.ClasseUsuario;
 import com.apiedoe.models.TipoUsuario;
 import com.apiedoe.models.Usuario;
+import com.apiedoe.models.requestModels.UsuarioRequest;
 
 import lombok.Data;
 
@@ -30,20 +31,14 @@ public class UsuarioDTO {
 		this.classe = classe;
 		this.docIdentificacao = doc;
 	}
-
-	public UsuarioDTO(Usuario usuario) {
-		this.nome = usuario.getNome();
-		this.email = usuario.getEmail();
-	}
-
-	public UsuarioDTO(String email, String senha) {
-		this.email = email;
-		this.senha = senha;
-	}
-
-	public UsuarioDTO(String email, TipoUsuario tipo) {
-		this.email = email.toUpperCase();
-		this.tipo = tipo;
+	
+	public UsuarioDTO(UsuarioRequest user) {
+		this.nome = user.getNome();
+		this.email = user.getEmail();
+		this.senha = user.getSenha();
+		this.celular = user.getCelular();
+		this.classe = user.getClasse();
+		this.docIdentificacao = user.getDocIdentificacao();
 	}
 
 	public Usuario getUsuario() {

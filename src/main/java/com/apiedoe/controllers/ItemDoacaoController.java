@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.apiedoe.models.Descritor;
+import com.apiedoe.models.Doacao;
 import com.apiedoe.models.TipoItem;
-import com.apiedoe.models.dtos.Doacao;
-import com.apiedoe.models.dtos.DoacaoResponse;
-import com.apiedoe.models.dtos.ItemDTO;
-import com.apiedoe.models.dtos.ItemResponse;
+import com.apiedoe.models.requestModels.ItemRequest;
+import com.apiedoe.models.responseModels.DoacaoResponse;
+import com.apiedoe.models.responseModels.ItemResponse;
 import com.apiedoe.services.ItemService;
 
 @RestController
@@ -35,7 +35,7 @@ public class ItemDoacaoController {
 	}
 
 	@PostMapping("/doacoes/cadastro")
-	public ResponseEntity<ItemResponse> adicionaItem(@RequestBody ItemDTO item,
+	public ResponseEntity<ItemResponse> adicionaItem(@RequestBody ItemRequest item,
 			@RequestHeader("Authorization") String header) throws ServletException {
 		return new ResponseEntity<ItemResponse>(itemService.adicionaItem(item, TipoItem.DOACAO, header), HttpStatus.CREATED);
 	}
@@ -53,7 +53,7 @@ public class ItemDoacaoController {
 	}
 
 	@PutMapping("/doacoes/atualizar/{id}")
-	public ResponseEntity<ItemResponse> atualizaItem(@PathVariable long id, @RequestBody ItemDTO dadosAtualizados,
+	public ResponseEntity<ItemResponse> atualizaItem(@PathVariable long id, @RequestBody ItemRequest dadosAtualizados,
 			@RequestHeader("Authorization") String authHeader) throws ServletException {
 		return new ResponseEntity<ItemResponse>(
 				itemService.atualizaItem(id, dadosAtualizados, TipoItem.DOACAO, authHeader), HttpStatus.OK);

@@ -3,6 +3,8 @@ package com.apiedoe.models.dtos;
 import lombok.Data;
 import java.util.Date;
 
+import com.apiedoe.models.Doacao;
+
 @Data
 public class DoacaoDTO {
 

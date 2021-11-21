@@ -13,13 +13,14 @@ import com.apiedoe.exceptions.ItemInvalidoException;
 import com.apiedoe.exceptions.ItemNaoEncontradoException;
 import com.apiedoe.exceptions.NaoAutorizadoException;
 import com.apiedoe.models.Descritor;
+import com.apiedoe.models.Doacao;
 import com.apiedoe.models.Item;
 import com.apiedoe.models.TipoItem;
 import com.apiedoe.models.TipoUsuario;
 import com.apiedoe.models.Usuario;
-import com.apiedoe.models.dtos.ItemResponse;
-import com.apiedoe.models.dtos.Doacao;
-import com.apiedoe.models.dtos.DoacaoResponse;
+import com.apiedoe.models.requestModels.ItemRequest;
+import com.apiedoe.models.responseModels.DoacaoResponse;
+import com.apiedoe.models.responseModels.ItemResponse;
 import com.apiedoe.models.dtos.ItemDTO;
 import com.apiedoe.repositories.DoacoesRepository;
 import com.apiedoe.repositories.ItensRepository;
@@ -135,7 +136,7 @@ public class ItemService {
 		return listResponse;
 	}
 
-	public Item setDados(Item item, Item itemAtualizado) {
+	public Item setDados(Item item, ItemRequest itemAtualizado) {
 		item.setNome(itemAtualizado.getNome().toUpperCase());
 		item.setDescricaoDetalhada(itemAtualizado.getDescricaoDetalhada().toUpperCase());
 		item.setQuantidade(itemAtualizado.getQuantidade());
@@ -171,7 +172,7 @@ public class ItemService {
 
 	}
 
-	public ItemResponse atualizaItem(long id, ItemDTO dadosAtualizados, TipoItem tipo, String authHeader) {
+	public ItemResponse atualizaItem(long id, ItemRequest dadosAtualizados, TipoItem tipo, String authHeader) {
 		if (!repositorioDeItens.existsById(id))
 			throw new ItemNaoEncontradoException("Item não encontrado!", "Nenhum item com o id " + id + " no sistema.");
 
@@ -182,7 +183,7 @@ public class ItemService {
 
 		if (usuarioDoToken.get() != item.getUsuario())
 			throw new NaoAutorizadoException("Não autorizado", "Este item pertence a outro doador.");
-		item = repositorioDeItens.save(setDados(item, dadosAtualizados.getItem()));
+		item = repositorioDeItens.save(setDados(item, dadosAtualizados));
 		return new ItemResponse(item);
 	}
 
@@ -199,8 +200,8 @@ public class ItemService {
 		return response;
 	}
 
-	public ItemResponse adicionaItem(ItemDTO itemDTO, TipoItem tipoItem, String authHeader) {
-		itemDTO.setTipo(tipoItem);
+	public ItemResponse adicionaItem(ItemRequest requestItem, TipoItem tipoItem, String authHeader) {	
+		ItemDTO itemDTO = new ItemDTO(requestItem, tipoItem);
 		itemDTO.setNome(itemDTO.getNome().toUpperCase());
 		itemDTO.setDescricaoDetalhada(itemDTO.getDescricaoDetalhada().toUpperCase());
 		String subject = jwtService.getSujeitoDoToken(authHeader);
