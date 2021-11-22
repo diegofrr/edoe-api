@@ -2,6 +2,8 @@ package com.apiedoe.models.responseModels;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 import com.apiedoe.models.Doacao;
@@ -22,9 +24,8 @@ public class DoacaoResponse {
 		this.idItemDoacao = dadosDoacao.getIdItemDoacao();
 		this.idItemNecessario = dadosDoacao.getIdItemNecessario();
 		this.quantidadeDoacao = dadosDoacao.getQuantidadeDoacao();
-		DateFormat df = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy hh:mm:ss a");
-		df.setTimeZone(TimeZone.getDefault());
-		this.data = df.format(dadosDoacao.getData());
+		this.data = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy hh:mm:ss a").format(dadosDoacao.getData());
+		
 	}
 
 }

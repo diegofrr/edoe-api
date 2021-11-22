@@ -1,7 +1,10 @@
 package com.apiedoe.models;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +41,7 @@ public class Doacao implements Serializable {
 		this.idItemDoacao = idItemDoacao;
 		this.idItemNecessario = idItemNecessario;
 		this.quantidadeDoacao = quantidade;
-		this.data = new Date();
+		this.data = Calendar.getInstance(TimeZone.getTimeZone("America/Brasilia")).getTime();
 	}
 
 }
