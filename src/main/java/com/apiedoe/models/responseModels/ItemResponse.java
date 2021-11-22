@@ -9,6 +9,7 @@ import lombok.Data;
 
 @Data
 public class ItemResponse {
+	private long id;
 	private String nome;
 	private String descricaoDetalhada;
 	private int quantidade;
@@ -19,6 +20,7 @@ public class ItemResponse {
 	public ItemResponse() {}
 	
 	public ItemResponse(ItemDTO item) {
+		this.id = item.getItem().getId();
 		this.nome = item.getNome();
 		this.descricaoDetalhada = item.getDescricaoDetalhada();
 		this.quantidade = item.getQuantidade();
@@ -28,6 +30,7 @@ public class ItemResponse {
 	}
 
 	public ItemResponse(Item item) {
+		this.id = item.getId();
 		this.nome = item.getNome();
 		this.descricaoDetalhada = item.getDescricaoDetalhada();
 		this.quantidade = item.getQuantidade();

@@ -1,13 +1,7 @@
 package com.apiedoe.models.responseModels;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
-
 import com.apiedoe.models.Doacao;
-
 import lombok.Data;
 
 @Data
