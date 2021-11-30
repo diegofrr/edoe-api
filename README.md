@@ -14,7 +14,7 @@ No eDoe.com usuários de todo o campus IV da UFPB podem cadastrar itens a serem 
 ## 2. Links úteis
 2.1. [URL base](https://edoe-api.herokuapp.com/api/)
 
-2.2. [Vídeo explicativo](https://youtube.com)
+2.2. [Vídeo explicativo](https://www.youtube.com/watch?v=sR_NvgXY-R8)
 
 2.3. [Documentação Swagger](https://edoe-api.herokuapp.com/swagger-ui.html)
 
