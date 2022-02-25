@@ -18,7 +18,7 @@ No eDoe.com usuários de todo o campus IV da UFPB podem cadastrar itens a serem 
 
 2.3. [Documentação Swagger](https://edoe-api.herokuapp.com/swagger-ui.html)
 
-2.4. [Postman Colletion - JSON format](https://www.getpostman.com/collections/075d5afe1b7f0ef552ed)
+2.4. [Postman Collection - JSON format](https://www.getpostman.com/collections/075d5afe1b7f0ef552ed)
 
 2.5. [Banco H2](https://edoe-api.herokuapp.com/h2)
 ```
