@@ -42,12 +42,11 @@ Pronto! Após ser feita a instalação automática de algumas dependências, o s
 ### 3.1 Importando coleção no Postman
 Faça a importação da coleção já com todas as rotas e métodos atribuídos para agilizar o processo de realização das requisições.
 
-```
-Passo 1 - Dentro do Postman, vá até a opção de Import nas suas coleções;
-Passo 2 - Na janela de Import, vá até a aba "Link";
-Passo 3 - Informe o link do Postman Colletion (item 2.4) informado no início e clique em Continue.
-Obs.: Os itens nomeados com um cadeado significam que necessitam de autenticação (veja o item 4.1)
-```
+* Passo 1 - Dentro do Postman, vá até a opção de Import nas suas coleções;
+* Passo 2 - Na janela de Import, vá até a aba "Link";
+* Passo 3 - Informe o link do Postman Colletion (item 2.4) informado no início e clique em Continue.
+
+_Obs.: Os itens nomeados com um cadeado significam que necessitam de autenticação (veja o item 4.1)_
 
 ## 4. Segurança
 
@@ -56,9 +55,13 @@ O token de acesso é gerado quando o usuário faz login no sistema e tem duraç�
 
 ### 4.1. Realizando login no sistema, recebendo um token de acesso e utilizando-o
 /i\ Os passos a seguir foram realizados através do Postman.
+
+* Passo 1 - Se redirecione para https://edoe-api/herokuapp.com/api/auth/login;
+* Passo 2 - Faça um <b>POST</b> passando no body da requisição um JSON com email e senha.
+
+Veja exemplo:
 ```
-Passo 1 - Se redirecione para https://edoe-api/herokuapp.com/api/auth/login;
-Passo 2 - Faça um POST passando no body da requisição um JSON com email e senha;
-Passo 3 - Caso as credenciais sejam válidas, o sistema retornará um token de acesso que deve ser copiado;
-Passo 4 - Na aba "Auth" selecione Bearer Token e forneça seu token de acesso gerado.
+{ "email": "string", "senha": "string" }
 ```
+* Passo 3 - Caso as credenciais sejam válidas, o sistema retornará o token de acesso que deve ser guardado;
+* Passo 4 - Na aba "Auth" selecione <b>Bearer Token</b> e forneça seu token de acesso gerado.
