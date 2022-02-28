@@ -33,7 +33,7 @@ Password: admin
 ## 3. Intalação e utilização
 <b>Método #1</b> - Devido ao sistema já está implementado no **Heroku**, você pode simplesmente utilizar a [URL base](https://edoe-api.herokuapp.com/api/) informada mais acima e, com o auxílio da documentação Swagger para se direcionar entre as rotas existentes, realizar requisições ao sistema.
 
-<b>Método #2</b> - Antes de tudo, faça o clone do repositório ou baixe o arquivo zipado do mesmo. Em seguida, dentro da pasta principal do projeto, basta executar o seguinte comando:
+<b>Método #2</b> - Antes de tudo, faça o clone do repositório ou baixe o arquivo zipado do mesmo. Em seguida, abra a pasta principal do projeto no terminal e execute o seguinte comando:
 ```
 mvn spring-boot:run
 ```
