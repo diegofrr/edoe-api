@@ -31,9 +31,9 @@ Password: admin
 ```
 
 ## 3. Intalação e utilização
-Método #1 - Devido ao sistema já está implementado no **Heroku**, você pode simplesmente utilizar a [URL base](https://edoe-api.herokuapp.com/api/) informada mais acima e, com o auxílio da documentação Swagger para se direcionar entre as rotas existentes, realizar requisições ao sistema.
+<b>Método #1</b> - Devido ao sistema já está implementado no **Heroku**, você pode simplesmente utilizar a [URL base](https://edoe-api.herokuapp.com/api/) informada mais acima e, com o auxílio da documentação Swagger para se direcionar entre as rotas existentes, realizar requisições ao sistema.
 
-Método #2 - Antes de tudo, faça o clone do repositório ou baixe o arquivo zipado do mesmo. Em seguida, dentro da pasta principal do projeto, basta executar o seguinte comando:
+<b>Método #2</b> - Antes de tudo, faça o clone do repositório ou baixe o arquivo zipado do mesmo. Em seguida, dentro da pasta principal do projeto, basta executar o seguinte comando:
 ```
 mvn spring-boot:run
 ```
@@ -51,8 +51,8 @@ Obs.: Os itens nomeados com um cadeado significam que necessitam de autenticaç�
 
 ## 4. Segurança
 
-Foi utilizado o JSON Web Token (JWT), sendo necessário informar um token de acesso para realizar determinadas requisições. 
-O token de acesso é gerado quando o usuário faz login no sistema e tem duração de 60 minutos, por consequência, o sistema exige novamente as credenciais do usuário após o término deste tempo.
+Foi utilizado o <b>JSON Web Token (JWT)</b>, sendo necessário informar um token de acesso para realizar determinadas requisições. 
+O token de acesso é gerado quando o usuário faz login no sistema e tem duração de 60 minutos por consequência, o sistema exige novamente as credenciais do usuário após o término deste tempo.
 
 ### 4.1. Realizando login no sistema, recebendo um token de acesso e utilizando-o
 /i\ Os passos a seguir foram realizados através do Postman.
