@@ -59,6 +59,6 @@ O token de acesso é gerado quando o usuário faz login no sistema e tem duraç�
 ```
 Passo 1 - Se redirecione para https://edoe-api/herokuapp.com/api/auth/login;
 Passo 2 - Faça um POST passando no body da requisição um JSON com email e senha;
-Passo 3 - Caso as credenciais seja válidas, o sistema retorna o token de acesso que deve ser copiado;
+Passo 3 - Caso as credenciais sejam válidas, o sistema retornará um token de acesso que deve ser copiado;
 Passo 4 - Na aba "Auth" selecione Bearer Token e forneça seu token de acesso gerado.
 ```
